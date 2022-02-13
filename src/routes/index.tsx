@@ -1,6 +1,8 @@
 import { Redirect } from "react-router-dom";
 import Main from "../page/Main";
 import Athlete from "../page/Main/Athlete";
+import Info from "../page/Main/Athlete/Info";
+import Mqtest from "../page/Main/Athlete/xxx";
 import Check from "../page/Main/Check";
 import Coach from "../page/Main/Coach";
 import Event from "../page/Main/Event";
@@ -16,9 +18,18 @@ const routes = [
                 render: () => <Redirect to="/athleteManage" />
             },
             {
-                path: "/athleteManage",
-                exact: true,
+                path: "/athleteManage", 
                 component: Athlete,
+                children: [
+                    {
+                        path: '/athleteManage/info',
+                        component: Info,
+                    },
+                    {
+                        path: '/athleteManage/test',
+                        component: Mqtest,
+                    }
+                ]
             },
             {
                 path: "/eventManage",

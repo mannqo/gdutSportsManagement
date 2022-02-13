@@ -1,15 +1,24 @@
 import React, { memo } from 'react';
-import { Menu } from 'antd'; 
+import { Layout } from 'antd';
+import { renderRoutes } from 'react-router-config';
+import MSider from '../../../component/MSider'; 
 
-export default memo(function index() {
+
+const { Content } = Layout;
+
+
+export default memo(function Athlete(props: any) {
+    const { route } = props;   
+    
     return (
-        <Menu
-            mode="inline"
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
-            style={{ height: '100%', borderRight: 0 }}
-        >
-            <Menu.Item key="1">运动员信息表</Menu.Item>
-        </Menu>
+        <Layout>
+            <MSider />
+            <Layout style={{ padding: '0 24px 24px' }}>
+                <Content > 
+                    {route && renderRoutes(route.children)}
+                </Content>
+            </Layout>
+        </Layout>
+
     );
 });

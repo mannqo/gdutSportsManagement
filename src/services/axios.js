@@ -4,7 +4,7 @@ export default function request(option) {
     return new Promise((resolve, reject) => {
         // 1. 创建axios的实例
         const instance = axios.create({
-            baseURL: "http://47.98.190.152:8080",
+            baseURL: "http://47.98.190.152:8090",
             timeout: 10000,
             headers: {
                 "Access-Control-Allow-Origin": "*",

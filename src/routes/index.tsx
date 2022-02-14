@@ -18,9 +18,14 @@ const routes = [
                 render: () => <Redirect to="/athleteManage" />
             },
             {
-                path: "/athleteManage", 
+                path: "/athleteManage",
                 component: Athlete,
                 children: [
+                    {
+                        path: "/athleteManage",
+                        exact: true,
+                        render: () => <Redirect to="/athleteManage/info" />
+                    },
                     {
                         path: '/athleteManage/info',
                         component: Info,

@@ -5,7 +5,7 @@ export function getAthleteMsg(option) {
     return request({
         method: 'GET',
         url: '/sports/api/sportsBaseMsg',
-        data: option
+        params: option
     })
 }
 

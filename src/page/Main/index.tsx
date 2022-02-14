@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 import { renderRoutes } from 'react-router-config';
 import MHeader from '../../component/MHeader';
 

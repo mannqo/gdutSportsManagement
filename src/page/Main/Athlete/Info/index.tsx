@@ -1,15 +1,34 @@
-import { Button, Table } from 'antd';
+import { Button, Table, Modal } from 'antd';
 import React, { memo, useEffect, useState } from 'react'
-import { getAthleteMsg } from '../../../../services/athlete';
-import { UserDeleteOutlined } from "@ant-design/icons";
-
-
+import { deleteAthleteMsg, getAthleteMsg } from '../../../../services/athlete';
+import { ExclamationCircleOutlined, SettingOutlined, DeleteOutlined } from "@ant-design/icons";
+import MInfoTable from '../../../../component/MInfoTable';
+import MContent from '../../../../component/MInfoTable/MContent';
+import BaseInfo from '../../../../component/MInfoTable/MContent/BaseInfo';
+import styled from 'styled-components';
 
 const Info = memo(() => {
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
     const [total, setTotal] = useState(0);    // 总数据数
+    const [visible, setVisible] = useState(false);
+
+    /* 删除运动员信息 */
+    const deleteAthlete = (id: string) => {
+        Modal.confirm({
+            title: '确定要删除该运动员吗?',
+            icon: <ExclamationCircleOutlined />,
+            okText: '确认',
+            cancelText: '取消',
+            onOk: async () => {
+                const res = await deleteAthleteMsg({ id });
+                Modal.info({
+                    title: res.message,
+                })
+            }
+        });
+    }
 
     const columns = [
         {
@@ -43,26 +62,32 @@ const Info = memo(() => {
                 <span>{JSON.parse(coach).toString()}</span>
             )
         },
-        // {
-        //     title: '运动项目组别',
-        //     dataIndex: 'address',
-        // },
         {
             title: '操作',
-            dataIndex: 'handle',
-            render: () => (
-                <UserDeleteOutlined />
+            dataIndex: 'id',
+            render: (id: string) => (
+                <div>
+                    <SettingOutlined />
+                    &nbsp; &nbsp;
+                    <DeleteOutlined onClick={() => deleteAthlete(id)} />
+                </div>
             )
         },
     ];
-
-    const start = () => {
+    const deleteAll = () => {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
             setSelectedRowKeys([]);
         }, 1000);
     };
+    const addAthlete = () => {
+        setVisible(true);
+    }
+    /* 运动员信息表 */
+    const hideModal = () => {
+        setVisible(false);
+    }
     const onSelectChange = (selectedRowKeys: any) => {
         console.log('selectedRowKeys changed: ', selectedRowKeys);
         setSelectedRowKeys(selectedRowKeys);
@@ -73,35 +98,27 @@ const Info = memo(() => {
     };
     const hasSelected = selectedRowKeys.length > 0;
 
-    const onChange = async (page: any) => {
-        const res = await getAthleteMsg({ pn: page, size: '10' });
+    /* 获取运动员列表 */
+    const getInfo = async (page: number) => {
+        const res = await getAthleteMsg({ pn: page, size: 10 });
         const { data } = res;
-
-        data.records.forEach((item: any) => {
-            item.key = item.id;
-            item.belongCoach = JSON.parse(item.belongCoach).toString();
-        })
         setTotal(data.total);
         setData(data.records);
     }
+    const onChange = (page: number) => {
+        getInfo(page)
+    }
 
     useEffect(() => {
-
-        const getInfo = async () => {
-            const res = await getAthleteMsg({ pn: '1', size: '10' });
-            const { data } = res;
-            setTotal(data.total);
-            setData(data.records);
-        }
-        getInfo();
-
+        getInfo(1);
     }, [])
 
     return (
         <div>
-            <div style={{ marginBottom: 16 }}>
-                <Button type="primary" onClick={start} disabled={!hasSelected} loading={loading}>
-                    Reload
+            <div style={{ margin: 16, float: 'right' }}>
+                <Button type='primary' onClick={addAthlete}> 新增 </Button>
+                <Button onClick={deleteAll} disabled={!hasSelected} loading={loading}>
+                    批量删除
                 </Button>
                 <span style={{ marginLeft: 8 }}>
                     {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
@@ -109,6 +126,17 @@ const Info = memo(() => {
             </div>
             <Table rowSelection={rowSelection} columns={columns} dataSource={data} rowKey='id'
                 pagination={{ total: total, onChange: onChange }} />
+
+            <Modal
+                title={<MInfoTable />}
+                visible={visible}
+                bodyStyle={{ display: 'none'}}
+                onOk={hideModal}
+                onCancel={hideModal}
+                width={1000}
+                okText="确认"
+                cancelText="取消"
+            />
         </div>
     )
 })

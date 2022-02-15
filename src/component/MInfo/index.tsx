@@ -1,12 +1,12 @@
 import { Button, Table, Modal } from 'antd';
 import React, { memo, useEffect, useState } from 'react'
-import MInfoTable from '../MInfoTable';
+import MInfoTable from '../MAthleteModal';
 
 const MInfo = memo((props: any) => {
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [loading, setLoading] = useState(false);
     const [visible, setVisible] = useState(false);
-    const { columns, getInfo, data, total } = props;
+    const { columns, getInfo, data, total, TitleComponent } = props;
 
 
     const deleteAll = () => {
@@ -65,7 +65,7 @@ const MInfo = memo((props: any) => {
             />
 
             <Modal
-                title={<MInfoTable />}
+                title={TitleComponent}
                 visible={visible}
                 bodyStyle={{ display: 'none' }}
                 onOk={hideModal}

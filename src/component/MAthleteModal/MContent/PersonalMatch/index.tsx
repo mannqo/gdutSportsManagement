@@ -1,5 +1,5 @@
 import { Form, Row, Col, Input, Button } from 'antd'
-import React, { memo, useState } from 'react'
+import React, { memo } from 'react'
 import { athletePersonalMatch } from '../../../../constant/athlete';
 
 const PersonalMatch = memo(() => {

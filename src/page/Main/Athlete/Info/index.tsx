@@ -3,6 +3,7 @@ import React, { memo, useState } from 'react'
 import { ExclamationCircleOutlined, SettingOutlined, DeleteOutlined } from "@ant-design/icons";
 import { deleteAthleteMsg, getAthleteMsg } from '../../../../services/athlete';
 import MInfo from '../../../../component/MInfo';
+import MInfoTable from '../../../../component/MAthleteModal';
 
 const AthleteInfo = memo(() => {
     const [data, setData] = useState([]);
@@ -84,6 +85,7 @@ const AthleteInfo = memo(() => {
             getInfo={getAthleteInfo}
             data={data}
             total={total}
+            TitleComponent={<MInfoTable />}
         />
     )
 })

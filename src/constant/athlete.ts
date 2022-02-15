@@ -1,5 +1,6 @@
 import MDatePicker from "../component/MSelector/MDatePicker"
 import MPicker from "../component/MSelector/MPicker"
+import { acceptanceLevel, acceptanceType, belongCoach, examProvinces, gender, group, idCardType, inSchool, nation, sportProject } from "./picker"
 
 export const athleteBaseInfo = [
     {
@@ -10,6 +11,8 @@ export const athleteBaseInfo = [
         name: 'sportProject',
         label: '运动项目',
         require: true,
+        component: MPicker,
+        optionList: sportProject
     },
     {
         name: 'chineseName',
@@ -20,6 +23,8 @@ export const athleteBaseInfo = [
         name: 'group',
         label: '组别',
         require: true,
+        component: MPicker,
+        optionList: group
     },
     {
         name: 'usedName',
@@ -29,10 +34,13 @@ export const athleteBaseInfo = [
         name: 'gender',
         label: '性别',
         component: MPicker,
+        optionList: gender
     },
     {
         name: 'nation',
-        label: '民族'
+        label: '民族',
+        component: MPicker,
+        optionList: nation
     },
     {
         name: 'birth',
@@ -41,11 +49,11 @@ export const athleteBaseInfo = [
     },
     {
         name: 'birthPlace',
-        label: '出生地'
+        label: '出生地',
     },
     {
         name: 'nativePlace',
-        label: '籍贯'
+        label: '籍贯',
     },
     {
         name: 'high',
@@ -59,7 +67,9 @@ export const athleteBaseInfo = [
     },
     {
         name: 'idCardType',
-        label: '身份证件类型'
+        label: '身份证件类型',
+        component: MPicker,
+        optionList: idCardType
     },
     {
         name: 'idCardNumber',
@@ -71,7 +81,9 @@ export const athleteBaseInfo = [
     },
     {
         name: 'acceptanceLevel',
-        label: '录取层次'
+        label: '录取层次',
+        component: MPicker,
+        optionList: acceptanceLevel
     },
 ]
 
@@ -79,6 +91,8 @@ export const athleteEntrance = [
     {
         name: 'acceptanceType',
         label: '录取方式',
+        component: MPicker,
+        optionList: acceptanceType
     },
     {
         name: 'entranceTime',
@@ -129,6 +143,8 @@ export const athleteEntrance = [
         name: 'belongCoach',
         label: '所属教练',
         require: true,
+        component: MPicker,
+        optionList: belongCoach
     },
 ]
 
@@ -137,6 +153,8 @@ export const athleteCollegeExam = [
         name: 'examProvinces',
         label: '考试所在省份/直辖市',
         require: true,
+        component: MPicker,
+        optionList: examProvinces
     },
     {
         name: 'examPrefecture',
@@ -152,6 +170,8 @@ export const athleteCollegeExam = [
         name: 'inSchool',
         label: '是否在校',
         require: true,
+        component: MPicker,
+        optionList: inSchool
     },
 ]
 

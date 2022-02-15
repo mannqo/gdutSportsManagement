@@ -31,7 +31,7 @@ const CollegeExam = memo(() => {
                                 },
                             ]}
                         >
-                            <Input />
+                            {item.component ? <item.component optionList={item.optionList} /> : <Input />}
                         </Form.Item>
                     </Col>
                 ))}

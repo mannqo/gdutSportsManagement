@@ -3,6 +3,7 @@ import MInfo from '../../../../component/MInfo'
 import { deleteCoachMsg, getCoachMsg } from '../../../../services/coach'
 import { ExclamationCircleOutlined, SettingOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Modal } from 'antd';
+import MCoachModal from '../../../../component/MCoachModal';
 
 const CoachInfo = memo(() => {
     const [data, setData] = useState([]);
@@ -68,6 +69,7 @@ const CoachInfo = memo(() => {
             getInfo={getCoachInfo}
             data={data}
             total={total}
+            TitleComponent={<MCoachModal />}
         />
     )
 })

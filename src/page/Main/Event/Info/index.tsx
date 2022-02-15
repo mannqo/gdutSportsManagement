@@ -3,6 +3,7 @@ import MInfo from '../../../../component/MInfo'
 import { ExclamationCircleOutlined, SettingOutlined, DeleteOutlined } from "@ant-design/icons";
 import { deleteEventMsg, getEventMsg } from '../../../../services/event';
 import { Modal } from 'antd';
+import MEventModal from '../../../../component/MEventModal';
 
 const EventInfo = memo(() => {
     const [data, setData] = useState([]);
@@ -71,6 +72,7 @@ const EventInfo = memo(() => {
             getInfo={getEventInfo}
             data={data}
             total={total}
+            TitleComponent={<MEventModal />}
         />
     )
 })

@@ -1,11 +1,11 @@
 import React, { memo, useState } from 'react';
 import { Menu } from 'antd';
-import MContent from '../MContent';
+import MContent from './MContent';
 
-const MMenu: React.FC = memo(() => {
+const MAthleteModal: React.FC = memo(() => {
     const [current, setCurrent] = useState('baseInfo');
 
-    const handleClick = (e: any) => { 
+    const handleClick = (e: any) => {
         setCurrent(e.key);
     }
 
@@ -31,4 +31,4 @@ const MMenu: React.FC = memo(() => {
     )
 })
 
-export default MMenu;
+export default MAthleteModal;

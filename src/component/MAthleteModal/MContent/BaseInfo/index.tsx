@@ -68,7 +68,7 @@ const BaseInfo = memo(() => {
                                 },
                             ]}
                         >
-                            {item.component ? <item.component /> : <Input />}
+                            {item.component ? <item.component optionList={item.optionList} /> : <Input />}
                         </Form.Item>
                     </Col>
                 )

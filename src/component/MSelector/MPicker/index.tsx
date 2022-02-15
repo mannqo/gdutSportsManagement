@@ -3,11 +3,17 @@ import React, { memo } from 'react'
 
 const { Option } = Select;
 
-const MPicker = memo(() => {
+const MPicker = memo((props: any) => { 
+    const { optionList } = props; 
+
     return (
         <Select>
-            <Option value="1">男</Option>
-            <Option value="2">女</Option>
+            {
+                optionList.map((item: any) => (
+                    <Option key={item.value} value={item.value}>{item.content}</Option>
+                ))
+            }
+
         </Select>
     )
 })

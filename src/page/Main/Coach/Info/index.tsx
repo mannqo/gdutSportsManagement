@@ -27,14 +27,20 @@ const CoachInfo = memo(() => {
             dataIndex: 'professionName',
         },
         {
+            title: '详情',
+            dataIndex: 'id',
+            render: () => (
+                <div>
+                    <SettingOutlined />
+                    <span>查看/修改</span>
+                </div>
+            )
+        },
+        {
             title: '操作',
             dataIndex: 'id',
             render: (id: string) => (
-                <div>
-                    <SettingOutlined />
-                    &nbsp; &nbsp;
-                    <DeleteOutlined onClick={() => deleteCoach(id)} />
-                </div>
+                <DeleteOutlined onClick={() => deleteCoach(id)} />
             )
         },
     ]

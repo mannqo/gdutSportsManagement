@@ -23,3 +23,11 @@ export function deleteEventMsg(option) {
         data: option,
     })
 }
+
+export function putEventMsg(option) {
+    return request({
+        method: 'PUT',
+        url: '/sports/api/competitionManage',
+        data: option,
+    })
+}

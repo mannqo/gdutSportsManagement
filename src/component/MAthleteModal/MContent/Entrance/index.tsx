@@ -1,14 +1,17 @@
-import { Form, Row, Col, Input, Upload, message, Button } from 'antd'
+import { Form, Row, Col, Input, Upload, message, Button, Select, DatePicker } from 'antd'
 import React, { memo, useState } from 'react'
 import { athleteEntrance } from '../../../../constant/athlete';
 import styled from 'styled-components';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import moment from 'moment';
 
+const { Option } = Select;
 
 const Entrance = memo(() => {
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState('');
     const [form] = Form.useForm();
+    const dateFormat = 'YYYY-MM-DD';
 
     const onFinish = (values: any) => {
         console.log('Received values of form: ', values);
@@ -67,7 +70,21 @@ const Entrance = memo(() => {
                                 },
                             ]}
                         >
-                            {item.component ? <item.component optionList={item.optionList} /> : <Input />}
+                            {
+                                item.component === 'MPicker' ?
+                                    <Select placeholder={`请填写${item.label}`}>
+                                        {
+                                            item.optionList && item.optionList.map((item: any) => (
+                                                <Option key={item.value} value={item.content} label={item.content}>{item.content}</Option>
+                                            ))
+                                        }
+                                    </Select>
+                                    : item.component === 'MDatePicker' ?
+                                        <DatePicker
+                                            defaultValue={moment('2020-01-01', dateFormat)}
+                                            format={dateFormat} /> :
+                                        <Input />
+                            }
                         </Form.Item>
                     </Col>
                 ))}

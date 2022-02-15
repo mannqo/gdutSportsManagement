@@ -1,8 +1,10 @@
-import { Form, Row, Col, Input, Upload, Button } from 'antd'
-import React, { memo, useState } from 'react'
+import { Form, Row, Col, Input, Upload, Button, Select } from 'antd'
+import React, { memo } from 'react'
 import { athleteCollegeExam } from '../../../../constant/athlete';
 import styled from 'styled-components';
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined } from '@ant-design/icons'; 
+
+const { Option } = Select;
 
 const CollegeExam = memo(() => {
     const [form] = Form.useForm();
@@ -31,7 +33,16 @@ const CollegeExam = memo(() => {
                                 },
                             ]}
                         >
-                            {item.component ? <item.component optionList={item.optionList} /> : <Input />}
+                            {
+                                item.component === 'MPicker' ?
+                                    <Select placeholder={`请填写${item.label}`}>
+                                        {
+                                            item.optionList && item.optionList.map((item: any) => (
+                                                <Option key={item.value} value={item.content} label={item.content}>{item.content}</Option>
+                                            ))
+                                        }
+                                    </Select> : <Input />
+                            }
                         </Form.Item>
                     </Col>
                 ))}

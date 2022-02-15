@@ -7,7 +7,8 @@ import MInfoTable from '../../../../component/MAthleteModal';
 
 const AthleteInfo = memo(() => {
     const [data, setData] = useState([]);
-    const [total, setTotal] = useState(0);    // 总数据数
+    const [total, setTotal] = useState(0);    // 总数据数 
+    const [page, setPage] = useState(1);
 
     /* 运动员信息列表 */
     const athleteColumns = [
@@ -32,25 +33,20 @@ const AthleteInfo = memo(() => {
             dataIndex: 'group',
         },
         {
-            title: '年级班级',
-            dataIndex: 'levelClass',
-        },
-        {
-            title: '教练',
-            dataIndex: 'belongCoach',
-            render: (coach: any) => (
-                <span>{JSON.parse(coach).toString()}</span>
+            title: '详情',
+            dataIndex: 'id',
+            render: (id: string) => (
+                <div>
+                    <SettingOutlined />
+                    <span>查看/修改</span>
+                </div>
             )
         },
         {
             title: '操作',
             dataIndex: 'id',
             render: (id: string) => (
-                <div>
-                    <SettingOutlined />
-                    &nbsp; &nbsp;
-                    <DeleteOutlined onClick={() => deleteAthlete(id)} />
-                </div>
+                <DeleteOutlined onClick={() => deleteAthlete(id)} />
             )
         },
     ];
@@ -67,22 +63,24 @@ const AthleteInfo = memo(() => {
                 Modal.info({
                     title: res.message,
                 })
+                getAthleteInfo(page);
             }
         });
     }
 
     /* 获取运动员列表 */
     const getAthleteInfo = async (page: number) => {
+        setPage(page);  
         const res = await getAthleteMsg({ pn: page, size: 10 });
         const { data } = res;
         setTotal(data.total);
         setData(data.records);
     }
-
+ 
     return (
         <MInfo
             columns={athleteColumns}
-            getInfo={getAthleteInfo}
+            getInfo={getAthleteInfo} 
             data={data}
             total={total}
             TitleComponent={<MInfoTable />}

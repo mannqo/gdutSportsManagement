@@ -1,6 +1,5 @@
 import { Button, Table, Modal } from 'antd';
 import React, { memo, useEffect, useState } from 'react'
-import MInfoTable from '../MAthleteModal';
 
 const MInfo = memo((props: any) => {
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -37,7 +36,7 @@ const MInfo = memo((props: any) => {
 
 
     const onChange = (page: number) => {
-        getInfo(page)
+        getInfo(page);
     }
 
     useEffect(() => {

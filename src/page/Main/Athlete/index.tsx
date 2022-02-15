@@ -3,9 +3,7 @@ import { Layout } from 'antd';
 import { renderRoutes } from 'react-router-config';
 import MSider from '../../../component/MSider'; 
 
-
 const { Content } = Layout;
-
 
 export default memo(function Athlete(props: any) {
     const { route } = props;   

@@ -3,8 +3,6 @@ import React, { memo, useEffect, useState } from 'react'
 import { deleteAthleteMsg, getAthleteMsg } from '../../../../services/athlete';
 import { ExclamationCircleOutlined, SettingOutlined, DeleteOutlined } from "@ant-design/icons";
 import MInfoTable from '../../../../component/MInfoTable';
-import MContent from '../../../../component/MInfoTable/MContent';
-import BaseInfo from '../../../../component/MInfoTable/MContent/BaseInfo';
 import styled from 'styled-components';
 
 const Info = memo(() => {
@@ -114,7 +112,7 @@ const Info = memo(() => {
     }, [])
 
     return (
-        <div>
+        <>
             <div style={{ margin: 16, float: 'right' }}>
                 <Button type='primary' onClick={addAthlete}> 新增 </Button>
                 <Button onClick={deleteAll} disabled={!hasSelected} loading={loading}>
@@ -130,14 +128,15 @@ const Info = memo(() => {
             <Modal
                 title={<MInfoTable />}
                 visible={visible}
-                bodyStyle={{ display: 'none'}}
+                bodyStyle={{ display: 'none' }}
+                style={{ paddingBottom: 0 }}
                 onOk={hideModal}
                 onCancel={hideModal}
                 width={1000}
                 okText="确认"
                 cancelText="取消"
             />
-        </div>
+        </>
     )
 })
 

@@ -1,4 +1,4 @@
-import { Form, Row, Col, Input, Upload, message } from 'antd'
+import { Form, Row, Col, Input, Upload, message, Button } from 'antd'
 import React, { memo, useState } from 'react'
 import { athleteEntrance } from '../../../../constant/athlete';
 import styled from 'styled-components';
@@ -62,11 +62,12 @@ const Entrance = memo(() => {
                             label={item.label}
                             rules={[
                                 {
-                                    message: '',
+                                    required: item.require ? true : false,
+                                    message: '请填写必填信息',
                                 },
                             ]}
                         >
-                            <Input placeholder="placeholder" />
+                            {item.component ? <item.component /> : <Input />}
                         </Form.Item>
                     </Col>
                 ))}
@@ -88,6 +89,11 @@ const Entrance = memo(() => {
                 </Upload>
             </ImageWrapper>
 
+            <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
+                <Button type="primary" htmlType="submit">
+                    提交入学情况信息
+                </Button>
+            </Form.Item>
         </Form>
     )
 })

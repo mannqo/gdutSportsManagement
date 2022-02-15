@@ -1,18 +1,20 @@
-import { Form, Row, Col, Input, Upload, message } from 'antd'
+import { Form, Row, Col, Input, Upload, message, Button } from 'antd'
 import React, { memo, useState } from 'react'
 import { athleteBaseInfo } from '../../../../constant/athlete';
 import styled from 'styled-components';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { baseURL } from '../../../../config';
 
 const BaseInfo = memo(() => {
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState('');
     const [form] = Form.useForm();
-    
+
     const onFinish = (values: any) => {
         console.log('Received values of form: ', values);
     };
     const beforeUpload = (file: File) => {
+
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
         if (!isJpgOrPng) {
             message.error('You can only upload JPG/PNG file!');
@@ -41,15 +43,15 @@ const BaseInfo = memo(() => {
         }
     }
     const uploadButton = (
-        <div>
+        <>
             {loading ? <LoadingOutlined /> : <PlusOutlined />}
             <div style={{ marginTop: 8 }}>Upload</div>
-        </div>
+        </>
     );
     return (
         <Form
             form={form}
-            name="baseInfo" 
+            name="baseInfo"
             onFinish={onFinish}
             style={{ width: 700 }}
         >
@@ -61,15 +63,16 @@ const BaseInfo = memo(() => {
                             label={item.label}
                             rules={[
                                 {
-                                    message: item.placeholder ? item.placeholder : '',
+                                    required: item.require ? true : false,
+                                    message: '请填写必填信息',
                                 },
                             ]}
                         >
-                            <Input placeholder="placeholder" />
+                            {item.component ? <item.component /> : <Input />}
                         </Form.Item>
                     </Col>
-                ))}
-
+                )
+                )}
             </Row>
 
             <ImageWrapper>
@@ -79,21 +82,29 @@ const BaseInfo = memo(() => {
                     listType="picture-card"
                     className="avatar-uploader"
                     showUploadList={false}
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                    action={baseURL}
                     beforeUpload={beforeUpload}
                     onChange={handleChange}
                 >
                     {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
                 </Upload>
             </ImageWrapper>
-
+            <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
+                <Button type="primary" htmlType="submit">
+                    提交基本信息
+                </Button>
+            </Form.Item>
         </Form>
     )
 })
 const ImageWrapper = styled.div` 
     position: absolute;
-    right: 100px;
-    top: 120px;
+    right: 40px;
+    top: 120px; 
+    .ant-upload.ant-upload-select-picture-card {
+        width: 160px;
+        height: 250px;
+    }
 `
 
 export default BaseInfo

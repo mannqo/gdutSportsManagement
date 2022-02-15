@@ -13,7 +13,7 @@ export default memo(function Athlete(props: any) {
     return (
         <Layout>
             <MSider />
-            <Layout style={{ padding: '0 24px 24px' }}>
+            <Layout style={{ padding: '0 24px' }}>
                 <Content > 
                     {route && renderRoutes(route.children)}
                 </Content>

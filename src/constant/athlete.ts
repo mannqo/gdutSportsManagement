@@ -1,20 +1,25 @@
+import MDatePicker from "../component/MSelector/MDatePicker"
+import MPicker from "../component/MSelector/MPicker"
+
 export const athleteBaseInfo = [
     {
         name: 'schoolName',
         label: '学校名称',
-        placeholder: '广东工业大学'
     },
     {
         name: 'sportProject',
-        label: '运动项目'
+        label: '运动项目',
+        require: true,
     },
     {
         name: 'chineseName',
-        label: '中文姓名'
+        label: '中文姓名',
+        require: true,
     },
     {
         name: 'group',
-        label: '组别'
+        label: '组别',
+        require: true,
     },
     {
         name: 'usedName',
@@ -22,7 +27,8 @@ export const athleteBaseInfo = [
     },
     {
         name: 'gender',
-        label: '性别'
+        label: '性别',
+        component: MPicker,
     },
     {
         name: 'nation',
@@ -30,7 +36,8 @@ export const athleteBaseInfo = [
     },
     {
         name: 'birth',
-        label: '出生日期'
+        label: '出生日期',
+        component: MDatePicker,
     },
     {
         name: 'birthPlace',
@@ -42,11 +49,13 @@ export const athleteBaseInfo = [
     },
     {
         name: 'high',
-        label: '身高'
+        label: '身高',
+        require: true,
     },
     {
         name: 'weight',
-        label: '体重'
+        label: '体重',
+        require: true,
     },
     {
         name: 'idCardType',
@@ -63,7 +72,7 @@ export const athleteBaseInfo = [
     {
         name: 'acceptanceLevel',
         label: '录取层次'
-    }, 
+    },
 ]
 
 export const athleteEntrance = [
@@ -73,62 +82,76 @@ export const athleteEntrance = [
     },
     {
         name: 'entranceTime',
-        label: '入学时间'
+        label: '入学时间',
+        component: MDatePicker,
     },
     {
         name: 'originalSchool',
-        label: '原所在学校'
+        label: '原所在学校',
+        require: true,
     },
     {
         name: 'totalCulturalScore',
-        label: '统考文化总分'
+        label: '统考文化总分',
+        require: true,
     },
     {
         name: 'takingProfessional',
-        label: '录取专业'
+        label: '录取专业',
+        require: true,
     },
     {
         name: 'ingCollege',
-        label: '所在院系'
+        label: '所在院系',
+        require: true,
     },
     {
         name: 'levelClass',
-        label: '年级班级'
+        label: '年级班级',
+        require: true,
     },
     {
         name: 'examinationPlace',
-        label: '报考地点'
+        label: '报考地点',
+        require: true,
     },
     {
         name: 'addedScore',
-        label: '体尖加分分数'
+        label: '体尖加分分数',
+        require: true,
     },
     {
         name: 'studentCardNum',
-        label: '学生证号码'
+        label: '学生证号码',
+        require: true,
     },
     {
         name: 'belongCoach',
-        label: '所属教练'
+        label: '所属教练',
+        require: true,
     },
 ]
 
 export const athleteCollegeExam = [
     {
         name: 'examProvinces',
-        label: '考试所在省份/直辖市'
+        label: '考试所在省份/直辖市',
+        require: true,
     },
     {
         name: 'examPrefecture',
-        label: '考试所在地级市'
+        label: '考试所在地级市',
+        require: true,
     },
     {
         name: 'admissionTicketNumber',
-        label: '准考证号码'
+        label: '准考证号码',
+        require: true,
     },
     {
         name: 'inSchool',
-        label: '是否在校'
+        label: '是否在校',
+        require: true,
     },
 ]
 

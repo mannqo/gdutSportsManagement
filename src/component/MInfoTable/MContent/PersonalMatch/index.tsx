@@ -1,4 +1,4 @@
-import { Form, Row, Col, Input, Upload, message } from 'antd'
+import { Form, Row, Col, Input, Button } from 'antd'
 import React, { memo, useState } from 'react'
 import { athletePersonalMatch } from '../../../../constant/athlete';
 
@@ -28,13 +28,17 @@ const PersonalMatch = memo(() => {
                                 },
                             ]}
                         >
-                            <Input placeholder="placeholder" />
+                            <Input />
                         </Form.Item>
                     </Col>
                 ))}
 
             </Row>
-
+            <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
+                <Button type="primary" htmlType="submit">
+                    提交个人比赛信息
+                </Button>
+            </Form.Item>
         </Form>
     )
 })

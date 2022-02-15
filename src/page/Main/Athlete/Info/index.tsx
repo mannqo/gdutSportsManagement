@@ -1,34 +1,15 @@
-import { Button, Table, Modal } from 'antd';
-import React, { memo, useEffect, useState } from 'react'
-import { deleteAthleteMsg, getAthleteMsg } from '../../../../services/athlete';
+import { Modal } from 'antd';
+import React, { memo, useState } from 'react'
 import { ExclamationCircleOutlined, SettingOutlined, DeleteOutlined } from "@ant-design/icons";
-import MInfoTable from '../../../../component/MInfoTable';
-import styled from 'styled-components';
+import { deleteAthleteMsg, getAthleteMsg } from '../../../../services/athlete';
+import MInfo from '../../../../component/MInfo';
 
-const Info = memo(() => {
-    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-    const [loading, setLoading] = useState(false);
+const AthleteInfo = memo(() => {
     const [data, setData] = useState([]);
     const [total, setTotal] = useState(0);    // 总数据数
-    const [visible, setVisible] = useState(false);
 
-    /* 删除运动员信息 */
-    const deleteAthlete = (id: string) => {
-        Modal.confirm({
-            title: '确定要删除该运动员吗?',
-            icon: <ExclamationCircleOutlined />,
-            okText: '确认',
-            cancelText: '取消',
-            onOk: async () => {
-                const res = await deleteAthleteMsg({ id });
-                Modal.info({
-                    title: res.message,
-                })
-            }
-        });
-    }
-
-    const columns = [
+    /* 运动员信息列表 */
+    const athleteColumns = [
         {
             title: '序号',
             dataIndex: 'id',
@@ -72,72 +53,39 @@ const Info = memo(() => {
             )
         },
     ];
-    const deleteAll = () => {
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-            setSelectedRowKeys([]);
-        }, 1000);
-    };
-    const addAthlete = () => {
-        setVisible(true);
+
+    /* 删除运动员信息 */
+    const deleteAthlete = (id: string) => {
+        Modal.confirm({
+            title: '确定要删除该运动员吗?',
+            icon: <ExclamationCircleOutlined />,
+            okText: '确认',
+            cancelText: '取消',
+            onOk: async () => {
+                const res = await deleteAthleteMsg({ id });
+                Modal.info({
+                    title: res.message,
+                })
+            }
+        });
     }
-    /* 运动员信息表 */
-    const hideModal = () => {
-        setVisible(false);
-    }
-    const onSelectChange = (selectedRowKeys: any) => {
-        console.log('selectedRowKeys changed: ', selectedRowKeys);
-        setSelectedRowKeys(selectedRowKeys);
-    };
-    const rowSelection = {
-        selectedRowKeys,
-        onChange: onSelectChange,
-    };
-    const hasSelected = selectedRowKeys.length > 0;
 
     /* 获取运动员列表 */
-    const getInfo = async (page: number) => {
+    const getAthleteInfo = async (page: number) => {
         const res = await getAthleteMsg({ pn: page, size: 10 });
         const { data } = res;
         setTotal(data.total);
         setData(data.records);
     }
-    const onChange = (page: number) => {
-        getInfo(page)
-    }
-
-    useEffect(() => {
-        getInfo(1);
-    }, [])
 
     return (
-        <>
-            <div style={{ margin: 16, float: 'right' }}>
-                <Button type='primary' onClick={addAthlete}> 新增 </Button>
-                <Button onClick={deleteAll} disabled={!hasSelected} loading={loading}>
-                    批量删除
-                </Button>
-                <span style={{ marginLeft: 8 }}>
-                    {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
-                </span>
-            </div>
-            <Table rowSelection={rowSelection} columns={columns} dataSource={data} rowKey='id'
-                pagination={{ total: total, onChange: onChange }} />
-
-            <Modal
-                title={<MInfoTable />}
-                visible={visible}
-                bodyStyle={{ display: 'none' }}
-                style={{ paddingBottom: 0 }}
-                onOk={hideModal}
-                onCancel={hideModal}
-                width={1000}
-                okText="确认"
-                cancelText="取消"
-            />
-        </>
+        <MInfo
+            columns={athleteColumns}
+            getInfo={getAthleteInfo}
+            data={data}
+            total={total}
+        />
     )
 })
 
-export default Info;
+export default AthleteInfo;

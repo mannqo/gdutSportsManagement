@@ -1,8 +1,12 @@
 import React, { memo } from 'react';
 import { Layout, Menu } from 'antd';
+import { renderRoutes } from 'react-router-config';
+
 const { Content, Sider } = Layout;
 
-export default memo(function index() {
+export default memo(function Coach(props: any) {
+    const { route } = props;
+
     return (
         <Layout>
             <Sider width={200} className="site-layout-background">
@@ -17,7 +21,7 @@ export default memo(function index() {
             </Sider>
             <Layout style={{ padding: '0 24px 24px' }}>
                 <Content >
-                    C111
+                    {route && renderRoutes(route.children)}
                 </Content>
             </Layout>
         </Layout>

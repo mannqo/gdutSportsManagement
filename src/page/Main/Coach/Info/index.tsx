@@ -1,0 +1,75 @@
+import React, { memo, useState } from 'react'
+import MInfo from '../../../../component/MInfo'
+import { deleteCoachMsg, getCoachMsg } from '../../../../services/coach'
+import { ExclamationCircleOutlined, SettingOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Modal } from 'antd';
+
+const CoachInfo = memo(() => {
+    const [data, setData] = useState([]);
+    const [total, setTotal] = useState(0);
+
+    const coachColumn = [
+        {
+            title: '工号',
+            dataIndex: 'number',
+        },
+        {
+            title: '名字',
+            dataIndex: 'name',
+        },
+        {
+            title: '出生日月',
+            dataIndex: 'birth',
+        },
+        {
+            title: '职称',
+            dataIndex: 'professionName',
+        },
+        {
+            title: '操作',
+            dataIndex: 'id',
+            render: (id: string) => (
+                <div>
+                    <SettingOutlined />
+                    &nbsp; &nbsp;
+                    <DeleteOutlined onClick={() => deleteCoach(id)} />
+                </div>
+            )
+        },
+    ]
+
+    /* 获取教练个人信息 */
+    const getCoachInfo = async (page: number) => {
+        const res = await getCoachMsg({ pn: page });
+        const { data } = res;
+        setTotal(data.total);
+        setData(data.records);
+    }
+
+    /* 删除教练信息 */
+    const deleteCoach = (id: string) => {
+        Modal.confirm({
+            title: '确定要删除该教练的信息吗?',
+            icon: <ExclamationCircleOutlined />,
+            okText: '确认',
+            cancelText: '取消',
+            onOk: async () => {
+                const res = await deleteCoachMsg({ id });
+                Modal.info({
+                    title: res.message,
+                })
+            }
+        });
+    }
+
+    return (
+        <MInfo
+            columns={coachColumn}
+            getInfo={getCoachInfo}
+            data={data}
+            total={total}
+        />
+    )
+})
+
+export default CoachInfo

@@ -1,11 +1,13 @@
 import { Redirect } from "react-router-dom";
 import Main from "../page/Main";
 import Athlete from "../page/Main/Athlete";
-import Info from "../page/Main/Athlete/Info";
+import AthleteInfo from "../page/Main/Athlete/Info";
 import Mqtest from "../page/Main/Athlete/xxx";
 import Check from "../page/Main/Check";
 import Coach from "../page/Main/Coach";
+import CoachInfo from "../page/Main/Coach/Info";
 import Event from "../page/Main/Event";
+import EventInfo from "../page/Main/Event/Info";
 
 const routes = [
     {
@@ -28,7 +30,7 @@ const routes = [
                     },
                     {
                         path: '/athleteManage/info',
-                        component: Info,
+                        component: AthleteInfo,
                     },
                     {
                         path: '/athleteManage/test',
@@ -38,13 +40,33 @@ const routes = [
             },
             {
                 path: "/eventManage",
-                exact: true,
-                component: Event
+                component: Event,
+                children: [
+                    {
+                        path: "/eventManage",
+                        exact: true,
+                        render: () => <Redirect to="/eventManage/info" />
+                    },
+                    {
+                        path: "/eventManage/info",
+                        component: EventInfo,
+                    }
+                ]
             },
             {
                 path: "/coachInfo",
-                exact: true,
-                component: Coach
+                component: Coach,
+                children: [
+                    {
+                        path: "/coachInfo",
+                        exact: true,
+                        render: () => <Redirect to="/coachInfo/info" />
+                    },
+                    {
+                        path: "/coachInfo/info",
+                        component: CoachInfo,
+                    }
+                ]
             },
             {
                 path: "/checkInfo",

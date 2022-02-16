@@ -70,7 +70,7 @@ const MInfo = memo((props: any) => {
                 onOk={hideModal}
                 onCancel={hideModal}
                 width={1000}
-                okText="确认"
+                okText="完成"
                 cancelText="取消"
             />
         </>

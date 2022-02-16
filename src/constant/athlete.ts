@@ -2,6 +2,10 @@ import { acceptanceLevel, acceptanceType, belongCoach, examProvinces, gender, gr
 
 export const athleteBaseInfo = [
     {
+        name: 'number',
+        label: '学号',
+    },
+    {
         name: 'schoolName',
         label: '学校名称',
     },
@@ -85,7 +89,7 @@ export const athleteBaseInfo = [
     },
 ]
 
-export const athleteEntrance = [
+export const athleteEntranceInfo = [
     {
         name: 'acceptanceType',
         label: '录取方式',
@@ -146,7 +150,7 @@ export const athleteEntrance = [
     },
 ]
 
-export const athleteCollegeExam = [
+export const athleteEntranceExam = [
     {
         name: 'examProvinces',
         label: '考试所在省份/直辖市',

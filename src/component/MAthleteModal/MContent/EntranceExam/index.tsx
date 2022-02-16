@@ -1,12 +1,12 @@
 import { Form, Row, Col, Input, Upload, Button, Select } from 'antd'
 import React, { memo } from 'react'
-import { athleteCollegeExam } from '../../../../constant/athlete';
+import { athleteEntranceExam } from '../../../../constant/athlete';
 import styled from 'styled-components';
-import { UploadOutlined } from '@ant-design/icons'; 
+import { UploadOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 
-const CollegeExam = memo(() => {
+const EntranceExam = memo(() => {
     const [form] = Form.useForm();
 
     const onFinish = (values: any) => {
@@ -21,7 +21,7 @@ const CollegeExam = memo(() => {
             style={{ width: 800 }}
         >
             <Row gutter={10}>
-                {athleteCollegeExam.map((item) => (
+                {athleteEntranceExam.map((item) => (
                     <Col span={20} key={item.name}>
                         <Form.Item
                             name={item.name}
@@ -41,7 +41,7 @@ const CollegeExam = memo(() => {
                                                 <Option key={item.value} value={item.content} label={item.content}>{item.content}</Option>
                                             ))
                                         }
-                                    </Select> : <Input />
+                                    </Select> :  <Input placeholder={`填写${item.label}`} />
                             }
                         </Form.Item>
                     </Col>
@@ -70,4 +70,4 @@ const ImageWrapper = styled.div`
 `
 
 
-export default CollegeExam
+export default EntranceExam

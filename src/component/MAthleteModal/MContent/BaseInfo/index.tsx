@@ -1,17 +1,27 @@
-import { Form, Row, Col, Input, Select, Button, DatePicker } from 'antd'
+import { Form, Row, Col, Input, Select, Button, DatePicker, Modal } from 'antd'
 import React, { memo, useState } from 'react'
 import { athleteBaseInfo } from '../../../../constant/athlete';
 import styled from 'styled-components';
 import MUploadImg from '../../../MSelector/MUploadImg';
-import moment from 'moment';
+import { postAthleteMsg } from '../../../../services/athlete';
 
 const { Option } = Select;
 
 const BaseInfo = memo(() => {
     const [form] = Form.useForm();
 
-    const onFinish = (values: any) => {
-        console.log(values);
+    const onFinish = async (values: any) => {
+        Modal.confirm({
+            title: '确定提交该运动员基本信息吗?',
+            okText: '确认',
+            cancelText: '取消',
+            onOk: async () => {
+                const res = await postAthleteMsg(values); 
+                Modal.info({
+                    title: res.message,
+                }) 
+            }
+        });
     };
     const dateFormat = 'YYYY-MM-DD';
 
@@ -38,7 +48,7 @@ const BaseInfo = memo(() => {
                         >
                             {
                                 item.component === 'MPicker' ?
-                                    <Select placeholder={`请填写${item.label}`}>
+                                    <Select placeholder={`选择${item.label}`}>
                                         {
                                             item.optionList && item.optionList.map((item: any) => (
                                                 <Option key={item.value} value={item.content} label={item.content}>{item.content}</Option>
@@ -46,7 +56,8 @@ const BaseInfo = memo(() => {
                                         }
                                     </Select>
                                     : item.component === 'MDatePicker' ?
-                                        <DatePicker format={dateFormat} /> : <Input />
+                                        <DatePicker placeholder='选择日期' format={dateFormat} /> :
+                                        <Input placeholder={`填写${item.label}`} />
                             }
                         </Form.Item>
                     </Col>

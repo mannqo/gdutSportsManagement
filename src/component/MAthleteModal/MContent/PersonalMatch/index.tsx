@@ -28,7 +28,7 @@ const PersonalMatch = memo(() => {
                                 },
                             ]}
                         >
-                            <Input />
+                            <Input placeholder={`填写${item.label}`} />
                         </Form.Item>
                     </Col>
                 ))}

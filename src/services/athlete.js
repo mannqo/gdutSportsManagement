@@ -1,6 +1,7 @@
 import request from "./axios";
 
 // 增删改查
+/* 运动员基本信息 */
 export function getAthleteMsg(option) {
     return request({
         method: 'GET',
@@ -8,15 +9,18 @@ export function getAthleteMsg(option) {
         params: option
     })
 }
-
 export function postAthleteMsg(option) {
+    const formData = new FormData();
+    Object.keys(option).forEach((key) => {
+        option[key] !== undefined && formData.append(key, option[key]);
+    })
+
     return request({
         method: 'POST',
-        url: '/sports/api/sportsBaseMsg',
-        data: option
+        url: '/sports/api/sportsBaseMsg', 
+        data: formData
     })
 }
-
 export function deleteAthleteMsg(option) {
     return request({
         method: 'DELETE',
@@ -24,7 +28,6 @@ export function deleteAthleteMsg(option) {
         data: option
     })
 }
-
 export function putAthleteInfo(option) {
     return request({
         method: 'PUT',
@@ -33,3 +36,92 @@ export function putAthleteInfo(option) {
     })
 }
 
+/* 运动员入学基本情况 */
+export function getEntranceInfo(option) {
+    return request({
+        method: 'GET',
+        url: '/sports/api/entranceInfo',
+        params: option
+    })
+}
+export function postEntranceInfo(option) {
+    return request({
+        method: 'POST',
+        url: '/sports/api/entranceInfo',
+        data: option
+    })
+}
+export function deleteEntranceInfo(option) {
+    return request({
+        method: 'DELETE',
+        url: '/sports/api/entranceInfo',
+        data: option
+    })
+}
+export function putEntranceInfo(option) {
+    return request({
+        method: 'PUT',
+        url: '/sports/api/entranceInfo',
+        data: option
+    })
+}
+
+/* 运动员参加高考情况 */
+export function getEntranceExam(option) {
+    return request({
+        method: 'GET',
+        url: '/sports/api/entranceExam',
+        params: option
+    })
+}
+export function postEntranceExam(option) {
+    return request({
+        method: 'POST',
+        url: '/sports/api/entranceExam',
+        data: option
+    })
+}
+export function deleteEntranceExam(option) {
+    return request({
+        method: 'DELETE',
+        url: '/sports/api/entranceExam',
+        data: option
+    })
+}
+export function putEntranceExam(option) {
+    return request({
+        method: 'PUT',
+        url: '/sports/api/entranceExam',
+        data: option
+    })
+}
+
+/* 运动员个人比赛情况 */
+export function getSportCompetition(option) {
+    return request({
+        method: 'GET',
+        url: '/sports/api/sportCompetition',
+        params: option
+    })
+}
+export function postSportCompetition(option) {
+    return request({
+        method: 'POST',
+        url: '/sports/api/sportCompetition',
+        data: option
+    })
+}
+export function deleteSportCompetition(option) {
+    return request({
+        method: 'DELETE',
+        url: '/sports/api/sportCompetition',
+        data: option
+    })
+}
+export function putSportCompetition(option) {
+    return request({
+        method: 'PUT',
+        url: '/sports/api/sportCompetition',
+        data: option
+    })
+}

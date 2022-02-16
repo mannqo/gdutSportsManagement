@@ -1,13 +1,12 @@
 import { Form, Row, Col, Input, Upload, message, Button, Select, DatePicker } from 'antd'
 import React, { memo, useState } from 'react'
-import { athleteEntrance } from '../../../../constant/athlete';
+import { athleteEntranceInfo } from '../../../../constant/athlete';
 import styled from 'styled-components';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import moment from 'moment';
 
 const { Option } = Select;
 
-const Entrance = memo(() => {
+const EntranceInfo = memo(() => {
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState('');
     const [form] = Form.useForm();
@@ -58,7 +57,7 @@ const Entrance = memo(() => {
             style={{ width: 700 }}
         >
             <Row gutter={10}>
-                {athleteEntrance.map((item) => (
+                {athleteEntranceInfo.map((item) => (
                     <Col span={10} key={item.name}>
                         <Form.Item
                             name={item.name}
@@ -80,10 +79,8 @@ const Entrance = memo(() => {
                                         }
                                     </Select>
                                     : item.component === 'MDatePicker' ?
-                                        <DatePicker
-                                            defaultValue={moment('2020-01-01', dateFormat)}
-                                            format={dateFormat} /> :
-                                        <Input />
+                                        <DatePicker placeholder='选择日期' format={dateFormat} /> :
+                                        <Input placeholder={`填写${item.label}`} />
                             }
                         </Form.Item>
                     </Col>
@@ -120,4 +117,4 @@ const ImageWrapper = styled.div`
     top: 120px;
 `
 
-export default Entrance
+export default EntranceInfo

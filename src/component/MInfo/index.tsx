@@ -63,7 +63,7 @@ const MInfo = memo((props: any) => {
                 pagination={{ total, onChange }}
             />
 
-            <Modal
+            <Modal 
                 title={TitleComponent}
                 visible={visible}
                 bodyStyle={{ display: 'none' }}

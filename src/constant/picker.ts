@@ -136,15 +136,15 @@ export const belongCoach = [
 export const examProvinces = [
     {
         value: '1',
-        content: '身份1',
+        content: '省份1',
     },
     {
         value: '2',
-        content: '身份1',
+        content: '省份2',
     },
     {
         value: '3',
-        content: '身份1',
+        content: '省份3',
     },
 ]
 

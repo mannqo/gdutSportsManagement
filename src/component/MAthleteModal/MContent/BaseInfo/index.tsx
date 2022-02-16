@@ -1,32 +1,52 @@
 import { Form, Row, Col, Input, Select, Button, DatePicker, Modal } from 'antd'
-import React, { memo, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { athleteBaseInfo } from '../../../../constant/athlete';
 import styled from 'styled-components';
 import MUploadImg from '../../../MSelector/MUploadImg';
-import { postAthleteMsg } from '../../../../services/athlete';
+import { getAthleteMsg, postAthleteMsg } from '../../../../services/athlete';
+import moment from 'moment';
 
 const { Option } = Select;
-
-const BaseInfo = memo(() => {
+const BaseInfo = memo((props: any) => {
+    const [value, setValue] = useState();
     const [form] = Form.useForm();
+    const dateFormat = 'YYYY-MM-DD';
+    const { getNumber, id } = props;
 
-    const onFinish = async (values: any) => {
+    const postInfo = async (values: any) => {
+        getNumber(values.number);
         Modal.confirm({
             title: '确定提交该运动员基本信息吗?',
             okText: '确认',
             cancelText: '取消',
             onOk: async () => {
-                const res = await postAthleteMsg(values); 
+                const res = await postAthleteMsg(values);
                 Modal.info({
                     title: res.message,
-                }) 
+                })
             }
         });
+    }
+    const onFinish = async (values: any) => {
+        postInfo(values);
+        console.log(id);
     };
-    const dateFormat = 'YYYY-MM-DD';
+
+    useEffect(() => {
+        const getInitialValues = async () => {
+            const res = await getAthleteMsg({ id });
+            res.data.records[0].birth = moment(res.data.records[0].birth, dateFormat);
+            setValue(res.data.records[0]);
+        }
+        id && getInitialValues();
+    }, [id])
+    useEffect(() => {
+        form.setFieldsValue(value);
+    }, [value])
 
     return (
         <Form
+            defaultValue={value}
             form={form}
             name="baseInfo"
             onFinish={onFinish}
@@ -36,7 +56,6 @@ const BaseInfo = memo(() => {
                 {athleteBaseInfo.map((item) => (
                     <Col span={10} key={item.name}>
                         <Form.Item
-                            hasFeedback
                             name={item.name}
                             label={item.label}
                             rules={[
@@ -55,7 +74,8 @@ const BaseInfo = memo(() => {
                                             ))
                                         }
                                     </Select>
-                                    : item.component === 'MDatePicker' ?
+                                    :
+                                    item.component === 'MDatePicker' ?
                                         <DatePicker placeholder='选择日期' format={dateFormat} /> :
                                         <Input placeholder={`填写${item.label}`} />
                             }

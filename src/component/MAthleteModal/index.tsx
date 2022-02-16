@@ -2,8 +2,10 @@ import React, { memo, useState } from 'react';
 import { Menu } from 'antd';
 import MContent from './MContent';
 
-const MAthleteModal: React.FC = memo(() => {
+const MAthleteModal = memo((props: any) => {
     const [current, setCurrent] = useState('baseInfo');
+    const { id } = props; 
+
 
     const handleClick = (e: any) => {
         setCurrent(e.key);
@@ -25,7 +27,7 @@ const MAthleteModal: React.FC = memo(() => {
                     个人比赛信息
                 </Menu.Item>
             </Menu>
-            <MContent current={current} />
+            <MContent current={current} id={id} />
         </>
 
     )

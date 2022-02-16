@@ -14,10 +14,9 @@ export function postAthleteMsg(option) {
     Object.keys(option).forEach((key) => {
         option[key] !== undefined && formData.append(key, option[key]);
     })
-
     return request({
         method: 'POST',
-        url: '/sports/api/sportsBaseMsg', 
+        url: '/sports/api/sportsBaseMsg',
         data: formData
     })
 }
@@ -44,11 +43,15 @@ export function getEntranceInfo(option) {
         params: option
     })
 }
-export function postEntranceInfo(option) {
+export function postEntranceInfo(option) { 
+    const formData = new FormData();
+    Object.keys(option).forEach((key) => {
+        option[key] !== undefined && formData.append(key, option[key]);
+    }) 
     return request({
         method: 'POST',
         url: '/sports/api/entranceInfo',
-        data: option
+        data: formData
     })
 }
 export function deleteEntranceInfo(option) {
@@ -75,10 +78,14 @@ export function getEntranceExam(option) {
     })
 }
 export function postEntranceExam(option) {
+    const formData = new FormData();
+    Object.keys(option).forEach((key) => {
+        option[key] !== undefined && formData.append(key, option[key]);
+    })
     return request({
         method: 'POST',
         url: '/sports/api/entranceExam',
-        data: option
+        data: formData
     })
 }
 export function deleteEntranceExam(option) {
@@ -105,10 +112,14 @@ export function getSportCompetition(option) {
     })
 }
 export function postSportCompetition(option) {
+    const formData = new FormData();
+    Object.keys(option).forEach((key) => {
+        option[key] !== undefined && formData.append(key, option[key]);
+    })
     return request({
         method: 'POST',
         url: '/sports/api/sportCompetition',
-        data: option
+        data: formData
     })
 }
 export function deleteSportCompetition(option) {

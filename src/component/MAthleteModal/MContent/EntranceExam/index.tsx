@@ -1,16 +1,28 @@
-import { Form, Row, Col, Input, Upload, Button, Select } from 'antd'
+import { Form, Row, Col, Input, Upload, Button, Select, Modal } from 'antd'
 import React, { memo } from 'react'
 import { athleteEntranceExam } from '../../../../constant/athlete';
 import styled from 'styled-components';
 import { UploadOutlined } from '@ant-design/icons';
+import { postEntranceExam } from '../../../../services/athlete';
 
 const { Option } = Select;
-
-const EntranceExam = memo(() => {
+const EntranceExam = memo((props: any) => {
     const [form] = Form.useForm();
+    const { number } = props;
 
     const onFinish = (values: any) => {
-        console.log('Received values of form: ', values);
+        values.number = number;;
+        Modal.confirm({
+            title: '确定提交该运动员参加高考情况吗?',
+            okText: '确认',
+            cancelText: '取消',
+            onOk: async () => {
+                const res = await postEntranceExam(values)
+                Modal.info({
+                    title: res.message,
+                })
+            }
+        });
     };
 
     return (
@@ -23,7 +35,7 @@ const EntranceExam = memo(() => {
             <Row gutter={10}>
                 {athleteEntranceExam.map((item) => (
                     <Col span={20} key={item.name}>
-                        <Form.Item
+                        <Form.Item 
                             name={item.name}
                             label={item.label}
                             rules={[
@@ -41,7 +53,7 @@ const EntranceExam = memo(() => {
                                                 <Option key={item.value} value={item.content} label={item.content}>{item.content}</Option>
                                             ))
                                         }
-                                    </Select> :  <Input placeholder={`填写${item.label}`} />
+                                    </Select> : <Input placeholder={`填写${item.label}`} />
                             }
                         </Form.Item>
                     </Col>

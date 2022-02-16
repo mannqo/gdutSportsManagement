@@ -10,6 +10,7 @@ const AthleteInfo = memo(() => {
     const [total, setTotal] = useState(0);    // 总数据数 
     const [page, setPage] = useState(1);
     const [visible, setVisible] = useState(false);
+    const [id, setId] = useState('0');
 
     /* 运动员信息列表 */
     const athleteColumns = [
@@ -37,7 +38,7 @@ const AthleteInfo = memo(() => {
             title: '详情',
             dataIndex: 'id',
             render: (id: string) => (
-                <div onClick={viewDetails}>
+                <div onClick={() => viewDetails(id)}>
                     <SettingOutlined />
                     <span>查看/修改</span>
                 </div>
@@ -52,7 +53,8 @@ const AthleteInfo = memo(() => {
         },
     ];
 
-    const viewDetails = () => {
+    const viewDetails = (id: string) => {
+        setId(id);
         setVisible(true);
     }
 
@@ -93,10 +95,10 @@ const AthleteInfo = memo(() => {
                 getInfo={getAthleteInfo}
                 data={data}
                 total={total}
-                TitleComponent={<MAthleteModal />}
+                TitleComponent={<MAthleteModal id={0} />}
             />
             <Modal
-                title={<MAthleteModal />}
+                title={<MAthleteModal id={id} />}
                 visible={visible}
                 bodyStyle={{ display: 'none' }}
                 onOk={hideModal}

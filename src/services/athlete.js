@@ -27,7 +27,7 @@ export function deleteAthleteMsg(option) {
         data: option
     })
 }
-export function putAthleteInfo(option) {
+export function putAthleteMsg(option) {
     return request({
         method: 'PUT',
         url: '/sports/api/sportsBaseMsg',
@@ -43,11 +43,11 @@ export function getEntranceInfo(option) {
         params: option
     })
 }
-export function postEntranceInfo(option) { 
+export function postEntranceInfo(option) {
     const formData = new FormData();
     Object.keys(option).forEach((key) => {
         option[key] !== undefined && formData.append(key, option[key]);
-    }) 
+    })
     return request({
         method: 'POST',
         url: '/sports/api/entranceInfo',

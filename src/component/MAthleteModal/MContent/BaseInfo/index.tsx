@@ -3,11 +3,12 @@ import React, { memo, useEffect, useState } from 'react'
 import { athleteBaseInfo } from '../../../../constant/athlete';
 import styled from 'styled-components';
 import MUploadImg from '../../../MSelector/MUploadImg';
-import { getAthleteMsg, postAthleteMsg } from '../../../../services/athlete';
+import { getAthleteMsg, postAthleteMsg, putAthleteMsg } from '../../../../services/athlete';
 import moment from 'moment';
 
 const { Option } = Select;
 const BaseInfo = memo((props: any) => {
+    const [number, setNumber] = useState('');
     const [value, setValue] = useState();
     const [form] = Form.useForm();
     const dateFormat = 'YYYY-MM-DD';
@@ -27,21 +28,38 @@ const BaseInfo = memo((props: any) => {
             }
         });
     }
+    const putInfo = async (values: any) => {
+        Modal.confirm({
+            title: '确定修改该运动员基本信息吗?',
+            okText: '确认',
+            cancelText: '取消',
+            onOk: async () => {
+                const res = await putAthleteMsg(values);
+                Modal.info({
+                    title: res.message,
+                })
+            }
+        });
+    }
     const onFinish = async (values: any) => {
-        postInfo(values);
-        console.log(id);
+        id && putInfo(values);
+        !id && postInfo(values);
     };
 
     useEffect(() => {
         const getInitialValues = async () => {
             const res = await getAthleteMsg({ id });
-            res.data.records[0].birth = moment(res.data.records[0].birth, dateFormat);
-            setValue(res.data.records[0]);
+            const msg = res.data.records[0];
+            msg.birth = moment(msg.birth, dateFormat);
+            setNumber(msg.number);
+            setValue(msg);
         }
         id && getInitialValues();
     }, [id])
+
     useEffect(() => {
-        form.setFieldsValue(value);
+        form.setFieldsValue(value); 
+        number && getNumber(number);
     }, [value])
 
     return (

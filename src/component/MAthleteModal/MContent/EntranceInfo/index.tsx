@@ -3,7 +3,7 @@ import React, { memo, useEffect, useState } from 'react'
 import { athleteEntranceInfo } from '../../../../constant/athlete';
 import styled from 'styled-components';
 import MUploadImg from '../../../MSelector/MUploadImg';
-import { getEntranceInfo, postEntranceInfo } from '../../../../services/athlete';
+import { getEntranceInfo, postEntranceInfo, putEntranceInfo } from '../../../../services/athlete';
 import moment from 'moment';
 
 const { Option } = Select;
@@ -12,7 +12,8 @@ const EntranceInfo = memo((props: any) => {
     const [value, setValue] = useState();
     const [form] = Form.useForm();
     const dateFormat = 'YYYY-MM-DD';
-    const { number, id } = props; 
+    const { number, id } = props;
+
 
     const postInfo = async (values: any) => {
         values.number = number;
@@ -28,18 +29,37 @@ const EntranceInfo = memo((props: any) => {
             }
         });
     }
-    const onFinish = async (values: any) => {
-        postInfo(values);
+    const putInfo = async (values: any) => {
+        values.id = id;
+        Modal.confirm({
+            title: '确定提交该运动员入学基本情况吗?',
+            okText: '确认',
+            cancelText: '取消',
+            onOk: async () => {
+                const res = await putEntranceInfo(values)
+                Modal.info({
+                    title: res.message,
+                })
+            }
+        });
+    }
+    const onFinish = (values: any) => {
+        (!value || !id) && postInfo(values);
+        (value && id) && putInfo(values);
     };
 
-    useEffect(() => {
+    useEffect(() => { 
         const getInitialValues = async () => {
-            const res = await getEntranceInfo({ id });
-            res.data.records[0].entranceTime = moment(res.data.records[0].entranceTime, dateFormat);
-            setValue(res.data.records[0]);
+            const res = await getEntranceInfo({ number }); 
+            if (res.data) {
+                const msg = res.data.records[0];
+                msg.entranceTime = moment(msg.entranceTime, dateFormat);
+                setValue(res.data.records[0]);
+            }
         }
         id && getInitialValues();
-    }, [])
+    }, [number])
+
     useEffect(() => {
         form.setFieldsValue(value);
     }, [value])

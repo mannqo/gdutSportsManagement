@@ -4,6 +4,7 @@ export const athleteBaseInfo = [
     {
         name: 'number',
         label: '学号',
+        require: true,
     },
     {
         name: 'schoolName',

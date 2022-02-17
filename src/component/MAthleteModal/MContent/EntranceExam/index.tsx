@@ -1,16 +1,19 @@
 import { Form, Row, Col, Input, Upload, Button, Select, Modal } from 'antd'
-import React, { memo } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { athleteEntranceExam } from '../../../../constant/athlete';
 import styled from 'styled-components';
 import { UploadOutlined } from '@ant-design/icons';
-import { postEntranceExam } from '../../../../services/athlete';
+import { getEntranceExam, postEntranceExam, putEntranceExam } from '../../../../services/athlete';
+import moment from 'moment';
 
 const { Option } = Select;
 const EntranceExam = memo((props: any) => {
+    const [value, setValue] = useState(null);
     const [form] = Form.useForm();
-    const { number } = props;
+    const { number, id } = props;
+    const dateFormat = 'YYYY-MM-DD';
 
-    const onFinish = (values: any) => {
+    const postInfo = (values: any) => {
         values.number = number;;
         Modal.confirm({
             title: '确定提交该运动员参加高考情况吗?',
@@ -23,7 +26,42 @@ const EntranceExam = memo((props: any) => {
                 })
             }
         });
+    }
+    const putInfo = (values: any) => {
+        values.id = id;
+        Modal.confirm({
+            title: '确定修改该运动员参加高考情况吗?',
+            okText: '确认',
+            cancelText: '取消',
+            onOk: async () => {
+                const res = await putEntranceExam(values)
+                Modal.info({
+                    title: res.message,
+                })
+            }
+        });
+    }
+    const onFinish = (values: any) => {
+        (!value || !id) && postInfo(values);
+        (value && id) && putInfo(values);
     };
+
+    useEffect(() => { 
+        const getInitialValues = async () => {
+            const res = await getEntranceExam({ number });
+            if (res.data) {
+                const msg = res.data.records[0];
+                msg.entranceTime = moment(msg.entranceTime, dateFormat);
+                setValue(res.data.records[0]);
+            }
+
+        }
+        id && getInitialValues();
+    }, [number])
+
+    useEffect(() => {
+        form.setFieldsValue(value);
+    }, [value, id])
 
     return (
         <Form
@@ -35,7 +73,7 @@ const EntranceExam = memo((props: any) => {
             <Row gutter={10}>
                 {athleteEntranceExam.map((item) => (
                     <Col span={20} key={item.name}>
-                        <Form.Item 
+                        <Form.Item
                             name={item.name}
                             label={item.label}
                             rules={[

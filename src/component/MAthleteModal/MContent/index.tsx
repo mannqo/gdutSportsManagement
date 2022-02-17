@@ -19,9 +19,10 @@ const MContent = memo((props: Props) => {
     ])
     const [status, setStatus] = useState(initialStatus);
     const [number, setNumber] = useState('');
+
     const getNumber = (number: string) => {
         setNumber(number);
-    }
+    } 
 
     useEffect(() => {
         initialStatus.forEach((value, key) => {

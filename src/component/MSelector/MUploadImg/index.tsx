@@ -1,12 +1,16 @@
-import { Upload, message } from 'antd';
+import { Upload, message, Modal } from 'antd';
 import React, { memo, useState } from 'react'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { baseURL } from '../../../config';
 
-const MUploadImg = memo(() => {
+const MUploadImg = memo((props: any) => {
     const [loading, setLoading] = useState(false);
+    const { id, initialImageUrl } = props;
+    // const [imageUrl, setImageUrl] = useState(baseURL + initialImageUrl);
     const [imageUrl, setImageUrl] = useState('');
-    
+    console.log(imageUrl);
+
+
     const beforeUpload = (file: File) => {
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
         if (!isJpgOrPng) {
@@ -24,16 +28,22 @@ const MUploadImg = memo(() => {
         reader.readAsDataURL(img);
     }
     const handleChange = (info: any) => {
-        if (info.file.status === 'uploading') {
+        const { status } = info.file;
+        if (status === 'uploading') {
             setLoading(true);
             return;
         }
-        if (info.file.status === 'done') {
+        console.log(info.file.status);
+
+        if (status === 'done') {
             getBase64(info.file.originFileObj, (imageUrl: any) => {
                 setImageUrl(imageUrl);
                 setLoading(false);
             })
         }
+        Modal.info({
+            title: status
+        })
     }
     const uploadButton = (
         <>
@@ -44,15 +54,18 @@ const MUploadImg = memo(() => {
 
     return (
         <Upload
-            name="avatar"
+            name="picture"
             listType="picture-card"
             className="avatar-uploader"
+            action={baseURL + '/sports/api/img'}
+            method='PUT'
+            data={{ id, type: 10 }}
             showUploadList={false}
-            action={baseURL}
             beforeUpload={beforeUpload}
             onChange={handleChange}
+            maxCount={1}
         >
-            {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+            {imageUrl ? <img src={imageUrl} alt="image" style={{ width: '100%' }} /> : uploadButton}
         </Upload>
     )
 })

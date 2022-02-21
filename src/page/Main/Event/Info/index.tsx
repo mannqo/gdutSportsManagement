@@ -8,6 +8,8 @@ import MEventModal from '../../../../component/MEventModal';
 const EventInfo = memo(() => {
     const [data, setData] = useState([]);
     const [total, setTotal] = useState(0);
+    const [visible, setVisible] = useState(false);
+    const [id, setId] = useState('0');
 
     /* 个人比赛信息列表 */
     const eventColumn = [
@@ -33,7 +35,7 @@ const EventInfo = memo(() => {
             title: '详情',
             dataIndex: 'id',
             render: () => (
-                <div>
+                <div onClick={() => viewDetails(id)}>
                     <SettingOutlined />
                     <span>查看/修改</span>
                 </div>
@@ -48,7 +50,12 @@ const EventInfo = memo(() => {
                 </div>
             )
         },
-    ]
+    ];
+
+    const viewDetails = (id: string) => {
+        setId(id);
+        setVisible(true);
+    }
 
     /* 删除比赛信息 */
     const deleteEvent = (id: string) => {
@@ -74,14 +81,31 @@ const EventInfo = memo(() => {
         setData(data.records);
     }
 
+    const hideModal = () => {
+        setVisible(false);
+    }
+
     return (
-        <MInfo
-            columns={eventColumn}
-            getInfo={getEventInfo}
-            data={data}
-            total={total}
-            TitleComponent={<MEventModal />}
-        />
+        <>
+            <MInfo
+                columns={eventColumn}
+                getInfo={getEventInfo}
+                data={data}
+                total={total}
+                TitleComponent={<MEventModal />}
+            />
+            <Modal
+                title={<MEventModal id={id} />}
+                visible={visible}
+                bodyStyle={{ display: 'none' }}
+                onOk={hideModal}
+                onCancel={hideModal}
+                width={1000}
+                okText="确认"
+                cancelText="取消"
+            />
+        </>
+
     )
 })
 

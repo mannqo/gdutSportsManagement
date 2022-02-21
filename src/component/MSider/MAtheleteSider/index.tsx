@@ -6,13 +6,12 @@ import { MailOutlined } from '@ant-design/icons';
 const { Sider } = Layout;
 
 
-const index = memo(() => {
+const MAtheleteSider = memo(() => {
     return (
         <Sider width={200} className="site-layout-background">
             <Menu
                 mode="inline"
-                defaultSelectedKeys={['info']}
-                defaultOpenKeys={['sub1']}
+                defaultSelectedKeys={['info']} 
                 style={{ height: '100%', borderRight: 0 }}
             >
                 <Menu.Item key="info" icon={<MailOutlined />}>
@@ -26,4 +25,4 @@ const index = memo(() => {
     )
 })
 
-export default index
+export default MAtheleteSider;

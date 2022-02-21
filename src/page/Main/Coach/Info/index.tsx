@@ -8,6 +8,8 @@ import MCoachModal from '../../../../component/MCoachModal';
 const CoachInfo = memo(() => {
     const [data, setData] = useState([]);
     const [total, setTotal] = useState(0);
+    const [visible, setVisible] = useState(false);
+    const [id, setId] = useState('0'); 
 
     const coachColumn = [
         {
@@ -29,8 +31,8 @@ const CoachInfo = memo(() => {
         {
             title: '详情',
             dataIndex: 'id',
-            render: () => (
-                <div>
+            render: (id: string) => (
+                <div onClick={() => viewDetails(id)}>
                     <SettingOutlined />
                     <span>查看/修改</span>
                 </div>
@@ -44,6 +46,11 @@ const CoachInfo = memo(() => {
             )
         },
     ]
+
+    const viewDetails = (id: string) => {
+        setId(id);
+        setVisible(true);
+    }
 
     /* 获取教练个人信息 */
     const getCoachInfo = async (page: number) => {
@@ -68,15 +75,31 @@ const CoachInfo = memo(() => {
             }
         });
     }
-
+    const hideModal = () => {
+        setVisible(false);
+    }
     return (
-        <MInfo
-            columns={coachColumn}
-            getInfo={getCoachInfo}
-            data={data}
-            total={total}
-            TitleComponent={<MCoachModal />}
-        />
+        <>
+            <MInfo
+                columns={coachColumn}
+                getInfo={getCoachInfo}
+                data={data}
+                total={total}
+                TitleComponent={<MCoachModal />}
+            />
+
+            <Modal
+                title={<MCoachModal id={id} />}
+                visible={visible}
+                bodyStyle={{ display: 'none' }}
+                onOk={hideModal}
+                onCancel={hideModal}
+                width={1000}
+                okText="确认"
+                cancelText="取消"
+            />
+        </>
+
     )
 })
 

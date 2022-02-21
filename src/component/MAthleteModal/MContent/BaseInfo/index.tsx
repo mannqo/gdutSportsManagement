@@ -10,6 +10,8 @@ const { Option } = Select;
 const BaseInfo = memo((props: any) => {
     const [number, setNumber] = useState('');
     const [value, setValue] = useState();
+    const [imageUrl, setImageUrl] = useState('');
+
     const [form] = Form.useForm();
     const dateFormat = 'YYYY-MM-DD';
     const { getNumber, id } = props;
@@ -51,6 +53,7 @@ const BaseInfo = memo((props: any) => {
             const res = await getAthleteMsg({ id });
             const msg = res.data.records[0];
             msg.birth = moment(msg.birth, dateFormat);
+            setImageUrl(msg.picture);
             setNumber(msg.number);
             setValue(msg);
         }
@@ -58,64 +61,66 @@ const BaseInfo = memo((props: any) => {
     }, [id])
 
     useEffect(() => {
-        form.setFieldsValue(value); 
+        form.setFieldsValue(value);
         number && getNumber(number);
-    }, [value])
+    }, [value, number, getNumber, form])
 
     return (
-        <Form
-            defaultValue={value}
-            form={form}
-            name="baseInfo"
-            onFinish={onFinish}
-            style={{ width: 700 }}
-        >
-            <Row gutter={10}>
-                {athleteBaseInfo.map((item) => (
-                    <Col span={10} key={item.name}>
-                        <Form.Item
-                            name={item.name}
-                            label={item.label}
-                            rules={[
+        <>
+            <Form
+                defaultValue={value}
+                form={form}
+                name="baseInfo"
+                onFinish={onFinish}
+                style={{ width: 700 }}
+            >
+                <Row gutter={10}>
+                    {athleteBaseInfo.map((item) => (
+                        <Col span={10} key={item.name}>
+                            <Form.Item
+                                name={item.name}
+                                label={item.label}
+                                rules={[
+                                    {
+                                        required: item.require ? true : false,
+                                        message: `请填写${item.label}`,
+                                    },
+                                ]}
+                            >
                                 {
-                                    required: item.require ? true : false,
-                                    message: `请填写${item.label}`,
-                                },
-                            ]}
-                        >
-                            {
-                                item.component === 'MPicker' ?
-                                    <Select placeholder={`选择${item.label}`}>
-                                        {
-                                            item.optionList && item.optionList.map((item: any) => (
-                                                <Option key={item.value} value={item.content} label={item.content}>{item.content}</Option>
-                                            ))
-                                        }
-                                    </Select>
-                                    :
-                                    item.component === 'MDatePicker' ?
-                                        <DatePicker placeholder='选择日期' format={dateFormat} /> :
-                                        <Input placeholder={`填写${item.label}`} />
-                            }
-                        </Form.Item>
-                    </Col>
-                )
-                )}
-            </Row>
-
+                                    item.component === 'MPicker' ?
+                                        <Select placeholder={`选择${item.label}`}>
+                                            {
+                                                item.optionList && item.optionList.map((item: any) => (
+                                                    <Option key={item.value} value={item.content} label={item.content}>{item.content}</Option>
+                                                ))
+                                            }
+                                        </Select>
+                                        :
+                                        item.component === 'MDatePicker' ?
+                                            <DatePicker placeholder='选择日期' format={dateFormat} /> :
+                                            <Input placeholder={`填写${item.label}`} />
+                                }
+                            </Form.Item>
+                        </Col>
+                    )
+                    )}
+                </Row>
+                <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
+                    <Button type="primary" htmlType="submit" >
+                        提交基本信息
+                    </Button>
+                </Form.Item>
+            </Form>
             <ImageWrapper>
                 <p>相片:</p>
-                <MUploadImg />
+                <MUploadImg initialImageUrl={imageUrl} id={id} />
             </ImageWrapper>
-            <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
+        </>
 
-                <Button type="primary" htmlType="submit" >
-                    提交基本信息
-                </Button>
-            </Form.Item>
-        </Form>
     )
 })
+
 const ImageWrapper = styled.div` 
     position: absolute;
     right: 40px;

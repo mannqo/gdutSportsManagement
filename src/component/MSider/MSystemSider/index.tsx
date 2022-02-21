@@ -19,19 +19,19 @@ const MSystemSider = memo(() => {
                 </Menu.Item>
                 <SubMenu key='center' title="组织权限中心">
                     <Menu.Item key="framework">
-                        <NavLink to="/systemManage/config/framework">组织架构</NavLink>
+                        <NavLink to="/systemManage/center/framework">组织架构</NavLink>
                     </Menu.Item>
                     <Menu.Item key="account">
-                        <NavLink to="/systemManage/config/account">账户中心</NavLink>
+                        <NavLink to="/systemManage/center/account">账户中心</NavLink>
                     </Menu.Item>
                     <Menu.Item key="character">
-                        <NavLink to="/systemManage/config/character">角色中心</NavLink>
+                        <NavLink to="/systemManage/center/character">角色中心</NavLink>
                     </Menu.Item>
                     <Menu.Item key="group">
-                        <NavLink to="/systemManage/config/group">群组中心</NavLink>
+                        <NavLink to="/systemManage/center/group">群组中心</NavLink>
                     </Menu.Item>
                     <Menu.Item key="authority">
-                        <NavLink to="/systemManage/config/authority">权限中心</NavLink>
+                        <NavLink to="/systemManage/center/authority">权限中心</NavLink>
                     </Menu.Item>
                 </SubMenu>
                 <Menu.Item key="test">

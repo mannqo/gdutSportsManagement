@@ -1,14 +1,9 @@
 import React, { memo } from 'react'
-import { renderRoutes } from 'react-router-config';
 
-const Config = memo((props: any) => {
-    const { route } = props; 
-    
+const Config = memo(() => {
     return (
-        <>
-            {route && renderRoutes(route.children)} 
-        </>
+        <div>Center</div>
     )
 })
 
-export default Config;
+export default Config

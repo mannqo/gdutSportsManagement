@@ -106,6 +106,8 @@ const BaseInfo = memo((props: any) => {
                     )
                     )}
                 </Row>
+
+
                 <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
                     <Button type="primary" htmlType="submit" >
                         提交基本信息
@@ -114,8 +116,9 @@ const BaseInfo = memo((props: any) => {
             </Form>
             <ImageWrapper>
                 <p>相片:</p>
-                <MUploadImg initialImageUrl={imageUrl} id={id} />
+                <MUploadImg imageUrl={imageUrl} id={id} />
             </ImageWrapper>
+
         </>
 
     )

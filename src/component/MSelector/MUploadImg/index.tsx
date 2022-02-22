@@ -1,15 +1,12 @@
 import { Upload, message, Modal } from 'antd';
-import React, { memo, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { baseURL } from '../../../config';
 
 const MUploadImg = memo((props: any) => {
     const [loading, setLoading] = useState(false);
-    const { id, initialImageUrl } = props;
-    // const [imageUrl, setImageUrl] = useState(baseURL + initialImageUrl);
-    const [imageUrl, setImageUrl] = useState('');
-    console.log(imageUrl);
-
+    const { id } = props;
+    const [imageUrl, setImageUrl] = useState();
 
     const beforeUpload = (file: File) => {
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -52,9 +49,13 @@ const MUploadImg = memo((props: any) => {
         </>
     );
 
+    useEffect(() => {
+
+    }, [])
+
     return (
         <Upload
-            name="picture"
+            name="img"
             listType="picture-card"
             className="avatar-uploader"
             action={baseURL + '/sports/api/img'}

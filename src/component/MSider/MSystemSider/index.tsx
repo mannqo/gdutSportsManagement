@@ -11,6 +11,7 @@ const MSystemSider = memo(() => {
         <Sider width={200} className="site-layout-background">
             <Menu
                 mode="inline"
+                theme='dark'
                 defaultSelectedKeys={['info']}
                 style={{ height: '100%', borderRight: 0 }}
             >

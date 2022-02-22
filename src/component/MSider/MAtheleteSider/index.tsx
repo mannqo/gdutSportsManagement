@@ -10,8 +10,9 @@ const MAtheleteSider = memo(() => {
     return (
         <Sider width={200} className="site-layout-background">
             <Menu
+                theme='dark'
                 mode="inline"
-                defaultSelectedKeys={['info']} 
+                defaultSelectedKeys={['info']}
                 style={{ height: '100%', borderRight: 0 }}
             >
                 <Menu.Item key="info" icon={<MailOutlined />}>

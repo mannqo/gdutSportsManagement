@@ -7,13 +7,8 @@ import { Tabs } from 'antd';
 
 const { TabPane } = Tabs;
 
-interface Props {
-    current: string,
-    id: string
-}
-
-const MContent = memo((props: Props) => {
-    const { current, id } = props;
+const MContent = memo((props: any) => {
+    const { id } = props;
     const [number, setNumber] = useState('');
 
     const getNumber = (number: string) => {

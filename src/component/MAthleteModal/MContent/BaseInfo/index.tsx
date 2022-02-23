@@ -116,7 +116,7 @@ const BaseInfo = memo((props: any) => {
             </Form>
             <ImageWrapper>
                 <p>相片:</p>
-                <MUploadImg imageUrl={imageUrl} id={id} />
+                <MUploadImg initialImageUrl={imageUrl} id={id} />
             </ImageWrapper>
 
         </>

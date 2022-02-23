@@ -12,7 +12,8 @@ const MSystemSider = memo(() => {
             <Menu
                 mode="inline"
                 theme='dark'
-                defaultSelectedKeys={['info']}
+                defaultOpenKeys={['info', 'center']}
+                defaultSelectedKeys={['info', 'center', 'authority']}
                 style={{ height: '100%', borderRight: 0 }}
             >
                 <Menu.Item key="info" icon={<MailOutlined />}>

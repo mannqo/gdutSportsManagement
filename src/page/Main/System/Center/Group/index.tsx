@@ -2,7 +2,9 @@ import React, { memo } from 'react'
 
 const Group = memo(() => {
     return (
-        <div>Group</div>
+        <>
+            <h1>群组中心</h1>
+        </>
     )
 })
 

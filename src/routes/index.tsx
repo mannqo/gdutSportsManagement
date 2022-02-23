@@ -17,6 +17,8 @@ import Character from "../page/Main/System/Center/Character";
 import Framework from "../page/Main/System/Center/Framework";
 import Group from "../page/Main/System/Center/Group";
 import Platform from "../page/Main/System/Platform";
+import Audit from "../page/Main/Audit";
+import AuditEvent from "../page/Main/Audit/AuditEvent";
 
 const routes = [
     {
@@ -129,6 +131,22 @@ const routes = [
                         path: "/systemManage/platform",
                         component: Platform,
                     },
+                ]
+            },
+            {
+                path: "/auditManage",
+                component: Audit,
+                children: [
+                    {
+                        path: "/auditManage",
+                        exact: true,
+                        render: () => <Redirect to="/auditManage/event" />
+                    },
+                    {
+                        path: "/auditManage/event",
+                        exact: true,
+                        component: AuditEvent
+                    }
                 ]
             }
         ]

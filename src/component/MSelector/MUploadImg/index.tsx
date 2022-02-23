@@ -5,8 +5,9 @@ import { baseURL } from '../../../config';
 
 const MUploadImg = memo((props: any) => {
     const [loading, setLoading] = useState(false);
-    const { id } = props;
-    const [imageUrl, setImageUrl] = useState();
+    const { id, initialImageUrl } = props;
+    const [imageUrl, setImageUrl] = useState('');
+
 
     const beforeUpload = (file: File) => {
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -24,17 +25,17 @@ const MUploadImg = memo((props: any) => {
         reader.addEventListener('load', () => callback(reader.result));
         reader.readAsDataURL(img);
     }
-    const handleChange = (info: any) => {
-        const { status } = info.file;
+    const handleChange = async (info: any) => {
+        const { status, response } = info.file;
+
         if (status === 'uploading') {
             setLoading(true);
             return;
         }
-        console.log(info.file.status);
-
         if (status === 'done') {
             getBase64(info.file.originFileObj, (imageUrl: any) => {
-                setImageUrl(imageUrl);
+                const url = baseURL + response.data;
+                setImageUrl(url);
                 setLoading(false);
             })
         }
@@ -49,10 +50,6 @@ const MUploadImg = memo((props: any) => {
         </>
     );
 
-    useEffect(() => {
-
-    }, [])
-
     return (
         <Upload
             name="img"
@@ -66,7 +63,17 @@ const MUploadImg = memo((props: any) => {
             onChange={handleChange}
             maxCount={1}
         >
-            {imageUrl ? <img src={imageUrl} alt="image" style={{ width: '100%' }} /> : uploadButton}
+            {imageUrl ?
+                <img
+                    src={initialImageUrl}
+                    alt="image"
+                    style={{ width: '100%' }} /> :
+                initialImageUrl ?
+                    <img
+                        src={baseURL + initialImageUrl}
+                        alt="image"
+                        style={{ width: '100%' }} /> :
+                    uploadButton}
         </Upload>
     )
 })

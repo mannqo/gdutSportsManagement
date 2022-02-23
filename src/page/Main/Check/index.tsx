@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { Layout, Menu } from 'antd';
 const { Content, Sider } = Layout;
 
-export default memo(function index() {
+export default memo(function Check() {
     return (
         <Layout>
             <Sider width={200} className="site-layout-background">

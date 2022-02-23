@@ -2,7 +2,9 @@ import React, { memo } from 'react'
 
 const Authority = memo(() => {
     return (
-        <div>Authority</div>
+        <>
+            <h1>权限中心</h1>
+        </>
     )
 })
 

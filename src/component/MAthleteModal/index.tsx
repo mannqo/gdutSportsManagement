@@ -13,20 +13,6 @@ const MAthleteModal = memo((props: any) => {
 
     return (
         <>
-            <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
-                <Menu.Item key="baseInfo">
-                    基本信息
-                </Menu.Item>
-                <Menu.Item key="entrance">
-                    入学基本情况
-                </Menu.Item>
-                <Menu.Item key="collegeExam">
-                    参加高考情况
-                </Menu.Item>
-                <Menu.Item key="personalMatch">
-                    个人比赛信息
-                </Menu.Item>
-            </Menu>
             <MContent current={current} id={id} />
         </>
 

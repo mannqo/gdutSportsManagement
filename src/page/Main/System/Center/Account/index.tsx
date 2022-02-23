@@ -2,7 +2,9 @@ import React, { memo } from 'react'
 
 const Account = memo(() => {
     return (
-        <div>Account</div>
+        <>
+            <h1>账户中心</h1>
+        </>
     )
 })
 

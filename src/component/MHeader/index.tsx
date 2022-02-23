@@ -17,6 +17,7 @@ export default memo(function MHeader() {
                 <Menu.Item key="/coachInfo/info" onClick={() => history.push('/coachInfo')}>教练信息</Menu.Item>
                 <Menu.Item key="/checkInfo" onClick={() => history.push('/checkInfo')}>考勤管理</Menu.Item>
                 <Menu.Item key="/systemManage/config" onClick={() => history.push('/systemManage')}>系统管理</Menu.Item>
+                <Menu.Item key="/auditManage/event" onClick={() => history.push('/auditManage')}>审核管理</Menu.Item>
             </Menu>
         </Header>
     )

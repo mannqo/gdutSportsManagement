@@ -14,7 +14,7 @@ const MEventModal = memo((props: any) => {
 
     const postInfo = async (values: any) => {
         Modal.confirm({
-            title: '确定提交该教练的信息吗?',
+            title: '确定提交该比赛的信息吗?',
             okText: '确认',
             cancelText: '取消',
             onOk: async () => {
@@ -27,7 +27,7 @@ const MEventModal = memo((props: any) => {
     }
     const putInfo = async (values: any) => {
         Modal.confirm({
-            title: '确定修改该教练的信息吗?',
+            title: '确定修改该比赛的信息吗?',
             okText: '确认',
             cancelText: '取消',
             onOk: async () => {
@@ -40,8 +40,6 @@ const MEventModal = memo((props: any) => {
     }
 
     const onFinish = (values: any) => {
-        console.log(values);
-
         id && putInfo(values);
         !id && postInfo(values);
     };
@@ -50,6 +48,8 @@ const MEventModal = memo((props: any) => {
         const getInitialValues = async () => {
             const res = await getEventMsg({ id });
             const msg = res.data.records[0];
+            msg.name = JSON.parse(msg.name).toString()
+            msg.coach = JSON.parse(msg.coach).toString()
             msg.birth = moment(msg.birth, dateFormat);
             setValue(msg);
         }
@@ -75,7 +75,7 @@ const MEventModal = memo((props: any) => {
                                 name={item.name}
                                 label={item.label}
                             >
-                                {item.component ? <item.component /> : <Input />}
+                                {item.component ? <item.component name={item.name} /> : <Input />}
                             </Form.Item>
                         </Col>
                     )

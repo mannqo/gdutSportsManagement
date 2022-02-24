@@ -34,7 +34,7 @@ const EventInfo = memo(() => {
         {
             title: '详情',
             dataIndex: 'id',
-            render: () => (
+            render: (id: string) => (
                 <div onClick={() => viewDetails(id)}>
                     <SettingOutlined />
                     <span>查看/修改</span>
@@ -53,7 +53,7 @@ const EventInfo = memo(() => {
     ];
 
     const viewDetails = (id: string) => {
-        setId(id);
+        setId(id); 
         setVisible(true);
     }
 

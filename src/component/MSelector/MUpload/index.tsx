@@ -2,24 +2,28 @@ import React, { memo } from 'react';
 import { Upload, message, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
-const MUpload = memo(() => {
+
+const MUpload = memo((initialProps: any) => {
+
     const props = {
-        name: 'file',
-        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-        headers: {
-            authorization: 'authorization-text',
-        },
-        onChange(info: any) {
-            if (info.file.status !== 'uploading') {
-                console.log(info.file, info.fileList);
+        name: initialProps.name,
+        action: '',
+        beforeUpload(file: File) {
+            console.log(file);
+            const reader = new FileReader();
+            // reader.addEventListener('load', () => {
+            //     console.log(reader.result); 
+            //     return false;
+            // });
+            reader.onload = () => {
+                console.log(reader.result); 
+                return false;
             }
-            if (info.file.status === 'done') {
-                message.success(`${info.file.name} file uploaded successfully`);
-            } else if (info.file.status === 'error') {
-                message.error(`${info.file.name} file upload failed.`);
-            }
-        },
+            reader.readAsDataURL(file);
+        }
     };
+
+
 
     return (
         <Upload {...props}>

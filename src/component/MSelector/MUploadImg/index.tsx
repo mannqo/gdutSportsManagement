@@ -1,7 +1,7 @@
 import { Upload, message, Modal } from 'antd';
 import React, { memo, useEffect, useState } from 'react'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { baseURL } from '../../../config';
+import { host } from '../../../config';
 
 const MUploadImg = memo((props: any) => {
     const [loading, setLoading] = useState(false);
@@ -14,6 +14,7 @@ const MUploadImg = memo((props: any) => {
         if (!isJpgOrPng) {
             message.error('You can only upload JPG/PNG file!');
         }
+
         const isLt2M = file.size / 1024 / 1024 < 2;
         if (!isLt2M) {
             message.error('Image must smaller than 2MB!');
@@ -34,7 +35,7 @@ const MUploadImg = memo((props: any) => {
         }
         if (status === 'done') {
             getBase64(info.file.originFileObj, (imageUrl: any) => {
-                const url = baseURL + response.data;
+                const url = host + response.data;
                 setImageUrl(url);
                 setLoading(false);
             })
@@ -55,7 +56,7 @@ const MUploadImg = memo((props: any) => {
             name="img"
             listType="picture-card"
             className="avatar-uploader"
-            action={baseURL + '/sports/api/img'}
+            action={host + '/sports/api/img'}
             method='PUT'
             data={{ id, type: 10 }}
             showUploadList={false}
@@ -65,12 +66,12 @@ const MUploadImg = memo((props: any) => {
         >
             {imageUrl ?
                 <img
-                    src={initialImageUrl}
+                    src={host + imageUrl}
                     alt="image"
                     style={{ width: '100%' }} /> :
                 initialImageUrl ?
                     <img
-                        src={baseURL + initialImageUrl}
+                        src={host + initialImageUrl}
                         alt="image"
                         style={{ width: '100%' }} /> :
                     uploadButton}

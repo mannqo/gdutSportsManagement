@@ -4,8 +4,8 @@ import React, { memo, useEffect, useState } from 'react'
 import { eventInfo } from '../../constant/event';
 import { getEventMsg, postEventMsg, putEventMsg } from '../../services/event';
 
-
 const MEventModal = memo((props: any) => {
+    const formData = new FormData();
     const [value, setValue] = useState();
     const [form] = Form.useForm();
     const { id } = props;
@@ -25,23 +25,26 @@ const MEventModal = memo((props: any) => {
             }
         });
     }
-    const putInfo = async (values: any) => {
+    const putInfo = async (formData: FormData, values: any) => {
         Modal.confirm({
             title: '确定修改该比赛的信息吗?',
             okText: '确认',
             cancelText: '取消',
             onOk: async () => {
-                const res = await putEventMsg(values);
+                formData.get('resultsBook')
+                const res = await putEventMsg({ formData, values });
                 Modal.info({
                     title: res.message,
                 })
             }
         });
     }
-
+    const getFormData = async (name: string, file: File) => {
+        formData.append(name, file);
+    }
     const onFinish = (values: any) => {
-        id && putInfo(values);
-        !id && postInfo(values);
+        id && putInfo(formData, values);
+        // !id && postInfo(formData, values);
     };
 
     useEffect(() => {
@@ -50,7 +53,9 @@ const MEventModal = memo((props: any) => {
             const msg = res.data.records[0];
             msg.name = JSON.parse(msg.name).toString()
             msg.coach = JSON.parse(msg.coach).toString()
+            msg.leader = JSON.parse(msg.leader).toString()
             msg.birth = moment(msg.birth, dateFormat);
+            msg.id = id;
             setValue(msg);
         }
         id && getInitialValues();
@@ -75,7 +80,7 @@ const MEventModal = memo((props: any) => {
                                 name={item.name}
                                 label={item.label}
                             >
-                                {item.component ? <item.component name={item.name} /> : <Input />}
+                                {item.component ? <item.component getFormData={getFormData} name={item.name} /> : <Input />}
                             </Form.Item>
                         </Col>
                     )

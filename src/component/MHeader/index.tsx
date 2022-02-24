@@ -12,7 +12,7 @@ export default memo(function MHeader() {
         <Header className="header">
             <div className="logo" />
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[pathname]}>
-                <Menu.Item key="/athleteManage/info" onClick={() => history.push('/athleteManage')}>运动员管理</Menu.Item>
+                <Menu.Item key="/athleteManage" onClick={() => history.push('/athleteManage')}>运动员管理</Menu.Item>
                 <Menu.Item key="/eventManage/info" onClick={() => history.push('/eventManage')}>比赛管理</Menu.Item>
                 <Menu.Item key="/coachInfo/info" onClick={() => history.push('/coachInfo')}>教练信息</Menu.Item>
                 <Menu.Item key="/checkInfo" onClick={() => history.push('/checkInfo')}>考勤管理</Menu.Item>

@@ -28,10 +28,15 @@ export function deleteAthleteMsg(option) {
     })
 }
 export function putAthleteMsg(option) {
+    const formData = new FormData();
+    Object.keys(option).forEach((key) => { 
+        option[key] && formData.append(key, option[key]);
+    })
+    formData.get('id');
     return request({
         method: 'PUT',
         url: '/sports/api/sportsBaseMsg',
-        data: option
+        data: formData
     })
 }
 

@@ -1,32 +1,34 @@
 import React, { memo } from 'react';
-import { Upload, message, Button } from 'antd';
+import { Upload, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
 
-const MUpload = memo((initialProps: any) => {
+const MUpload = memo((props: any) => {
 
-    const props = {
-        name: initialProps.name,
-        action: '',
-        beforeUpload(file: File) {
-            console.log(file);
-            const reader = new FileReader();
-            // reader.addEventListener('load', () => {
-            //     console.log(reader.result); 
-            //     return false;
-            // });
-            reader.onload = () => {
-                console.log(reader.result); 
-                return false;
-            }
-            reader.readAsDataURL(file);
+    const { name, getFormData } = props;
+    const getBase64 = (img: any, callback: any) => {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => callback(reader.result));
+        reader.readAsDataURL(img);
+    }
+    const beforeUpload = (file: File) => {
+        try {
+            getFormData(name, file);
+            getBase64(file, (imageUrl: any) => {
+                // console.log(imageUrl);
+            })
+            return false;
+        } catch (err) {
+            console.log(err);
         }
-    };
 
-
+    }
 
     return (
-        <Upload {...props}>
+        <Upload
+            name='name'
+            beforeUpload={beforeUpload}
+        >
             <Button icon={<UploadOutlined />}>上传附件</Button>
         </Upload>
     )

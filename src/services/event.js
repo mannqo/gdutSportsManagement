@@ -25,9 +25,13 @@ export function deleteEventMsg(option) {
 }
 
 export function putEventMsg(option) {
+    const { formData, values } = option;
+    Object.keys(values).forEach((key) => {
+        !formData.get(key) && !option[key] && formData.append(key, values[key]);
+    })
     return request({
         method: 'PUT',
         url: '/sports/api/competitionManage',
-        data: option,
+        data: formData,
     })
 }

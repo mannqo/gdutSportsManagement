@@ -5,7 +5,7 @@ import { eventInfo } from '../../constant/event';
 import { getEventMsg, postEventMsg, putEventMsg } from '../../services/event';
 
 const MEventModal = memo((props: any) => {
-    const formData = new FormData();
+    const [formData, setFormData] = useState(new FormData());
     const [value, setValue] = useState();
     const [form] = Form.useForm();
     const { id } = props;
@@ -43,6 +43,10 @@ const MEventModal = memo((props: any) => {
         formData.append(name, file);
     }
     const onFinish = (values: any) => {
+        values.id = id;
+        // values.money = '100'
+        // values.beforeOrAfter = 1;
+        // values.dataType = 0;
         id && putInfo(formData, values);
         // !id && postInfo(formData, values);
     };

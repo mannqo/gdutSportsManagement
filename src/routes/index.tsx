@@ -19,6 +19,10 @@ import Group from "../page/Main/System/Center/Group";
 import Platform from "../page/Main/System/Platform";
 import Audit from "../page/Main/Audit";
 import AuditEvent from "../page/Main/Audit/AuditEvent";
+import Notice from "../page/Notice";
+import EventNotice from "../page/Notice/EventNotice";
+import AuditNotice from "../page/Notice/AuditNotice";
+import { InfoCircleOutlined, MailOutlined, PlusOutlined } from "@ant-design/icons";
 
 const routes = [
     {
@@ -42,10 +46,16 @@ const routes = [
                     {
                         path: '/athleteManage/info',
                         component: AthleteInfo,
+                        icon: MailOutlined,
+                        key: 'info',
+                        content: '运动员信息表'
                     },
                     {
                         path: '/athleteManage/test',
                         component: Mqtest,
+                        icon: PlusOutlined,
+                        key: 'test',
+                        content: '测试'
                     }
                 ]
             },
@@ -61,6 +71,9 @@ const routes = [
                     {
                         path: "/eventManage/info",
                         component: EventInfo,
+                        icon: MailOutlined,
+                        key: 'info',
+                        content: '比赛信息'
                     }
                 ]
             },
@@ -76,12 +89,15 @@ const routes = [
                     {
                         path: "/coachInfo/info",
                         component: CoachInfo,
+                        icon: MailOutlined,
+                        key: 'info',
+                        content: '教练信息表'
                     }
                 ]
             },
             {
                 path: "/checkInfo",
-                component: Check
+                component: Check,
             },
             {
                 path: "/systemManage",
@@ -145,7 +161,37 @@ const routes = [
                     {
                         path: "/auditManage/event",
                         exact: true,
-                        component: AuditEvent
+                        component: AuditEvent,
+                        icon: MailOutlined,
+                        key: 'event',
+                        content: '比赛审核'
+                    }
+                ]
+            },
+            {
+                path: "/notice",
+                component: Notice,
+                children: [
+                    {
+                        path: "/notice",
+                        exact: true,
+                        render: () => <Redirect to="/notice/event" />
+                    },
+                    {
+                        path: "/notice/event",
+                        exact: true,
+                        component: EventNotice,
+                        icon: InfoCircleOutlined,
+                        key: 'event',
+                        content: '比赛通知'
+                    },
+                    {
+                        path: "/notice/audit",
+                        exact: true,
+                        component: AuditNotice,
+                        icon: InfoCircleOutlined,
+                        key: 'audit',
+                        content: '审核通知'
                     }
                 ]
             }

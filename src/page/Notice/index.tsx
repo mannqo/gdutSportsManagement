@@ -1,16 +1,14 @@
 import React, { memo } from 'react';
 import { Layout } from 'antd';
 import { renderRoutes } from 'react-router-config';
-
-import MSimpleSider from '../../../component/MSider/MSimpleSider';
+import MSimpleSider from '../../component/MSider/MSimpleSider';
 
 const { Content } = Layout;
 
-export default memo(function Athlete(props: any) {
+const Notice = memo((props: any) => {
     const { route } = props;
-
     return (
-        <Layout> 
+        <Layout>
             <MSimpleSider children={route.children} />
             <Layout style={{ padding: '0 24px' }}>
                 <Content >
@@ -18,6 +16,7 @@ export default memo(function Athlete(props: any) {
                 </Content>
             </Layout>
         </Layout>
-
     );
-});
+})
+
+export default Notice

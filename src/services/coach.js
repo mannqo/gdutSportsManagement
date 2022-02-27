@@ -26,9 +26,13 @@ export function deleteCoachMsg(option) {
 }
 
 export function putCoachMsg(option) {
+    const formData = new FormData();
+    Object.keys(option).forEach((key) => { 
+        option[key] && formData.append(key, option[key]);
+    })
     return request({
         method: 'PUT',
         url: '/sports/api/coach',
-        data: option
+        data: formData
     })
 }

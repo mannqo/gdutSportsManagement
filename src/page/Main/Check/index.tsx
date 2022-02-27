@@ -18,7 +18,7 @@ export default memo(function Check() {
             </Sider>
             <Layout style={{ padding: '0 24px 24px' }}>
                 <Content >
-                    C111
+                    考勤管理
                 </Content>
             </Layout>
         </Layout>

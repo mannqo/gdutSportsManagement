@@ -28,6 +28,8 @@ const EntranceExam = memo((props: any) => {
         });
     }
     const putInfo = (values: any) => {
+        console.log(id);
+        
         values.id = id;
         Modal.confirm({
             title: '确定修改该运动员参加高考情况吗?',

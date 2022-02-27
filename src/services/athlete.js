@@ -29,7 +29,7 @@ export function deleteAthleteMsg(option) {
 }
 export function putAthleteMsg(option) {
     const formData = new FormData();
-    Object.keys(option).forEach((key) => { 
+    Object.keys(option).forEach((key) => {
         option[key] && formData.append(key, option[key]);
     })
     formData.get('id');
@@ -67,10 +67,14 @@ export function deleteEntranceInfo(option) {
     })
 }
 export function putEntranceInfo(option) {
+    const formData = new FormData();
+    Object.keys(option).forEach((key) => {
+        option[key] && formData.append(key, option[key]);
+    })
     return request({
         method: 'PUT',
         url: '/sports/api/entranceInfo',
-        data: option
+        data: formData
     })
 }
 
@@ -101,10 +105,14 @@ export function deleteEntranceExam(option) {
     })
 }
 export function putEntranceExam(option) {
+    const formData = new FormData();
+    Object.keys(option).forEach((key) => {
+        option[key] && formData.append(key, option[key]);
+    })
     return request({
         method: 'PUT',
         url: '/sports/api/entranceExam',
-        data: option
+        data: formData
     })
 }
 
@@ -135,9 +143,13 @@ export function deleteSportCompetition(option) {
     })
 }
 export function putSportCompetition(option) {
+    const formData = new FormData();
+    Object.keys(option).forEach((key) => { 
+        option[key] && formData.append(key, option[key]);
+    })
     return request({
         method: 'PUT',
         url: '/sports/api/sportCompetition',
-        data: option
+        data: formData
     })
 }

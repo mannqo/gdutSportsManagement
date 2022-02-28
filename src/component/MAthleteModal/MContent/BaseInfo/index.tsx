@@ -31,6 +31,7 @@ const BaseInfo = memo((props: any) => {
         });
     }
     const putInfo = async (values: any) => {
+        values.id = id;
         Modal.confirm({
             title: '确定修改该运动员基本信息吗?',
             okText: '确认',
@@ -44,7 +45,6 @@ const BaseInfo = memo((props: any) => {
         });
     }
     const onFinish = async (values: any) => {
-        values.id = id;
         id && putInfo(values);
         !id && postInfo(values);
     };
@@ -53,7 +53,7 @@ const BaseInfo = memo((props: any) => {
         const getInitialValues = async () => {
             const res = await getAthleteMsg({ id });
             const msg = res.data.records[0];
-            msg.birth = moment(msg.birth, dateFormat); 
+            msg.birth = moment(msg.birth, dateFormat);
             setImageUrl(msg.picture);
             setNumber(msg.number);
             setValue(msg);

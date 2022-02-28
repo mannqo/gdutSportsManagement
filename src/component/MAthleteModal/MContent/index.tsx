@@ -4,6 +4,7 @@ import CollegeExam from './EntranceExam';
 import Entrance from './EntranceInfo';
 import PersonalMatch from './PersonalMatch';
 import { Tabs } from 'antd';
+import { getAthleteMsg } from '../../../services/athlete';
 
 const { TabPane } = Tabs;
 
@@ -14,6 +15,15 @@ const MContent = memo((props: any) => {
     const getNumber = (number: string) => {
         setNumber(number);
     }
+
+    useEffect(() => {
+        const getInitialValues = async () => {
+            const res = await getAthleteMsg({ id });
+            const record = res.data.records[0];
+            setNumber(record.number);
+        }
+        id && getInitialValues();
+    }, [id])
 
     return (
         <Tabs defaultActiveKey="1">

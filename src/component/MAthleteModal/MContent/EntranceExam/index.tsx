@@ -8,9 +8,10 @@ import moment from 'moment';
 
 const { Option } = Select;
 const EntranceExam = memo((props: any) => {
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState();
+    const [id, setId] = useState(0);
     const [form] = Form.useForm();
-    const { number, id } = props;
+    const { number } = props;
     const dateFormat = 'YYYY-MM-DD';
 
     const postInfo = (values: any) => {
@@ -24,12 +25,13 @@ const EntranceExam = memo((props: any) => {
                 Modal.info({
                     title: res.message,
                 })
+                if (res.data) {
+                    setId(res.data.id);
+                }
             }
         });
     }
     const putInfo = (values: any) => {
-        console.log(id);
-        
         values.id = id;
         Modal.confirm({
             title: '确定修改该运动员参加高考情况吗?',
@@ -48,27 +50,31 @@ const EntranceExam = memo((props: any) => {
         (value && id) && putInfo(values);
     };
 
-    useEffect(() => { 
+    useEffect(() => {
         const getInitialValues = async () => {
             const res = await getEntranceExam({ number });
             if (res.data) {
-                const msg = res.data.records[0];
+                const msg = res.data.records[0]; 
                 msg.entranceTime = moment(msg.entranceTime, dateFormat);
-                setValue(res.data.records[0]);
+                setValue(msg);
+                setId(msg.id);
+            } else {
+                setValue(undefined);
             }
-
         }
-        id && getInitialValues();
-    }, [number])
+        number && getInitialValues();
+    }, [number, id])
 
     useEffect(() => {
-        form.setFieldsValue(value);
-    }, [value, id])
+        form.resetFields();
+    }, [value])
 
     return (
         <Form
             form={form}
-            name="entrance"
+            preserve={false}
+            initialValues={value}
+            name="entranceExam"
             onFinish={onFinish}
             style={{ width: 800 }}
         >

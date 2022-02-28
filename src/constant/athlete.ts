@@ -23,7 +23,7 @@ export const athleteBaseInfo = [
         require: true,
     },
     {
-        name: 'group',
+        name: 'inGroup',
         label: '组别',
         require: true,
         component: 'MPicker',

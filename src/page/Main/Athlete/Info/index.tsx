@@ -32,7 +32,7 @@ const AthleteInfo = memo(() => {
         },
         {
             title: '组别',
-            dataIndex: 'group',
+            dataIndex: 'inGroup',
         },
         {
             title: '详情',

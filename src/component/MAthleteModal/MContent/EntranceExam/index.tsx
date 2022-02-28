@@ -54,7 +54,7 @@ const EntranceExam = memo((props: any) => {
         const getInitialValues = async () => {
             const res = await getEntranceExam({ number });
             if (res.data) {
-                const msg = res.data.records[0]; 
+                const msg = res.data.records[0];
                 msg.entranceTime = moment(msg.entranceTime, dateFormat);
                 setValue(msg);
                 setId(msg.id);
@@ -70,61 +70,69 @@ const EntranceExam = memo((props: any) => {
     }, [value])
 
     return (
-        <Form
-            form={form}
-            preserve={false}
-            initialValues={value}
-            name="entranceExam"
-            onFinish={onFinish}
-            style={{ width: 800 }}
-        >
-            <Row gutter={10}>
-                {athleteEntranceExam.map((item) => (
-                    <Col span={20} key={item.name}>
-                        <Form.Item
-                            name={item.name}
-                            label={item.label}
-                            rules={[
+        <ImageWrapper>
+            <Form
+                form={form}
+                preserve={false}
+                initialValues={value}
+                name="entranceExam"
+                onFinish={onFinish}
+                style={{ width: 800 }}
+            >
+                <Row gutter={10}>
+                    {athleteEntranceExam.map((item) => (
+                        <Col span={20} key={item.name}>
+                            <Form.Item
+                                name={item.name}
+                                label={item.label}
+                                rules={[
+                                    {
+                                        required: item.require ? true : false,
+                                        message: '请填写必填信息',
+                                    },
+                                ]}
+                            >
                                 {
-                                    required: item.require ? true : false,
-                                    message: '请填写必填信息',
-                                },
-                            ]}
-                        >
-                            {
-                                item.component === 'MPicker' ?
-                                    <Select placeholder={`请填写${item.label}`}>
-                                        {
-                                            item.optionList && item.optionList.map((item: any) => (
-                                                <Option key={item.value} value={item.content} label={item.content}>{item.content}</Option>
-                                            ))
-                                        }
-                                    </Select> : <Input placeholder={`填写${item.label}`} />
-                            }
-                        </Form.Item>
-                    </Col>
-                ))}
+                                    item.component === 'MPicker' ?
+                                        <Select placeholder={`请填写${item.label}`}>
+                                            {
+                                                item.optionList && item.optionList.map((item: any) => (
+                                                    <Option key={item.value} value={item.content} label={item.content}>{item.content}</Option>
+                                                ))
+                                            }
+                                        </Select> : <Input placeholder={`填写${item.label}`} />
+                                }
+                            </Form.Item>
+                        </Col>
+                    ))}
 
-            </Row>
+                </Row>
 
-            <ImageWrapper>
+                <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
+                    <Button type="primary" htmlType="submit">
+                        提交高考情况信息
+                    </Button>
+                </Form.Item>
+            </Form>
+            <div className='image'>
                 <p>身份证件:</p>
                 <Upload>
                     <Button icon={<UploadOutlined />}>上传附件</Button>
-                </Upload>,
-            </ImageWrapper>
-            <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
-                <Button type="primary" htmlType="submit">
-                    提交高考情况信息
-                </Button>
-            </Form.Item>
-        </Form>
+                </Upload>
+            </div>
+        </ImageWrapper >
     )
 })
+
 const ImageWrapper = styled.div` 
-    position: absolute;
-    right: 60px;
-    top: 80px;
+    display: flex;
+    flex-wrap: nowrap;  
+    .image {  
+        .ant-upload.ant-upload-select-picture-card { 
+            width: 160px;
+            height: 250px;
+        } 
+    }
 `
 
 

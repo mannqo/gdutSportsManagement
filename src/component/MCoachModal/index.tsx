@@ -39,8 +39,6 @@ const MCoachModal = memo((props: any) => {
     }
 
     const onFinish = (values: any) => {
-        console.log(values);
-
         id && putInfo(values);
         !id && postInfo(values);
     };

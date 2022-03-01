@@ -9,10 +9,14 @@ export function getEventMsg(option) {
 }
 
 export function postEventMsg(option) {
+    const { formData, values } = option;
+    Object.keys(values).forEach((key) => {
+        !formData.get(key) && values[key] && formData.append(key, values[key]);
+    })
     return request({
         method: 'POST',
         url: '/sports/api/competitionManage',
-        data: option,
+        data: formData,
     })
 }
 
@@ -26,8 +30,10 @@ export function deleteEventMsg(option) {
 
 export function putEventMsg(option) {
     const { formData, values } = option;
+    const fileName = ['orderBook', 'competitionPicture', 'prizesPicture', 'resultsBook', 'resultsCertificate'];
+
     Object.keys(values).forEach((key) => {
-        !formData.get(key) && !option[key] && formData.append(key, values[key]);
+        !formData.get(key) && values[key] && !fileName.includes(key) && formData.append(key, values[key]);
     })
     return request({
         method: 'PUT',

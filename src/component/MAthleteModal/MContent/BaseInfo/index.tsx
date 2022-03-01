@@ -17,12 +17,12 @@ const BaseInfo = memo((props: any) => {
     const { getNumber, id } = props;
 
     const postInfo = async (values: any) => {
-        getNumber(values.number);
         Modal.confirm({
             title: '确定提交该运动员基本信息吗?',
             okText: '确认',
             cancelText: '取消',
             onOk: async () => {
+                getNumber(values.number);
                 const res = await postAthleteMsg(values);
                 Modal.info({
                     title: res.message,
@@ -49,7 +49,7 @@ const BaseInfo = memo((props: any) => {
         !id && postInfo(values);
     };
 
-    useEffect(() => {
+    useEffect(() => { 
         const getInitialValues = async () => {
             const res = await getAthleteMsg({ id });
             const msg = res.data.records[0];
@@ -62,7 +62,7 @@ const BaseInfo = memo((props: any) => {
     }, [id])
 
     useEffect(() => {
-        form.setFieldsValue(value);
+        form.resetFields();
         number && getNumber(number);
     }, [value, number, getNumber, form])
 
@@ -71,8 +71,9 @@ const BaseInfo = memo((props: any) => {
 
             <ImageWrapper>
                 <Form
-                    defaultValue={value}
                     form={form}
+                    preserve={false}
+                    initialValues={value}
                     name="baseInfo"
                     onFinish={onFinish}
                     style={{ width: 700 }}

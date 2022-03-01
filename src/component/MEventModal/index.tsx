@@ -12,16 +12,17 @@ const MEventModal = memo((props: any) => {
 
     const dateFormat = 'YYYY-MM-DD';
 
-    const postInfo = async (values: any) => {
+    const postInfo = async (formData: FormData, values: any) => {
         Modal.confirm({
             title: '确定提交该比赛的信息吗?',
             okText: '确认',
             cancelText: '取消',
             onOk: async () => {
-                const res = await postEventMsg(values);
+                const res = await postEventMsg({ formData, values });
                 Modal.info({
                     title: res.message,
                 })
+                setValue(undefined);
             }
         });
     }
@@ -31,7 +32,6 @@ const MEventModal = memo((props: any) => {
             okText: '确认',
             cancelText: '取消',
             onOk: async () => {
-                formData.get('resultsBook')
                 const res = await putEventMsg({ formData, values });
                 Modal.info({
                     title: res.message,
@@ -44,11 +44,8 @@ const MEventModal = memo((props: any) => {
     }
     const onFinish = (values: any) => {
         values.id = id;
-        // values.money = '100'
-        // values.beforeOrAfter = 1;
-        // values.dataType = 0;
         id && putInfo(formData, values);
-        // !id && postInfo(formData, values);
+        !id && postInfo(formData, values);
     };
 
     useEffect(() => {
@@ -63,9 +60,10 @@ const MEventModal = memo((props: any) => {
             setValue(msg);
         }
         id && getInitialValues();
-    }, [id])
+    }, [id]) 
+
     useEffect(() => {
-        form.setFieldsValue(value);
+        form.resetFields();
     }, [value, form])
 
     return (
@@ -73,6 +71,8 @@ const MEventModal = memo((props: any) => {
             <h2 style={{ textAlign: 'center', lineHeight: '40px' }}>比赛信息表</h2>
             <Form
                 form={form}
+                preserve={false}
+                initialValues={value}
                 name="baseInfo"
                 onFinish={onFinish}
                 style={{ width: 900 }}
@@ -83,8 +83,14 @@ const MEventModal = memo((props: any) => {
                             <Form.Item
                                 name={item.name}
                                 label={item.label}
+                                rules={[
+                                    {
+                                        required: item.require ? true : false,
+                                        message: `请填写${item.label}`,
+                                    },
+                                ]}
                             >
-                                {item.component ? <item.component getFormData={getFormData} name={item.name} /> : <Input />}
+                                {item.component ? <item.component getFormData={getFormData} initfileList={value ? JSON.parse(value[item.name]) : []} name={item.name} /> : <Input />}
                             </Form.Item>
                         </Col>
                     )

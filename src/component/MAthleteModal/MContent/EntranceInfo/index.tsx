@@ -70,12 +70,11 @@ const EntranceInfo = memo((props: any) => {
 
     useEffect(() => {
         form.resetFields();
-    }, [value])
+    }, [value, form])
 
     return (
         <>
             <ImageWrapper>
-
                 <Form
                     form={form}
                     preserve={false}

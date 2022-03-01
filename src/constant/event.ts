@@ -3,15 +3,23 @@ import MUpload from "../component/MSelector/MUpload";
 export const eventInfo = [
     {
         name: 'desgination',
-        label: '名称'
+        label: '名称',
+        require: true,
     },
     {
         name: 'name',
-        label: '运动员姓名'
+        label: '运动员姓名',
+        require: true,
     },
     {
         name: 'coach',
-        label: '教练'
+        label: '教练',
+        require: true,
+    },
+    {
+        name: 'approvePerson',
+        label: '审核人',
+        require: true,
     },
     {
         name: 'leader',

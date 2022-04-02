@@ -40,6 +40,7 @@ const MEventModal = memo((props: any) => {
         });
     }
     const getFormData = async (name: string, file: File) => {
+        console.log(name, file);
         formData.append(name, file);
     }
     const onFinish = (values: any) => {
@@ -60,7 +61,7 @@ const MEventModal = memo((props: any) => {
             setValue(msg);
         }
         id && getInitialValues();
-    }, [id]) 
+    }, [id])
 
     useEffect(() => {
         form.resetFields();
@@ -73,9 +74,8 @@ const MEventModal = memo((props: any) => {
                 form={form}
                 preserve={false}
                 initialValues={value}
-                name="baseInfo"
-                onFinish={onFinish}
-                style={{ width: 900 }}
+                name="eventInfo"
+                onFinish={onFinish} 
             >
                 <Row gutter={10}>
                     {eventInfo.map((item) => (
@@ -90,7 +90,12 @@ const MEventModal = memo((props: any) => {
                                     },
                                 ]}
                             >
-                                {item.component ? <item.component getFormData={getFormData} initfileList={value ? JSON.parse(value[item.name]) : []} name={item.name} /> : <Input />}
+                                {item.component
+                                    ? <item.component
+                                        getFormData={getFormData}
+                                        initfileList={value ? JSON.parse(value[item.name]) : []}
+                                        name={item.name} />
+                                    : <Input />}
                             </Form.Item>
                         </Col>
                     )

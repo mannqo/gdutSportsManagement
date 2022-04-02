@@ -12,13 +12,14 @@ export default function request(option) {
                 "Access-Control-Allow-Origin": "*",
             }
         })
-        instance.defaults.withCredentials = true;
+        instance.defaults.withCredentials = true;  // 携带cookie
         instance.defaults.headers.post['Content-Type'] = 'application/json'
 
         // 拦截器
         instance.interceptors.request.use(config => {
-            return config
+            return config;
         }, err => {
+            console.log(err, '请求拦截');
             return err
         })
         instance.interceptors.response.use(response => {

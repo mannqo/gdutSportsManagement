@@ -1,3 +1,4 @@
+import MDatePicker from "../component/MSelector/MDatePicker";
 
 export const coachInfo = [
     {
@@ -11,14 +12,10 @@ export const coachInfo = [
     {
         name: 'birth',
         label: '出生年月',
-        component: 'MDatePicker'
+        component: MDatePicker
     },
     {
         name: 'professionName',
         label: '职称',
-    },
-    {
-        name: 'cardPicture',
-        label: '证件照',
     }
 ]

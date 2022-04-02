@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import MUploadImg from '../../../MSelector/MUploadImg';
 import { getEntranceInfo, postEntranceInfo, putEntranceInfo } from '../../../../services/athlete';
 import moment from 'moment';
+import { ImageWrapper } from '../../../../config/style';
 
 const { Option } = Select;
 
@@ -14,7 +15,6 @@ const EntranceInfo = memo((props: any) => {
     const [form] = Form.useForm();
     const dateFormat = 'YYYY-MM-DD';
     const { number } = props;
-
 
     const postInfo = async (values: any) => {
         values.number = number;
@@ -81,7 +81,6 @@ const EntranceInfo = memo((props: any) => {
                     initialValues={value}
                     name="entranceInfo"
                     onFinish={onFinish}
-                    style={{ width: 700 }}
                 >
                     <Row gutter={10}>
                         {athleteEntranceInfo.map((item) => (
@@ -124,22 +123,12 @@ const EntranceInfo = memo((props: any) => {
                 </Form>
                 <div className="image">
                     <p>学生证:</p>
-                    <MUploadImg />
+                    <MUploadImg id={id} type={15} />
                 </div>
             </ImageWrapper>
         </>
     )
 })
 
-const ImageWrapper = styled.div` 
-    display: flex;
-    flex-wrap: nowrap;  
-    .image {  
-        .ant-upload.ant-upload-select-picture-card { 
-            width: 160px;
-            height: 250px;
-        } 
-    }
-`
 
 export default EntranceInfo

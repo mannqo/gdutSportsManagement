@@ -65,8 +65,7 @@ const PersonalMatch = memo((props: any) => {
         <Form
             form={form}
             name="baseInfo"
-            onFinish={onFinish}
-            style={{ width: 1000 }}
+            onFinish={onFinish} 
         >
             <Row gutter={10}>
                 {athletePersonalMatch.map((item) => (

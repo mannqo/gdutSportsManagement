@@ -5,11 +5,15 @@ import styled from 'styled-components';
 import { UploadOutlined } from '@ant-design/icons';
 import { getEntranceExam, postEntranceExam, putEntranceExam } from '../../../../services/athlete';
 import moment from 'moment';
+import MUploadImg from '../../../MSelector/MUploadImg';
+import { ImageWrapper } from '../../../../config/style';
 
 const { Option } = Select;
 const EntranceExam = memo((props: any) => {
     const [value, setValue] = useState();
     const [id, setId] = useState(0);
+    const [imageUrl, setImageUrl] = useState('');
+
     const [form] = Form.useForm();
     const { number } = props;
     const dateFormat = 'YYYY-MM-DD';
@@ -56,6 +60,9 @@ const EntranceExam = memo((props: any) => {
             if (res.data) {
                 const msg = res.data.records[0];
                 msg.entranceTime = moment(msg.entranceTime, dateFormat);
+                console.log(msg);
+
+                setImageUrl(msg.idCard);
                 setValue(msg);
                 setId(msg.id);
             } else {
@@ -77,7 +84,6 @@ const EntranceExam = memo((props: any) => {
                 initialValues={value}
                 name="entranceExam"
                 onFinish={onFinish}
-                style={{ width: 800 }}
             >
                 <Row gutter={10}>
                     {athleteEntranceExam.map((item) => (
@@ -116,24 +122,10 @@ const EntranceExam = memo((props: any) => {
             </Form>
             <div className='image'>
                 <p>身份证件:</p>
-                <Upload>
-                    <Button icon={<UploadOutlined />}>上传附件</Button>
-                </Upload>
+                <MUploadImg initialImageUrl={imageUrl} id={id} type={14}></MUploadImg>
             </div>
         </ImageWrapper >
     )
 })
-
-const ImageWrapper = styled.div` 
-    display: flex;
-    flex-wrap: nowrap;  
-    .image {  
-        .ant-upload.ant-upload-select-picture-card { 
-            width: 160px;
-            height: 250px;
-        } 
-    }
-`
-
 
 export default EntranceExam

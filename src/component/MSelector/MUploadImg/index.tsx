@@ -1,18 +1,17 @@
 import { Upload, message, Modal } from 'antd';
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useState } from 'react'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { host } from '../../../config';
+import { host, uploadImgUrl } from '../../../config';
 
 const MUploadImg = memo((props: any) => {
     const [loading, setLoading] = useState(false);
-    const { id, initialImageUrl } = props;
+    const { id, initialImageUrl, type } = props;
     const [imageUrl, setImageUrl] = useState('');
-
 
     const beforeUpload = (file: File) => {
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
         if (!isJpgOrPng) {
-            message.error('You can only upload JPG/PNG file!');
+            message.error('你只能上传 JPG/PNG 格式的文件');
         }
 
         const isLt2M = file.size / 1024 / 1024 < 2;
@@ -35,7 +34,7 @@ const MUploadImg = memo((props: any) => {
         }
         if (status === 'done') {
             getBase64(info.file.originFileObj, (imageUrl: any) => {
-                const url = host + response.data;
+                const url = response.data;
                 setImageUrl(url);
                 setLoading(false);
             })
@@ -56,9 +55,9 @@ const MUploadImg = memo((props: any) => {
             name="img"
             listType="picture-card"
             className="avatar-uploader"
-            action={host + '/sports/api/img'}
+            action={uploadImgUrl}
             method='PUT'
-            data={{ id, type: 10 }}
+            data={{ id, type }}
             showUploadList={false}
             beforeUpload={beforeUpload}
             onChange={handleChange}

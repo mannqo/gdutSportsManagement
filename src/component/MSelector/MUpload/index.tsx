@@ -10,13 +10,14 @@ const MUpload = memo((props: any) => {
     const { name, getFormData, initfileList } = props;
     const [fileList, setFileList] = useState(arr);
 
-    useEffect(() => {
+    useEffect(() => { 
+
         if (initfileList) {
             setFileList(arr);
             initfileList.forEach((item: any) => {
                 const imgArr = item.split('/');
                 const name = imgArr[imgArr.length - 1];
-                const thumbUrl = baseURL + item; 
+                const thumbUrl = baseURL + item;
                 fileList.push({ name, thumbUrl });
             });
             setFileList(fileList);

@@ -1,12 +1,14 @@
 import { Form, Row, Col, Input, Select, Button, DatePicker, Modal } from 'antd'
 import React, { memo, useEffect, useState } from 'react'
 import { athleteBaseInfo } from '../../../../constant/athlete';
-import styled from 'styled-components';
 import MUploadImg from '../../../MSelector/MUploadImg';
+import MDatePicker from '../../../MSelector/MDatePicker';
 import { getAthleteMsg, postAthleteMsg, putAthleteMsg } from '../../../../services/athlete';
 import moment from 'moment';
+import { ImageWrapper } from '../../../../config/style';
 
 const { Option } = Select;
+
 const BaseInfo = memo((props: any) => {
     const [number, setNumber] = useState('');
     const [value, setValue] = useState();
@@ -49,7 +51,7 @@ const BaseInfo = memo((props: any) => {
         !id && postInfo(values);
     };
 
-    useEffect(() => { 
+    useEffect(() => {
         const getInitialValues = async () => {
             const res = await getAthleteMsg({ id });
             const msg = res.data.records[0];
@@ -68,7 +70,6 @@ const BaseInfo = memo((props: any) => {
 
     return (
         <>
-
             <ImageWrapper>
                 <Form
                     form={form}
@@ -76,7 +77,6 @@ const BaseInfo = memo((props: any) => {
                     initialValues={value}
                     name="baseInfo"
                     onFinish={onFinish}
-                    style={{ width: 700 }}
                 >
                     <Row gutter={10}>
                         {athleteBaseInfo.map((item) => (
@@ -102,7 +102,7 @@ const BaseInfo = memo((props: any) => {
                                             </Select>
                                             :
                                             item.component === 'MDatePicker' ?
-                                                <DatePicker placeholder='选择日期' format={dateFormat} /> :
+                                                <MDatePicker /> :
                                                 <Input placeholder={`填写${item.label}`} />
                                     }
                                 </Form.Item>
@@ -115,13 +115,10 @@ const BaseInfo = memo((props: any) => {
                             </Button>
                         </Form.Item>
                     </Row>
-
-
-
                 </Form>
                 <div className="image">
-                    <p>相片:</p>
-                    <MUploadImg initialImageUrl={imageUrl} id={id} />
+                    <p>证件照:</p>
+                    <MUploadImg initialImageUrl={imageUrl} id={id} type={10} />
                 </div>
             </ImageWrapper>
 
@@ -129,16 +126,5 @@ const BaseInfo = memo((props: any) => {
 
     )
 })
-
-const ImageWrapper = styled.div` 
-    display: flex;
-    flex-wrap: nowrap;  
-    .image {  
-        .ant-upload.ant-upload-select-picture-card { 
-            width: 160px;
-            height: 250px;
-        } 
-    }
-`
 
 export default BaseInfo

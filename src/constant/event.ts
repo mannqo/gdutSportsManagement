@@ -1,6 +1,35 @@
 import MUpload from "../component/MSelector/MUpload";
 
-export const eventInfo = [
+export type FileName = 'resultsBook' | 'orderBook' | 'competitionPicture' | 'resultsCertificate' | 'prizesPicture'
+interface Item {
+    name: 'approvePerson' |
+    'beforeOrAfter' |
+    'birth' |
+    'coach' |
+    'competitionLevel' |
+    'competitionPlace' |
+    'competitionProject' |
+    'competitionTime' |
+    'competitionPicture' |
+    'dataType' |
+    'desgination' |
+    'id' |
+    'leader' |
+    'money' |
+    'name' |
+    'orderBook' |
+    'prizesPicture' |
+    'results' |
+    'resultsBook' |
+    'resultsCertificate' |
+    'state',
+    label: string,
+    component?: any,
+    require?: Boolean
+}
+export type EventInfo = Array<Item>
+
+export const eventInfo: EventInfo = [
     {
         name: 'desgination',
         label: '名称',

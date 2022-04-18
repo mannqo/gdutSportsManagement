@@ -1,12 +1,13 @@
-import { Form, Row, Col, Input, Button, Modal } from 'antd'
+import { Form, Row, Col, Input, Button, Modal, Upload } from 'antd'
 import moment from 'moment';
 import React, { memo, useEffect, useState } from 'react'
-import { eventInfo } from '../../constant/event';
+import { eventInfo, FileName } from '../../constant/event';
 import { getEventMsg, postEventMsg, putEventMsg } from '../../services/event';
+import { initialEventValue } from '../../type/eventInfo';
 
 const MEventModal = memo((props: any) => {
-    const [formData, setFormData] = useState(new FormData());
-    const [value, setValue] = useState();
+    const [formData, setFormData] = useState(new FormData());  // 存文件
+    const [value, setValue] = useState(initialEventValue);
     const [form] = Form.useForm();
     const { id } = props;
 
@@ -22,7 +23,7 @@ const MEventModal = memo((props: any) => {
                 Modal.info({
                     title: res.message,
                 })
-                setValue(undefined);
+                setValue(initialEventValue);
             }
         });
     }
@@ -39,9 +40,12 @@ const MEventModal = memo((props: any) => {
             }
         });
     }
-    const getFormData = async (name: string, file: File) => {
-        console.log(name, file);
+    const getFormData = async (name: FileName, file: File) => {
+        // console.log(name, file);
+        // console.log(value);
+        value[name].push(name);
         formData.append(name, file);
+        return formData;
     }
     const onFinish = (values: any) => {
         values.id = id;
@@ -56,7 +60,15 @@ const MEventModal = memo((props: any) => {
             msg.name = JSON.parse(msg.name).toString()
             msg.coach = JSON.parse(msg.coach).toString()
             msg.leader = JSON.parse(msg.leader).toString()
+            msg.approvePerson = JSON.parse(msg.approvePerson);
             msg.birth = moment(msg.birth, dateFormat);
+            // 文件
+            msg.competitionPicture = JSON.parse(msg.competitionPicture);
+            msg.orderBook = JSON.parse(msg.orderBook);
+            msg.prizesPicture = JSON.parse(msg.prizesPicture);
+            msg.resultsBook = JSON.parse(msg.resultsBook);
+            msg.resultsCertificate = JSON.parse(msg.resultsCertificate);
+
             msg.id = id;
             setValue(msg);
         }
@@ -75,7 +87,7 @@ const MEventModal = memo((props: any) => {
                 preserve={false}
                 initialValues={value}
                 name="eventInfo"
-                onFinish={onFinish} 
+                onFinish={onFinish}
             >
                 <Row gutter={10}>
                     {eventInfo.map((item) => (
@@ -90,12 +102,15 @@ const MEventModal = memo((props: any) => {
                                     },
                                 ]}
                             >
-                                {item.component
-                                    ? <item.component
-                                        getFormData={getFormData}
-                                        initfileList={value ? JSON.parse(value[item.name]) : []}
-                                        name={item.name} />
-                                    : <Input />}
+                                {item.component ?
+                                    <item.component
+                                        initfileList={
+                                            value[item.name]
+                                        }
+                                        name={item.name}
+                                        getFormData={getFormData} />
+                                    : <Input />
+                                }
                             </Form.Item>
                         </Col>
                     )

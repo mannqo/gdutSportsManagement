@@ -103,9 +103,8 @@ const AthleteInfo = memo(() => {
                 bodyStyle={{ display: 'none' }}
                 onOk={hideModal}
                 onCancel={hideModal}
-                width={1000}
-                okText="确认"
-                cancelText="取消"
+                width={1000} 
+                footer={(<></>)}
             />
         </>
 

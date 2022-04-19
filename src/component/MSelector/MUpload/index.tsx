@@ -27,7 +27,7 @@ const MUpload = memo((props: { name: string, getFormData: Function, initfileList
             getFormData(name, file);
             getBase64(file, (imageUrl: any) => {
                 const newFileList = JSON.parse(JSON.stringify(fileList));
-                newFileList.push({ name: file.name, thumbUrl: imageUrl, url: imageUrl, status: 'done', uid: file.name })
+                newFileList.push({ name: file.name, thumbUrl: imageUrl, url: imageUrl, status: 'done', uid: file })
                 setFileList(newFileList)
             })
             return false;
@@ -37,7 +37,8 @@ const MUpload = memo((props: { name: string, getFormData: Function, initfileList
     }
     const onFileChange = (e: any) => {
         console.log('filechange ', e);
-    } 
+        setFileList(e.fileList);
+    }
 
     return (
         <Upload

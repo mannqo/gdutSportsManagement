@@ -9,7 +9,7 @@ const MEventModal = memo((props: any) => {
     const [formData, setFormData] = useState(new FormData());  // 存文件
     const [value, setValue] = useState(initialEventValue);
     const [form] = Form.useForm();
-    const { id } = props;
+    const { id, type } = props;  // type: approve审核 eventInfo比赛信息
 
     const dateFormat = 'YYYY-MM-DD';
 
@@ -41,8 +41,6 @@ const MEventModal = memo((props: any) => {
         });
     }
     const getFormData = async (name: FileName, file: File) => {
-        // console.log(name, file);
-        // console.log(value);
         value[name].push(name);
         formData.append(name, file);
         return formData;
@@ -57,18 +55,7 @@ const MEventModal = memo((props: any) => {
         const getInitialValues = async () => {
             const res = await getEventMsg({ id });
             const msg = res.data.records[0];
-            msg.name = JSON.parse(msg.name).toString()
-            msg.coach = JSON.parse(msg.coach).toString()
-            msg.leader = JSON.parse(msg.leader).toString()
-            msg.approvePerson = JSON.parse(msg.approvePerson);
             msg.birth = moment(msg.birth, dateFormat);
-            // 文件
-            msg.competitionPicture = JSON.parse(msg.competitionPicture);
-            msg.orderBook = JSON.parse(msg.orderBook);
-            msg.prizesPicture = JSON.parse(msg.prizesPicture);
-            msg.resultsBook = JSON.parse(msg.resultsBook);
-            msg.resultsCertificate = JSON.parse(msg.resultsCertificate);
-
             msg.id = id;
             setValue(msg);
         }
@@ -118,11 +105,15 @@ const MEventModal = memo((props: any) => {
                 </Row>
 
                 <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button style={{ 'display': type === 'eventInfo' ? 'block' : 'none' }} type="primary" htmlType="submit">
                         提交比赛信息
                     </Button>
                 </Form.Item>
             </Form>
+            <div style={{ textAlign: 'center', display: type === 'approve' ? 'block' : 'none' }} >
+                <Button type='primary' style={{ 'marginRight': '20px' }}>通过申请</Button>
+                <Button>拒绝该申请</Button>
+            </div>
         </>
 
     )

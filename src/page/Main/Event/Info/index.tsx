@@ -21,14 +21,14 @@ const EventInfo = memo(() => {
             title: '运动员姓名',
             dataIndex: 'name',
             render: (athlete: any) => (
-                <span>{JSON.parse(athlete).toString()}</span>
+                <span>{athlete}</span>
             )
         },
         {
             title: '教练',
             dataIndex: 'coach',
             render: (coach: any) => (
-                <span>{JSON.parse(coach).toString()}</span>
+                <span>{coach}</span>
             )
         },
         {
@@ -53,7 +53,7 @@ const EventInfo = memo(() => {
     ];
 
     const viewDetails = (id: string) => {
-        setId(id); 
+        setId(id);
         setVisible(true);
     }
 
@@ -92,17 +92,16 @@ const EventInfo = memo(() => {
                 getInfo={getEventInfo}
                 data={data}
                 total={total}
-                TitleComponent={<MEventModal />}
+                TitleComponent={<MEventModal type='eventInfo' />}
             />
             <Modal
-                title={<MEventModal id={id} />}
+                title={<MEventModal type='eventInfo' id={id} />}
                 visible={visible}
                 bodyStyle={{ display: 'none' }}
                 onOk={hideModal}
                 onCancel={hideModal}
                 width={1000}
-                okText="确认"
-                cancelText="取消"
+                footer={(<></>)}
             />
         </>
 

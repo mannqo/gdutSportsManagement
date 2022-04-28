@@ -1,45 +1,43 @@
 import { Card } from 'antd';
 import React, { memo, useState } from 'react'
+import NoticeTable from '../Component/NoticeTable';
 
 const tabList = [
     {
-        key: 'article',
-        tab: 'article',
+        key: 'eventNotice',
+        tab: '比赛通知',
     },
     {
-        key: 'app',
-        tab: 'app',
-    },
-    {
-        key: 'project',
-        tab: 'project',
+        key: 'approveNotice',
+        tab: '审核通知',
     },
 ];
 
-const contentList = {
-    article: <p>article content</p>,
-    app: <p>app content</p>,
-    project: <p>project content</p>,
-};
-type tabType = 'app' | 'article' | 'project';
+type tabType = 'eventNotice' | 'approveNotice';
 const NoticeManage = memo(() => {
-    let activeTabKey: tabType = 'app';
+    const [activeTabKey, setActiveTabKey] = useState<tabType>('eventNotice');
     const onTabChange = (key: tabType) => {
-        activeTabKey = key;
+        setActiveTabKey(key);
     };
+    const contentList = {
+        eventNotice: <NoticeTable type='4'></NoticeTable>,
+        // approveNotice: <></>
+        approveNotice: <NoticeTable type='10'></NoticeTable>,
+    };
+
     return (
         <>
             <Card
-                style={{ width: '100%' }}
+                style={{ width: '100% ' }}
                 tabList={tabList}
                 activeTabKey={activeTabKey}
-                tabBarExtraContent={<a href="#">More</a>}
+                tabBarExtraContent={<a href="#" > More</a>}
                 onTabChange={(key: tabType) => {
                     onTabChange(key);
                 }}
             >
                 {contentList[activeTabKey]}
-            </Card>
+            </Card >
         </>
     )
 })

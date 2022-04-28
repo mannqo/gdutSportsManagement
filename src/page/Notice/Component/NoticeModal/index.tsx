@@ -1,13 +1,12 @@
 import React, { memo, useEffect, useState } from 'react'
 import { List, Button, Skeleton } from 'antd';
 import { getNoticeMsg } from '../../../../services/notice';
-import { SmileOutlined } from '@ant-design/icons';
-import styled from 'styled-components';
+import { SmileOutlined } from '@ant-design/icons'; 
 
 
 const NoticeModal = memo((props: { type: string }) => {
-    const { type } = props;
-    const [loading, setloading] = useState(true);
+    const { type } = props; 
+    const [loading, setLoading] = useState(true);
     const [list, setList] = useState([]);
     const [ifMore, setIfMore] = useState(true);  // 是否还有更多信息
     const getNotice = async (pn: number) => {
@@ -15,13 +14,12 @@ const NoticeModal = memo((props: { type: string }) => {
             const res = await getNoticeMsg({ pn, type });
             const { data: { records } } = res;
             records.length < 10 && setIfMore(false);
-            setloading(false);
+            setLoading(false);
             res && res.data && setList(list.concat(records));
         } catch (err) {
             setIfMore(false);
-            setloading(false);
-        }
-
+            setLoading(false);
+        } 
     }
     const onLoadMore = () => {
         const pn = Math.floor(list.length / 10) + 1;
@@ -46,7 +44,7 @@ const NoticeModal = memo((props: { type: string }) => {
         getNotice(1);
     }, [])
     return (
-        <ListContainer>
+        <>
             <List
                 className="demo-loadmore-list"
                 loading={loading}
@@ -55,7 +53,7 @@ const NoticeModal = memo((props: { type: string }) => {
                 dataSource={list}
                 renderItem={(item: any) => (
                     <List.Item
-                        actions={[<a key="list-loadmore-edit">edit</a>]}
+                        // actions={[<a key="list-loadmore-edit">edit</a>]}
                     >
                         <Skeleton avatar title={false} loading={item.loading} active>
                             <List.Item.Meta
@@ -67,15 +65,9 @@ const NoticeModal = memo((props: { type: string }) => {
                     </List.Item>
                 )}
             />
-        </ListContainer>
+        </>
 
     );
 })
-
-const ListContainer = styled.div`
-    /* .ant-list-item-meta-description {
-        color: #077FFF;
-    } */
-`
 
 export default NoticeModal;

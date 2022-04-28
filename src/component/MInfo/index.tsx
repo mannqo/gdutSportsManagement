@@ -1,7 +1,7 @@
 import { Button, Table, Modal } from 'antd';
 import React, { memo, useEffect, useState } from 'react'
 
-const MInfo = memo((props: any) => {
+const MInfo = memo((props: { columns: any, getInfo: any, data: any, total: number, TitleComponent?: any }) => {
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [loading, setLoading] = useState(false);
     const [visible, setVisible] = useState(false);
@@ -63,7 +63,7 @@ const MInfo = memo((props: any) => {
                 pagination={{ total, onChange }}
             />
 
-            <Modal 
+            <Modal
                 title={TitleComponent}
                 visible={visible}
                 bodyStyle={{ display: 'none' }}

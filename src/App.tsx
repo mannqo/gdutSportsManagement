@@ -1,14 +1,10 @@
 import React from 'react';
-import './App.css'; 
-import { renderRoutes } from 'react-router-config';
-import routes from './routes';
-import { HashRouter } from 'react-router-dom';
+import './App.css';
+import Admin from './page/Admin';
 
 function App() {
   return (
-    <HashRouter>
-      {renderRoutes(routes)}
-    </HashRouter>
+    <Admin id='1' />
   );
 }
 

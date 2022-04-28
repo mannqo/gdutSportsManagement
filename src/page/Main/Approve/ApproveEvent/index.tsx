@@ -59,11 +59,17 @@ const ApproveEvent = memo(() => {
         },
         {
             title: '审核意见',
-            dataIndex: 'message'
+            dataIndex: 'message',
+            render: (message: string) => (
+                <>{message ? message : 'null'}</>
+            )
         },
         {
             title: '审核时间',
-            dataIndex: 'approveTime'
+            dataIndex: 'approveTime',
+            render: (approveTime: string) => (
+                <>{approveTime ? approveTime : 'null'}</>
+            )
         },
         {
             title: '申请内容',

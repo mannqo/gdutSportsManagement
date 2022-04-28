@@ -17,12 +17,13 @@ import Character from "../page/Main/System/Center/Character";
 import Framework from "../page/Main/System/Center/Framework";
 import Group from "../page/Main/System/Center/Group";
 import Platform from "../page/Main/System/Platform";
-import Audit from "../page/Main/Approve";
-import AuditEvent from "../page/Main/Approve/ApproveEvent";
+import Approve from "../page/Main/Approve";
+import ApproveEvent from "../page/Main/Approve/ApproveEvent";
 import Notice from "../page/Notice";
 import EventNotice from "../page/Notice/EventNotice";
-import AuditNotice from "../page/Notice/AuditNotice";
+import ApproveNotice from "../page/Notice/ApproveNotice";
 import { InfoCircleOutlined, MailOutlined, PlusOutlined } from "@ant-design/icons";
+import NoticeManage from "../page/Notice/NoticeManage";
 
 const routes = [
     {
@@ -37,6 +38,7 @@ const routes = [
             {
                 path: "/athleteManage",
                 component: Athlete,
+                auth: 'root',
                 children: [
                     {
                         path: "/athleteManage",
@@ -62,6 +64,7 @@ const routes = [
             {
                 path: "/eventManage",
                 component: Event,
+                auth: 'root',
                 children: [
                     {
                         path: "/eventManage",
@@ -97,10 +100,12 @@ const routes = [
             },
             {
                 path: "/checkInfo",
+                auth: 'root',
                 component: Check,
             },
             {
                 path: "/systemManage",
+                auth: 'root',
                 component: System,
                 children: [
                     {
@@ -150,18 +155,19 @@ const routes = [
                 ]
             },
             {
-                path: "/auditManage",
-                component: Audit,
+                path: "/approveManage",
+                auth: 'root',
+                component: Approve,
                 children: [
                     {
-                        path: "/auditManage",
+                        path: "/approveManage",
                         exact: true,
-                        render: () => <Redirect to="/auditManage/event" />
+                        render: () => <Redirect to="/approveManage/event" />
                     },
                     {
-                        path: "/auditManage/event",
+                        path: "/approveManage/event",
                         exact: true,
-                        component: AuditEvent,
+                        component: ApproveEvent,
                         icon: MailOutlined,
                         key: 'event',
                         content: '比赛审核'
@@ -170,6 +176,7 @@ const routes = [
             },
             {
                 path: "/notice",
+                auth: 'root',
                 component: Notice,
                 children: [
                     {
@@ -186,12 +193,20 @@ const routes = [
                         content: '比赛通知'
                     },
                     {
-                        path: "/notice/audit",
+                        path: "/notice/approve",
                         exact: true,
-                        component: AuditNotice,
+                        component: ApproveNotice,
                         icon: InfoCircleOutlined,
-                        key: 'audit',
+                        key: 'approve',
                         content: '审核通知'
+                    },
+                    {
+                        path: '/notice/manage',
+                        exact: true,
+                        component: NoticeManage,
+                        icon: InfoCircleOutlined,
+                        key: 'mannage',
+                        content: '通知管理'
                     }
                 ]
             }

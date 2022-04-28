@@ -1,10 +1,11 @@
 import React, { memo } from 'react'
 import NoticeModal from '../Component/NoticeModal'
 
-const EventNotice = memo(() => {
+
+const ApproveNotice = memo(() => {
     return (
-        <NoticeModal type='4' />
+        <NoticeModal type='10' />
     )
 })
 
-export default EventNotice
+export default ApproveNotice

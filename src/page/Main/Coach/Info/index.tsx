@@ -94,8 +94,7 @@ const CoachInfo = memo(() => {
                 bodyStyle={{ display: 'none' }}
                 onOk={hideModal}
                 onCancel={hideModal}
-                width={1000} 
-                footer={(<></>)}
+                width={1000}  
             />
         </>
 

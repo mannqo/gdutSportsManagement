@@ -7,3 +7,19 @@ export function getNoticeMsg(option) {
         params: option
     })
 }
+
+export function postNoticeMsg(option) {
+    return request({
+        method: 'POST',
+        url: '/sports/api/notice',
+        data: option
+    })
+}
+
+export function deleteNoticeMsg(option) {
+    return request({
+        method: 'DELETE',
+        url: '/sports/api/notice',
+        data: option
+    })
+}

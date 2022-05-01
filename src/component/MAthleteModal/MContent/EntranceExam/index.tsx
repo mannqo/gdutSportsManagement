@@ -1,8 +1,6 @@
 import { Form, Row, Col, Input, Upload, Button, Select, Modal } from 'antd'
 import React, { memo, useEffect, useState } from 'react'
-import { athleteEntranceExam } from '../../../../constant/athlete';
-import styled from 'styled-components';
-import { UploadOutlined } from '@ant-design/icons';
+import { athleteEntranceExam } from '../../../../constant/athlete'; 
 import { getEntranceExam, postEntranceExam, putEntranceExam } from '../../../../services/athlete';
 import moment from 'moment';
 import MUploadImg from '../../../MSelector/MUploadImg';
@@ -59,9 +57,7 @@ const EntranceExam = memo((props: any) => {
             const res = await getEntranceExam({ number });
             if (res.data) {
                 const msg = res.data.records[0];
-                msg.entranceTime = moment(msg.entranceTime, dateFormat);
-                console.log(msg);
-
+                msg.entranceTime = moment(msg.entranceTime, dateFormat); 
                 setImageUrl(msg.idCard);
                 setValue(msg);
                 setId(msg.id);

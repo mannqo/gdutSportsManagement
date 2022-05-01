@@ -20,9 +20,8 @@ const NoticeManage = memo(() => {
         setActiveTabKey(key);
     };
     const contentList = {
-        eventNotice: <NoticeTable type='4'></NoticeTable>,
-        // approveNotice: <></>
-        approveNotice: <NoticeTable type='10'></NoticeTable>,
+        eventNotice: <NoticeTable type='4' />,
+        approveNotice: <NoticeTable type='10' />,
     };
 
     return (
@@ -31,7 +30,7 @@ const NoticeManage = memo(() => {
                 style={{ width: '100% ' }}
                 tabList={tabList}
                 activeTabKey={activeTabKey}
-                tabBarExtraContent={<a href="#" > More</a>}
+                // tabBarExtraContent={<a href="#" > More</a>}
                 onTabChange={(key: tabType) => {
                     onTabChange(key);
                 }}

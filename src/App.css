@@ -28,3 +28,7 @@
 .site-layout-background {
   background: #fff;
 }
+
+.ant-modal-footer {
+  display: none;
+}

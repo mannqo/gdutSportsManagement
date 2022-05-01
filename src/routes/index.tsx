@@ -186,7 +186,6 @@ const routes = [
                     },
                     {
                         path: "/notice/event",
-                        exact: true,
                         component: EventNotice,
                         icon: InfoCircleOutlined,
                         key: 'event',
@@ -194,7 +193,6 @@ const routes = [
                     },
                     {
                         path: "/notice/approve",
-                        exact: true,
                         component: ApproveNotice,
                         icon: InfoCircleOutlined,
                         key: 'approve',
@@ -202,7 +200,6 @@ const routes = [
                     },
                     {
                         path: '/notice/manage',
-                        exact: true,
                         component: NoticeManage,
                         icon: InfoCircleOutlined,
                         key: 'mannage',

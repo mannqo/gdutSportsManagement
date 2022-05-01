@@ -48,8 +48,7 @@ const MInfo = memo((props: { columns: any, getInfo: any, data: any, total: numbe
                 bodyStyle={{ display: 'none' }}
                 onOk={hideModal}
                 onCancel={hideModal}
-                width={1000}
-                footer={(<></>)}
+                width={1000} 
                 okText="完成"
                 cancelText="取消"
             />

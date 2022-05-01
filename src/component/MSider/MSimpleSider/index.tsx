@@ -1,6 +1,6 @@
-import React, { Component, memo } from 'react'
+import React, { Component, memo, useEffect } from 'react'
 import { Layout, Menu } from 'antd';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const { Sider } = Layout;
 
@@ -16,21 +16,22 @@ interface ItemValue {
 
 const MSimpleSider = memo((props: any) => {
     const { children } = props;
+    const { pathname } = useLocation();
 
     return (
         <Sider width={200} className="site-layout-background">
             <Menu
                 mode="inline"
                 theme='dark'
-                // defaultOpenKeys={[route[1].key]}
-                defaultSelectedKeys={[children[1].key]}
+                // defaultOpenKeys={[children[1].key]}
+                defaultSelectedKeys={[pathname]}
                 style={{ height: '100%', borderRight: 0 }}
             >
                 {
                     children.map((value: ItemValue, index: number) => {
                         if (index) {
                             return (
-                                <Menu.Item key={value.key} icon={<value.icon />}>
+                                <Menu.Item key={value.path} icon={<value.icon />}>
                                     <NavLink to={value.path}>{value.content}</NavLink>
                                 </Menu.Item>
                             )

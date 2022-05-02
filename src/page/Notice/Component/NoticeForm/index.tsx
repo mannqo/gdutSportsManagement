@@ -1,6 +1,6 @@
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { Button, Form, Input, Modal } from 'antd'
-import React, { memo, useEffect } from 'react'
+import React, { memo } from 'react'
 import { noticeContent } from '../../../../constant/notice'
 import { postNoticeMsg } from '../../../../services/notice'
 

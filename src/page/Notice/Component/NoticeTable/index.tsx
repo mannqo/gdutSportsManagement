@@ -66,17 +66,7 @@ const NoticeTable = memo((props: { type: string }) => {
         {
             title: '通知对象',
             dataIndex: 'toPerson'
-        },
-        {
-            title: '详情',
-            dataIndex: 'id',
-            render: (id: string) => (
-                <div onClick={() => viewDetails(id)}>
-                    <SettingOutlined />
-                    <span>查看/修改</span>
-                </div>
-            )
-        },
+        }, 
         {
             title: '操作',
             dataIndex: 'id',

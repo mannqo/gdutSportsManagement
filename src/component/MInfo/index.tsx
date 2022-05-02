@@ -23,7 +23,7 @@ const MInfo = memo((props: { columns: any, getInfo: any, data: any, total: numbe
         selectedRowKeys,
         onChange: onSelectChange,
     };
- 
+
     const onChange = (page: number) => {
         getInfo(page);
     }
@@ -41,14 +41,14 @@ const MInfo = memo((props: { columns: any, getInfo: any, data: any, total: numbe
                 dataSource={data}
                 rowKey='id'
                 pagination={{ total, onChange }}
-            /> 
+            />
             <Modal
                 title={TitleComponent}
                 visible={visible}
                 bodyStyle={{ display: 'none' }}
                 onOk={hideModal}
                 onCancel={hideModal}
-                width={1000} 
+                width={1000}
                 okText="完成"
                 cancelText="取消"
             />

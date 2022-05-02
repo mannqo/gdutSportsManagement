@@ -9,10 +9,14 @@ export function getNoticeMsg(option) {
 }
 
 export function postNoticeMsg(option) {
+    const formData = new FormData();
+    Object.keys(option).forEach(key => {
+        formData.append(key, option[key]);
+    })
     return request({
         method: 'POST',
         url: '/sports/api/notice',
-        data: option
+        data: formData
     })
 }
 

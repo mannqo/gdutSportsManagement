@@ -1,13 +1,10 @@
 import { Redirect } from "react-router-dom";
-import Main from "../page/Main";
-import Athlete from "../page/Main/Athlete";
-import AthleteInfo from "../page/Main/Athlete/Info";
+import Main from "../page/Main"; 
+import AthleteInfo from "../page/Main/Athlete";
 import Mqtest from "../page/Main/Athlete/xxx";
-import Check from "../page/Main/Check";
-import Coach from "../page/Main/Coach";
-import CoachInfo from "../page/Main/Coach/Info";
-import Event from "../page/Main/Event";
-import EventInfo from "../page/Main/Event/Info";
+import Check from "../page/Main/Check"; 
+import CoachInfo from "../page/Main/Coach"; 
+import EventInfo from "../page/Main/Event";
 import System from "../page/Main/System";
 import Center from "../page/Main/System/Center";
 import Config from "../page/Main/System/Config";
@@ -16,14 +13,13 @@ import Authority from "../page/Main/System/Center/Authority";
 import Character from "../page/Main/System/Center/Character";
 import Framework from "../page/Main/System/Center/Framework";
 import Group from "../page/Main/System/Center/Group";
-import Platform from "../page/Main/System/Platform";
-import Approve from "../page/Main/Approve";
-import ApproveEvent from "../page/Main/Approve/ApproveEvent";
-import Notice from "../page/Notice";
+import Platform from "../page/Main/System/Platform"; 
+import ApproveEvent from "../page/Main/Approve"; 
 import EventNotice from "../page/Notice/EventNotice";
 import ApproveNotice from "../page/Notice/ApproveNotice";
 import { InfoCircleOutlined, MailOutlined, PlusOutlined } from "@ant-design/icons";
 import NoticeManage from "../page/Notice/NoticeManage";
+import MNormalSider from "../component/MSider/MNormalSider";
 
 const routes = [
     {
@@ -33,11 +29,11 @@ const routes = [
             {
                 path: "/",
                 exact: true,
-                render: () => <Redirect to="/athleteManage" />
+                render: () => <Redirect to="/athleteManage/info" />
             },
             {
                 path: "/athleteManage",
-                component: Athlete,
+                component: MNormalSider,
                 auth: 'root',
                 children: [
                     {
@@ -63,7 +59,7 @@ const routes = [
             },
             {
                 path: "/eventManage",
-                component: Event,
+                component: MNormalSider,
                 auth: 'root',
                 children: [
                     {
@@ -82,7 +78,7 @@ const routes = [
             },
             {
                 path: "/coachInfo",
-                component: Coach,
+                component: MNormalSider,
                 children: [
                     {
                         path: "/coachInfo",
@@ -157,7 +153,7 @@ const routes = [
             {
                 path: "/approveManage",
                 auth: 'root',
-                component: Approve,
+                component: MNormalSider,
                 children: [
                     {
                         path: "/approveManage",
@@ -177,7 +173,7 @@ const routes = [
             {
                 path: "/notice",
                 auth: 'root',
-                component: Notice,
+                component: MNormalSider,
                 children: [
                     {
                         path: "/notice",

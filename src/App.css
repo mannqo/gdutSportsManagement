@@ -1,11 +1,12 @@
 @import '~antd/dist/antd.css';
 
 #root {
-  height: auto;
+  height: 100%;
 }
 
 .ant-layout {
   flex: 1 0 auto;
+  height: 100%;
 }
 
 .ant-layout-header {
@@ -15,8 +16,8 @@
 .logo {
   float: left;
   width: 200px;
-  height: 64px; 
-  background: url('../public/img/gdut_logo2.jpg') center no-repeat; 
+  height: 64px;
+  background: url('../public/img/gdut_logo2.jpg') center no-repeat;
   background-size: 180px 40px;
 }
 

@@ -1,22 +1,23 @@
-import React, { memo } from 'react';
+import React, { memo } from 'react'
 import { Layout } from 'antd';
 import { renderRoutes } from 'react-router-config';
-import MSimpleSider from '../../component/MSider/MSimpleSider';
+import MSimpleSider from '../MSimpleSider';
 
 const { Content } = Layout;
 
-const Notice = memo((props: any) => {
+const MNormalSider = memo((props: any) => {
     const { route } = props;
+    const { children } = route;
     return (
         <Layout>
-            <MSimpleSider children={route.children} />
+            <MSimpleSider children={children} />
             <Layout style={{ padding: '0 24px' }}>
                 <Content >
-                    {route && renderRoutes(route.children)}
+                    {route && renderRoutes(children)}
                 </Content>
             </Layout>
         </Layout>
-    );
+    )
 })
 
-export default Notice
+export default MNormalSider

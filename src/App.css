@@ -6,10 +6,11 @@
 
 .ant-layout {
   flex: 1 0 auto;
-  height: 100%;
+  min-height: 90vh;
+  height: auto;
 }
 
-.ant-layout-header {
+.ant-layout-header { 
   padding-left: 0;
 }
 

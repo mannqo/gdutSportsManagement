@@ -27,3 +27,11 @@ export function deleteNoticeMsg(option) {
         data: option
     })
 }
+
+export function putNoticeMsg(option) {
+    return request({
+        method: 'PUT',
+        url: '/sports/api/notice',
+        data: option
+    })
+}

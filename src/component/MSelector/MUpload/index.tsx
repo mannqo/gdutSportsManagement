@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useState } from 'react';
 import { Upload, Button, Modal } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { host } from '../../../config';

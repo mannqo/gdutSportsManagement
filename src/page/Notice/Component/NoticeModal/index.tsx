@@ -1,11 +1,14 @@
 import React, { memo, useEffect, useState } from 'react'
 import { List, Button, Skeleton } from 'antd';
 import { getNoticeMsg } from '../../../../services/notice';
-import { SmileOutlined } from '@ant-design/icons'; 
+import { SmileOutlined } from '@ant-design/icons';
+import './index.css'
+import ReadButton from './ReadButton';
+import { approveInfo } from '../../../../type/infoType';
 
 
 const NoticeModal = memo((props: { type: string }) => {
-    const { type } = props; 
+    const { type } = props;
     const [loading, setLoading] = useState(true);
     const [list, setList] = useState([]);
     const [ifMore, setIfMore] = useState(true);  // 是否还有更多信息
@@ -14,12 +17,14 @@ const NoticeModal = memo((props: { type: string }) => {
             const res = await getNoticeMsg({ pn, type });
             const { data: { records } } = res;
             records.length < 10 && setIfMore(false);
+            console.log(records);
+
             setLoading(false);
             res && res.data && setList(list.concat(records));
         } catch (err) {
             setIfMore(false);
             setLoading(false);
-        } 
+        }
     }
     const onLoadMore = () => {
         const pn = Math.floor(list.length / 10) + 1;
@@ -28,17 +33,12 @@ const NoticeModal = memo((props: { type: string }) => {
     const loadMore =
         !loading && ifMore ? (
             <div
-                style={{
-                    textAlign: 'center',
-                    marginTop: 12,
-                    height: 32,
-                    lineHeight: '32px',
-                }}
+                style={{ textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px' }}
             >
                 <Button type='primary' onClick={onLoadMore}>点击加载更多</Button>
             </div>
         ) : <></>;
-
+        
     useEffect(() => {
         setList([]);
         getNotice(1);
@@ -52,17 +52,19 @@ const NoticeModal = memo((props: { type: string }) => {
                 loadMore={loadMore}
                 dataSource={list}
                 renderItem={(item: any) => (
-                    <List.Item
+                    <>
+                        <List.Item
                         // actions={[<a key="list-loadmore-edit">edit</a>]}
-                    >
-                        <Skeleton avatar title={false} loading={item.loading} active>
-                            <List.Item.Meta
-                                title={<a>{item.message}</a>}
-                                description='你有一条新消息'
-                            />
-                            {item.isRead ? null : <SmileOutlined />}
-                        </Skeleton>
-                    </List.Item>
+                        >
+                            <ReadButton id={item.id} isRead={item.isRead} type={approveInfo} />
+                            <Skeleton avatar title={false} loading={item.loading} active>
+                                <List.Item.Meta
+                                    title={<a>{item.message}</a>} 
+                                />
+                                {item.isRead ? null : <SmileOutlined />}
+                            </Skeleton>
+                        </List.Item>
+                    </>
                 )}
             />
         </>

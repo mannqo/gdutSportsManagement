@@ -1,11 +1,10 @@
-import React, { memo, useState } from 'react'; 
+import React, { memo } from 'react';
 import MContent from './MContent';
 
-const MAthleteModal = memo((props: any) => {
-    const { id } = props;
+const MAthleteModal = memo((props: { id: number }) => {
     return (
         <>
-            <MContent id={id} />
+            <MContent id={props.id} />
         </>
 
     )

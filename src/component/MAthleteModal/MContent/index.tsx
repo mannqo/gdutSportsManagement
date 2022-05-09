@@ -8,7 +8,7 @@ import { getAthleteMsg } from '../../../services/athlete';
 
 const { TabPane } = Tabs;
 
-const MContent = memo((props: any) => {
+const MContent = memo((props: { id: number }) => {
     const { id } = props;
     const [number, setNumber] = useState('');
 
@@ -31,7 +31,7 @@ const MContent = memo((props: any) => {
                 <BaseInfo getNumber={getNumber} id={id} />
             </TabPane>
             <TabPane tab="入学基本情况" key="entrance">
-                <Entrance number={number} id={id} />
+                <Entrance number={number} />
             </TabPane>
             <TabPane tab="参加高考情况" key="collegeExam">
                 <CollegeExam number={number} id={id} />

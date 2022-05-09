@@ -1,37 +1,18 @@
-import { Button, Table, Modal } from 'antd';
-import React, { memo, useEffect, useState } from 'react'
+import { Table, Modal } from 'antd';
+import React, { memo } from 'react'
 import MChange from '../MChange';
+import { useInfo } from './useInfo';
 
-const MInfo = memo((props: { columns: any, getInfo: any, data: any, total: number, TitleComponent?: any }) => {
-    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-    const [visible, setVisible] = useState(false);
+const MInfo = memo((props: { columns: any, getInfo: (page: number) => void, data: any, total: number, TitleComponent?: any }) => {
     const { columns, getInfo, data, total, TitleComponent } = props;
-
-    const addAthlete = () => {
-        setVisible(true);
-    }
-    /* 运动员信息表 */
-    const hideModal = () => {
-        setVisible(false);
-    }
-
-    const onSelectChange = (selectedRowKeys: any) => {
-        console.log('selectedRowKeys changed: ', selectedRowKeys);
-        setSelectedRowKeys(selectedRowKeys);
-    };
-    const rowSelection = {
+    const {
+        addAthlete,
         selectedRowKeys,
-        onChange: onSelectChange,
-    };
-
-    const onChange = (page: number) => {
-        getInfo(page);
-    }
-
-    useEffect(() => {
-        getInfo(1);
-    }, [])
-
+        rowSelection,
+        onChange,
+        visible,
+        hideModal
+    } = useInfo(getInfo);
     return (
         <>
             <MChange add={addAthlete} selectedRowKeys={selectedRowKeys} />

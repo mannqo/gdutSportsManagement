@@ -7,7 +7,7 @@ import MTable from './MTable';
 const NoticeTable = memo((props: { type: string }) => {
     const [visible, setVisible] = useState(false);
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-    const [id, setId] = useState('0');
+    const [id, setId] = useState(0);
     const { type } = props;
     const hideModal = () => {
         setVisible(false);
@@ -16,14 +16,14 @@ const NoticeTable = memo((props: { type: string }) => {
         console.log('selectedRowKeys changed: ', selectedRowKeys);
         setSelectedRowKeys(selectedRowKeys);
     };
-    const viewDetails = (id: string) => {
+    const viewDetails = (id: number) => {
         setVisible(true);
         setId(id);
     }
     return (
         <>
             <MChange add={viewDetails} selectedRowKeys={selectedRowKeys} />
-            <MTable type={type} 
+            <MTable type={type}
                 onSelectChange={onSelectChange} />
             <Modal
                 title={<NoticeForm type={type} />}

@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import React, { memo, useState } from 'react'
 
-const MChange = memo((props: any) => {
+const MDeleteMulti = memo((props: any) => {
     const [deleteLoading, setDeleteLoading] = useState(false);
     const { add, selectedRowKeys, deleteMulti } = props;
     const hasSelected = selectedRowKeys.length > 0;
@@ -15,7 +15,7 @@ const MChange = memo((props: any) => {
     };
 
     return (
-        <div className="noticeChange" style={{ margin: 16 }}>
+        <div className="noticeChange" style={{ float: 'right', margin: 16 }}>
             <Button type='primary' onClick={add}> 新增 </Button>
             <Button onClick={deleteAll} disabled={!hasSelected} loading={deleteLoading}>
                 批量删除
@@ -27,4 +27,4 @@ const MChange = memo((props: any) => {
     )
 })
 
-export default MChange
+export default MDeleteMulti

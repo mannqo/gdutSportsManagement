@@ -1,6 +1,6 @@
 import { Modal } from 'antd'
 import React, { memo, useState } from 'react'
-import MChange from '../../../../component/MDeleteMulti';
+import MDeleteMulti from '../../../../component/MDeleteMulti';
 import NoticeForm from '../NoticeForm';
 import MTable from './MTable';
 
@@ -22,7 +22,7 @@ const NoticeTable = memo((props: { type: string }) => {
     }
     return (
         <>
-            <MChange add={addNotice} selectedRowKeys={selectedRowKeys} />
+            <MDeleteMulti add={addNotice} selectedRowKeys={selectedRowKeys} />
             <MTable type={type}
                 onSelectChange={onSelectChange} />
             <Modal

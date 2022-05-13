@@ -103,6 +103,12 @@ export const useAthlete = () => {
     const hideModal = () => {
         setVisible(false);
     }
+
+    /* 查询时更改data */
+    const changeData = (data: any, total: number) => {
+        setData(data);
+        setTotal(total)
+    }
     return {
         athleteColumns,
         getAthleteInfo,
@@ -111,6 +117,7 @@ export const useAthlete = () => {
         id,
         visible,
         hideModal,
-        deleteMultiAthlete
+        deleteMultiAthlete,
+        changeData
     }
 }

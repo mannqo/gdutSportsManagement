@@ -1,6 +1,6 @@
 import { Form, Row, Col, Input, Button } from 'antd'
 import React, { memo } from 'react'
-import { eventInfo } from '../../constant/event'; 
+import { eventInfo } from '../../constant/event';
 import { useEventModal } from './useEventModal';
 
 const MEventModal = memo((props: { id?: number, type?: string }) => {
@@ -9,7 +9,9 @@ const MEventModal = memo((props: { id?: number, type?: string }) => {
         form,
         value,
         onFinish,
-        getFormData
+        getFormData,
+        approveApply,
+        refuseApply
     } = useEventModal(id);
 
     return (
@@ -58,8 +60,8 @@ const MEventModal = memo((props: { id?: number, type?: string }) => {
                 </Form.Item>
             </Form>
             <div style={{ textAlign: 'center', display: type === 'approve' ? 'block' : 'none' }} >
-                <Button type='primary' style={{ 'marginRight': '20px' }}>通过申请</Button>
-                <Button>拒绝该申请</Button>
+                <Button onClick={approveApply} type='primary' style={{ 'marginRight': '20px' }}>通过申请</Button>
+                <Button onClick={refuseApply}>拒绝该申请</Button>
             </div>
         </>
 

@@ -6,7 +6,7 @@ const MChange = memo((props: any) => {
     const { add, selectedRowKeys } = props;
     const hasSelected = selectedRowKeys.length > 0;
 
-    const deleteAll = () => {
+    const deleteAll = () => { 
         setDeleteLoading(true);
         setTimeout(() => {
             setDeleteLoading(false);

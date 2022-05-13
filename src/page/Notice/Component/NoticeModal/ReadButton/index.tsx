@@ -1,4 +1,4 @@
-import { Button, message, Modal } from 'antd'
+import { Button, message } from 'antd'
 import React, { memo, useState } from 'react'
 import { putNoticeMsg } from '../../../../../services/notice';
 import { InfoType } from '../../../../../type/infoType';
@@ -8,7 +8,7 @@ interface PropType {
     type: InfoType
 }
 const ReadButton = memo((props: PropType) => {
-    const { isRead, id, type } = props;
+    const { isRead, id, type } = props; 
     const [status, setStatus] = useState(isRead);
     const handleClick = async () => {
         const curStatus = status === 1 ? 2 : 1;

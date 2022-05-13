@@ -3,6 +3,7 @@ import { Form, Modal } from 'antd';
 import moment from 'moment';
 import { useEffect, useState } from 'react'
 import { FileName } from '../../constant/event';
+import { agreeApply, ApproveRes } from '../../services/approve';
 import { getEventMsg, postEventMsg, putEventMsg } from '../../services/event';
 import { initialEventValue } from '../../type/eventInfo';
 
@@ -52,12 +53,17 @@ export const useEventModal = (id?: number) => {
     };
     const getInitialValues = async () => {
         const res = await getEventMsg({ id });
-        console.log(res);
-
         const msg = res.data.records[0];
         msg.birth = moment(msg.birth, dateFormat);
         msg.id = id;
         setValue(msg);
+    }
+    const approveApply = async () => {
+        const res = await agreeApply(value);
+        console.log(res);
+    }
+    const refuseApply = async () => {
+
     }
     useEffect(() => {
         id && getInitialValues();
@@ -70,6 +76,8 @@ export const useEventModal = (id?: number) => {
         form,
         value,
         onFinish,
-        getFormData
+        getFormData,
+        approveApply,
+        refuseApply
     }
 }

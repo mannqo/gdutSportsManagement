@@ -17,7 +17,7 @@ import Platform from "../page/Main/System/Platform";
 import ApproveEvent from "../page/Main/Approve";
 import EventNotice from "../page/Notice/EventNotice";
 import ApproveNotice from "../page/Notice/ApproveNotice";
-import { InfoCircleOutlined, MailOutlined, PlusOutlined } from "@ant-design/icons";
+import { InfoCircleOutlined, MailOutlined, PlusOutlined, RightOutlined } from "@ant-design/icons";
 import NoticeManage from "../page/Notice/NoticeManage";
 import MNormalSider from "../component/MSider/MNormalSider";
 
@@ -197,7 +197,7 @@ const routes = [
                     {
                         path: '/notice/manage',
                         component: NoticeManage,
-                        icon: InfoCircleOutlined,
+                        icon: RightOutlined,
                         key: 'mannage',
                         content: '通知管理'
                     }

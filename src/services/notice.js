@@ -29,9 +29,13 @@ export function deleteNoticeMsg(option) {
 }
 
 export function putNoticeMsg(option) {
+    const formData = new FormData();
+    Object.keys(option).forEach(key => {
+        formData.append(key, option[key]);
+    })
     return request({
         method: 'PUT',
         url: '/sports/api/notice',
-        data: option
+        data: formData
     })
 }

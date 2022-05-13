@@ -12,10 +12,14 @@ export const useApprove = () => {
     const [visible1, setVisible1] = useState(false);
     const [visible2, setVisible2] = useState(false);
     const [id, setId] = useState(0);
-    let total1 = 0;
-    let total2 = 0;
+    const [total, setTotal] = useState(0);
+    const [key, setKey] = useState('1');
 
     const notyetColumns = [
+        {
+            title: '序号',
+            dataIndex: 'id'
+        },
         {
             title: '申请者学号',
             dataIndex: 'resourceNumber',
@@ -46,6 +50,10 @@ export const useApprove = () => {
         },
     ]
     const alreadyColumns = [
+        {
+            title: '序号',
+            dataIndex: 'id'
+        },
         {
             title: '审核人工号',
             dataIndex: 'number',
@@ -96,27 +104,31 @@ export const useApprove = () => {
         setVisible1(false);
         setVisible2(false);
     }
-    const getApproveInfo = async (page: number) => {
-        const res = await getApproveMsg({ pn: page, size: 10 })
+
+    const onChange = async (page: number) => {
+        const res = await getApproveMsg({ pn: page, size: 10, state: key })
         const { data } = res;
         setData(data.records);
-        total1 = data.length ? data.filter((item: any) => item.state === 1).length : 0;
-        total2 = data.length ? data.filter((item: any) => item.state === 2).length : 0;
+        setTotal(data.total);
     }
-
-    const onChange = () => {
-
+    const handleTabChange = async (key: string) => {
+        setKey(key);
+        const res = await getApproveMsg({ pn: 1, size: 10, state: key })
+        const { data } = res;
+        setData(data.records);
+        setTotal(data.total);
     }
     useEffect(() => {
-        getApproveInfo(1);
+        onChange(1);
     }, [])
     return {
         notyetColumns,
         alreadyColumns,
-        hideModal,
-        total1, total2,
         visible1, visible2,
+        total,
         id, data,
+        hideModal,
         onChange,
+        handleTabChange
     }
 }

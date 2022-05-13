@@ -14,11 +14,13 @@ const CoachInfo = memo(() => {
         total,
         id,
         visible,
-        hideModal
+        hideModal,
+        deleteMutiCoach
     } = useCoach();
     return (
         <>
             <MInfo
+                deleteMulti={deleteMutiCoach}
                 columns={coachColumn}
                 getInfo={getCoachInfo}
                 data={data}

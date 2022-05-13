@@ -12,11 +12,13 @@ const AthleteInfo = memo(() => {
         total,
         id,
         visible,
-        hideModal
+        hideModal,
+        deleteMultiAthlete
     } = useAthlete();
     return (
         <>
             <MInfo
+                deleteMulti={deleteMultiAthlete}
                 columns={athleteColumns}
                 getInfo={getAthleteInfo}
                 data={data}

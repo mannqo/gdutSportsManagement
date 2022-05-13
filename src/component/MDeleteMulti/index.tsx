@@ -3,10 +3,11 @@ import React, { memo, useState } from 'react'
 
 const MChange = memo((props: any) => {
     const [deleteLoading, setDeleteLoading] = useState(false);
-    const { add, selectedRowKeys } = props;
+    const { add, selectedRowKeys, deleteMulti } = props;
     const hasSelected = selectedRowKeys.length > 0;
 
-    const deleteAll = () => { 
+    const deleteAll = () => {
+        deleteMulti(selectedRowKeys);
         setDeleteLoading(true);
         setTimeout(() => {
             setDeleteLoading(false);

@@ -27,6 +27,13 @@ export function deleteAthleteMsg(option) {
         data: option
     })
 }
+export function deleteMultAthleteMsg(option) {
+    return request({
+        method: 'DELETE',
+        url: '/sports/api/sportsBaseMsg/batchDelete',
+        data: option
+    })
+}
 export function putAthleteMsg(option) {
     const formData = new FormData();
     Object.keys(option).forEach((key) => {
@@ -144,7 +151,7 @@ export function deleteSportCompetition(option) {
 }
 export function putSportCompetition(option) {
     const formData = new FormData();
-    Object.keys(option).forEach((key) => { 
+    Object.keys(option).forEach((key) => {
         option[key] && formData.append(key, option[key]);
     })
     return request({

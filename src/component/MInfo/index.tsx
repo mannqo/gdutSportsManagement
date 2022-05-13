@@ -1,10 +1,11 @@
 import { Table, Modal } from 'antd';
 import React, { memo } from 'react'
-import MChange from '../MChange';
+import MChange from '../MDeleteMulti';
+import MSearch from '../MSelector/MSearch';
 import { useInfo } from './useInfo';
 
-const MInfo = memo((props: { columns: any, getInfo: (page: number) => void, data: any, total: number, TitleComponent?: any }) => {
-    const { columns, getInfo, data, total, TitleComponent } = props;
+const MInfo = memo((props: { columns: any, getInfo: (page: number) => void, data: any, total: number, TitleComponent?: any, deleteMulti?: (ids: Array<number>) => void }) => {
+    const { columns, getInfo, data, total, TitleComponent, deleteMulti } = props;
     const {
         addAthlete,
         selectedRowKeys,
@@ -15,7 +16,8 @@ const MInfo = memo((props: { columns: any, getInfo: (page: number) => void, data
     } = useInfo(getInfo);
     return (
         <>
-            <MChange add={addAthlete} selectedRowKeys={selectedRowKeys} />
+            <MSearch></MSearch>
+            <MChange add={addAthlete} deleteMulti={deleteMulti} selectedRowKeys={selectedRowKeys} />
             <Table
                 rowSelection={rowSelection}
                 columns={columns}

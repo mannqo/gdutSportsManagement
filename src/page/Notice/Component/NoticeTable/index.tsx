@@ -1,6 +1,6 @@
 import { Modal } from 'antd'
 import React, { memo, useState } from 'react'
-import MChange from '../../../../component/MChange';
+import MChange from '../../../../component/MDeleteMulti';
 import NoticeForm from '../NoticeForm';
 import MTable from './MTable';
 
@@ -16,13 +16,13 @@ const NoticeTable = memo((props: { type: string }) => {
         console.log('selectedRowKeys changed: ', selectedRowKeys);
         setSelectedRowKeys(selectedRowKeys);
     };
-    const viewDetails = (id: number) => {
+    const addNotice = (id: number) => {
         setVisible(true);
         setId(id);
     }
     return (
         <>
-            <MChange add={viewDetails} selectedRowKeys={selectedRowKeys} />
+            <MChange add={addNotice} selectedRowKeys={selectedRowKeys} />
             <MTable type={type}
                 onSelectChange={onSelectChange} />
             <Modal

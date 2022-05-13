@@ -25,9 +25,17 @@ export function deleteCoachMsg(option) {
     })
 }
 
+export function deleteMultCoachMsg(option) {
+    return request({
+        method: 'DELETE',
+        url: '/sports/api/coach/batchDelete',
+        data: option
+    })
+}
+
 export function putCoachMsg(option) {
     const formData = new FormData();
-    Object.keys(option).forEach((key) => { 
+    Object.keys(option).forEach((key) => {
         option[key] && formData.append(key, option[key]);
     })
     return request({

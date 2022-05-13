@@ -1,11 +1,12 @@
 import { DeleteOutlined, ExclamationCircleOutlined, SettingOutlined } from "@ant-design/icons";
 import { Modal } from "antd";
 import { useState } from "react";
-import { deleteCoachMsg, getCoachMsg } from "../../../services/coach";
+import { deleteCoachMsg, deleteMultCoachMsg, getCoachMsg } from "../../../services/coach";
 
 export const useCoach = () => {
     const [data, setData] = useState([]);
     const [total, setTotal] = useState(0);
+    const [page, setPage] = useState(1);
     const [visible, setVisible] = useState(false);
     const [id, setId] = useState(0);
 
@@ -52,6 +53,7 @@ export const useCoach = () => {
 
     /* 获取教练个人信息 */
     const getCoachInfo = async (page: number) => {
+        setPage(page);
         const res = await getCoachMsg({ pn: page });
         const { data } = res;
         setTotal(data.total);
@@ -70,6 +72,23 @@ export const useCoach = () => {
                 Modal.info({
                     title: res.message,
                 })
+                getCoachInfo(page);
+            }
+        });
+    }
+    const deleteMutiCoach = (ids: Array<number>) => {
+        Modal.confirm({
+            title: '确定要删除这些教练吗?',
+            content: `删除的教练id分别为${ids.join(',')}`,
+            icon: <ExclamationCircleOutlined />,
+            okText: '确认',
+            cancelText: '取消',
+            onOk: async () => {
+                const res = await deleteMultCoachMsg(ids);
+                Modal.info({
+                    title: res.message,
+                })
+                getCoachInfo(page);
             }
         });
     }
@@ -83,6 +102,7 @@ export const useCoach = () => {
         total,
         id,
         visible,
-        hideModal
+        hideModal,
+        deleteMutiCoach
     }
 }

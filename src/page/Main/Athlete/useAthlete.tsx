@@ -1,7 +1,7 @@
 import { DeleteOutlined, ExclamationCircleOutlined, SettingOutlined } from "@ant-design/icons";
 import { Modal } from "antd";
 import { useState } from "react";
-import { deleteAthleteMsg, getAthleteMsg } from "../../../services/athlete";
+import { deleteAthleteMsg, deleteMultAthleteMsg, getAthleteMsg } from "../../../services/athlete";
 
 export const useAthlete = () => {
     const [data, setData] = useState([]);
@@ -72,11 +72,28 @@ export const useAthlete = () => {
             }
         });
     }
+    /* 批量删除运动员信息 */
+    const deleteMultiAthlete = (ids: Array<number>) => {
+        Modal.confirm({
+            title: '确定要删除这些运动员吗?',
+            content: `删除的运动员id分别为${ids.join(',')}`,
+            icon: <ExclamationCircleOutlined />,
+            okText: '确认',
+            cancelText: '取消',
+            onOk: async () => {
+                const res = await deleteMultAthleteMsg(ids);
+                Modal.info({
+                    title: res.message,
+                })
+                getAthleteInfo(page);
+            }
+        });
+    }
 
     /* 获取运动员列表 */
     const getAthleteInfo = async (page: number) => {
         setPage(page);
-        const res = await getAthleteMsg({ pn: page, size: 10 });
+        const res = await getAthleteMsg({ pn: page });
         const { data } = res;
         setTotal(data.total);
         setData(data.records);
@@ -93,6 +110,7 @@ export const useAthlete = () => {
         total,
         id,
         visible,
-        hideModal
+        hideModal,
+        deleteMultiAthlete
     }
 }

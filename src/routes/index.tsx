@@ -8,18 +8,15 @@ import EventInfo from "../page/Main/Event";
 import System from "../page/Main/System";
 import Center from "../page/Main/System/Center";
 import Config from "../page/Main/System/Config";
-import Account from "../page/Main/System/Center/Account";
-import Authority from "../page/Main/System/Center/Authority";
-import Character from "../page/Main/System/Center/Character";
-import Framework from "../page/Main/System/Center/Framework";
-import Group from "../page/Main/System/Center/Group";
-import Platform from "../page/Main/System/Platform";
+import SecondLevel from "../page/Main/System/Center/SecondLevel";
+import Stair from "../page/Main/System/Center/Stair";
 import ApproveEvent from "../page/Main/Approve";
 import EventNotice from "../page/Notice/EventNotice";
 import ApproveNotice from "../page/Notice/ApproveNotice";
 import { InfoCircleOutlined, MailOutlined, PlusOutlined, RightOutlined } from "@ant-design/icons";
 import NoticeManage from "../page/Notice/NoticeManage";
 import MNormalSider from "../component/MSider/MNormalSider";
+import Character from "../page/Main/System/Character";
 
 const routes = [
     {
@@ -107,46 +104,28 @@ const routes = [
                     {
                         path: "/systemManage",
                         exact: true,
-                        render: () => <Redirect to="/systemManage/config" />
-                    },
+                        render: () => <Redirect to="/systemManage/framework/Event" />
+                    }, 
                     {
-                        path: "/systemManage/config",
-                        component: Config
-                    },
-                    {
-                        path: "/systemManage/center",
+                        path: "/systemManage/framework",
                         component: Center,
                         children: [
                             {
-                                path: "/systemManage/center/framework",
+                                path: "/systemManage/framework/sportEvent",
                                 exact: true,
-                                component: Framework
+                                component: Stair
                             },
                             {
-                                path: "/systemManage/center/account",
+                                path: "/systemManage/framework/classify",
                                 exact: true,
-                                component: Account
-                            },
-                            {
-                                path: "/systemManage/center/character",
-                                exact: true,
-                                component: Character
-                            },
-                            {
-                                path: "/systemManage/center/group",
-                                exact: true,
-                                component: Group
-                            },
-                            {
-                                path: "/systemManage/center/authority",
-                                exact: true,
-                                component: Authority
+                                component: SecondLevel
                             },
                         ]
                     },
+
                     {
-                        path: "/systemManage/platform",
-                        component: Platform,
+                        path: "/systemManage/character",
+                        component: Character
                     },
                 ]
             },

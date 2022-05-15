@@ -5,9 +5,19 @@ import { athleteBaseInfo } from '../../../constant/athlete';
 import { getAthleteMsg } from '../../../services/athlete';
 
 const { Option } = Select;
-interface Obj {
-    [key: string]: any;
-}
+// interface PropType<T,K> {
+//     changeData?: (data: any, total: number) => void
+//     searchMsg?: any
+//     info?: T
+// }
+// interface Obj {
+//     [key: string]: any;
+// }
+// const MySearch: React.FC = (props: PropType<T,K>) => {
+//     return (
+//         <></>
+//     )
+// }
 const MSearch = memo((props: {
     changeData?: (data: any, total: number) => void
     searchMsg?: any
@@ -19,17 +29,17 @@ const MSearch = memo((props: {
         setCondition(value);
     }
     async function handleSearch(value: any) {
-        const obj: Obj = {}
-        obj[condition] = value
-        const res = await getAthleteMsg(obj);
-        const { data, total } = res;
-        if (data) {
-            changeData && changeData(data.records, total);
-        } else {
-            Modal.info({
-                title: res.message,
-            })
-        }
+        // const obj: Obj = {}
+        // obj[condition] = value
+        // const res = await getAthleteMsg(obj);
+        // const { data, total } = res;
+        // if (data) {
+        //     changeData && changeData(data.records, total);
+        // } else {
+        //     Modal.info({
+        //         title: res.message,
+        //     })
+        // }
     }
     return (
         <SeachContainer>

@@ -1,5 +1,4 @@
-import { EventValue } from "../type/eventInfo";
-import { InfoType } from "../type/infoType";
+import { EventValue } from "../type/eventInfo"; 
 import request from "./axios";
 
 export type ApproveRes = -1 | 0 | 1 | 2; // -1撤销 0等待审核 1通过 2不通过

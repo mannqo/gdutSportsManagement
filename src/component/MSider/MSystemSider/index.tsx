@@ -13,31 +13,19 @@ const MSystemSider = memo(() => {
                 mode="inline"
                 theme='dark'
                 defaultOpenKeys={['info', 'center']}
-                defaultSelectedKeys={['info', 'center', 'authority']}
+                defaultSelectedKeys={['info', 'stair']}
                 style={{ height: '100%', borderRight: 0 }}
             >
-                <Menu.Item key="info" icon={<MailOutlined />}>
-                    <NavLink to="/systemManage/config">系统配置</NavLink>
-                </Menu.Item>
-                <SubMenu key='center' title="组织权限中心">
-                    <Menu.Item key="framework">
-                        <NavLink to="/systemManage/center/framework">组织架构</NavLink>
+                <SubMenu key='center' title="组织架构">
+                    <Menu.Item key="stair">
+                        <NavLink to="/systemManage/framework/sportEvent">一级组织</NavLink>
                     </Menu.Item>
-                    <Menu.Item key="account">
-                        <NavLink to="/systemManage/center/account">账户中心</NavLink>
-                    </Menu.Item>
-                    <Menu.Item key="character">
-                        <NavLink to="/systemManage/center/character">角色中心</NavLink>
-                    </Menu.Item>
-                    <Menu.Item key="group">
-                        <NavLink to="/systemManage/center/group">群组中心</NavLink>
-                    </Menu.Item>
-                    <Menu.Item key="authority">
-                        <NavLink to="/systemManage/center/authority">权限中心</NavLink>
+                    <Menu.Item key="secondLevel">
+                        <NavLink to="/systemManage/framework/classify">二级组织</NavLink>
                     </Menu.Item>
                 </SubMenu>
-                <Menu.Item key="test">
-                    <NavLink to="/systemManage/platform">测试</NavLink>
+                <Menu.Item key="character">
+                    <NavLink to="/systemManage/character">角色权限</NavLink>
                 </Menu.Item>
             </Menu>
         </Sider>

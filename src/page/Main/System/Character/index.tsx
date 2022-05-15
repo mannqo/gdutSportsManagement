@@ -1,5 +1,5 @@
 import React, { memo, useState } from 'react'
-import MInfo from '../../../../../component/MInfo';
+import MInfo from '../../../../component/MInfo';
 
 const Character = memo(() => {
     const [data, setData] = useState([]);
@@ -26,8 +26,7 @@ const Character = memo(() => {
 
     }
     return (
-        <>
-            <h1>角色权限</h1>
+        <> 
             <MInfo
                 columns={characterColumns}
                 getInfo={getCharacterInfo}

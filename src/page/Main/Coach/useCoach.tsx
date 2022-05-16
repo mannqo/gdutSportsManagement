@@ -12,6 +12,10 @@ export const useCoach = () => {
 
     const coachColumn = [
         {
+            title: '序号',
+            dataIndex: 'id',
+        },
+        {
             title: '工号',
             dataIndex: 'number',
         },
@@ -79,7 +83,7 @@ export const useCoach = () => {
     const deleteMutiCoach = (ids: Array<number>) => {
         Modal.confirm({
             title: '确定要删除这些教练吗?',
-            content: `删除的教练id分别为${ids.join(',')}`,
+            content: `删除的教练序号分别为${ids.join(',')}`,
             icon: <ExclamationCircleOutlined />,
             okText: '确认',
             cancelText: '取消',
@@ -95,6 +99,11 @@ export const useCoach = () => {
     const hideModal = () => {
         setVisible(false);
     }
+    /* 查询时更改data */
+    const changeData = (data: any, total: number) => {
+        setData(data);
+        setTotal(total)
+    }
     return {
         coachColumn,
         getCoachInfo,
@@ -103,6 +112,7 @@ export const useCoach = () => {
         id,
         visible,
         hideModal,
-        deleteMutiCoach
+        deleteMutiCoach,
+        changeData
     }
 }

@@ -1,32 +1,37 @@
 import { Table, Modal } from 'antd';
 import React, { memo } from 'react'
-import { Info } from '../../type/infoType';
 import MDeleteMulti from '../MDeleteMulti';
 import MSearch from '../MSelector/MSearch';
 import { useInfo } from './useInfo';
 
-const MInfo = memo((props: {
+interface PropType<T> {
+    info?: T[],
     columns: any,
     getInfo: (page: number) => void, data: any, total: number,
     TitleComponent?: any,
     deleteMulti?: (ids: Array<number>) => void,
     changeData?: (data: any, total: number) => void,
     searchMsg?: any,
-    info?: Info
-}) => {
+}
+interface Type {
+    name: string;
+    label: string;
+}
+const MInfo = <T extends Type>(props: PropType<T>) => {
     const { columns, getInfo, data, total, TitleComponent, deleteMulti, changeData, searchMsg, info } = props;
     const {
-        addAthlete,
+        add,
         selectedRowKeys,
         rowSelection,
         onChange,
         visible,
         hideModal
     } = useInfo(getInfo);
+
     return (
         <>
             <MSearch changeData={changeData} searchMsg={searchMsg} info={info} />
-            <MDeleteMulti add={addAthlete} deleteMulti={deleteMulti} selectedRowKeys={selectedRowKeys} />
+            <MDeleteMulti add={add} deleteMulti={deleteMulti} selectedRowKeys={selectedRowKeys} />
             <Table
                 rowSelection={rowSelection}
                 columns={columns}
@@ -46,6 +51,6 @@ const MInfo = memo((props: {
             />
         </>
     )
-})
+}
 
 export default MInfo;

@@ -1,8 +1,11 @@
-import React, { memo, useState } from 'react'
+import React, { memo } from 'react'
 import MInfo from '../../../component/MInfo'
 import { Modal } from 'antd';
 import MEventModal from '../../../component/MEventModal';
 import { useEvent } from './useEvent';
+import { ModalType } from '../../../type/ModalType';
+import { eventInfo } from '../../../constant/event';
+import { getEventMsg } from '../../../services/event';
 
 const EventInfo = memo(() => {
     const {
@@ -12,17 +15,22 @@ const EventInfo = memo(() => {
         total,
         id,
         visible,
-        hideModal
+        hideModal,
+        deleteMultiEvent,
+        changeData
     } = useEvent();
 
     return (
         <>
-            <MInfo
+            <MInfo<ModalType>
                 columns={eventColumn}
                 getInfo={getEventInfo}
-                data={data}
                 total={total}
                 TitleComponent={<MEventModal type='eventInfo' />}
+                deleteMulti={deleteMultiEvent}
+                changeData={changeData} data={data}
+                searchMsg={getEventMsg}
+                info={eventInfo}
             />
             <Modal
                 title={<MEventModal type='eventInfo' id={id} />}

@@ -1,7 +1,7 @@
 import { Button, message } from 'antd'
 import React, { memo, useState } from 'react'
 import { putNoticeMsg } from '../../../../../services/notice';
-import { InfoType } from '../../../../../type/infoType';
+import { InfoType } from '../../../../../type/infoNum';
 interface PropType {
     id: number,
     isRead: number,

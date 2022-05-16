@@ -14,6 +14,7 @@ const MDeleteMulti = memo((props: any) => {
         }, 1000);
     };
 
+
     return (
         <div className="noticeChange" style={{ float: 'right', margin: 16 }}>
             <Button type='primary' onClick={add}> 新增 </Button>

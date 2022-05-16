@@ -76,7 +76,7 @@ export const useAthlete = () => {
     const deleteMultiAthlete = (ids: Array<number>) => {
         Modal.confirm({
             title: '确定要删除这些运动员吗?',
-            content: `删除的运动员id分别为${ids.join(',')}`,
+            content: `删除的运动员序号分别为${ids.join(',')}`,
             icon: <ExclamationCircleOutlined />,
             okText: '确认',
             cancelText: '取消',

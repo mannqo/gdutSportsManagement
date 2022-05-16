@@ -1,10 +1,11 @@
 import React, { memo, useState } from 'react'
 import MInfo from '../../../component/MInfo'
-import { deleteCoachMsg, getCoachMsg } from '../../../services/coach'
-import { ExclamationCircleOutlined, SettingOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Modal } from 'antd';
 import MCoachModal from '../../../component/MCoachModal';
 import { useCoach } from './useCoach';
+import { ModalType } from '../../../type/ModalType';
+import { coachInfo } from '../../../constant/coach';
+import { getCoachMsg } from '../../../services/coach';
 
 const CoachInfo = memo(() => {
     const {
@@ -15,17 +16,20 @@ const CoachInfo = memo(() => {
         id,
         visible,
         hideModal,
-        deleteMutiCoach
+        deleteMutiCoach,
+        changeData
     } = useCoach();
     return (
         <>
-            <MInfo
-                deleteMulti={deleteMutiCoach}
+            <MInfo<ModalType>
                 columns={coachColumn}
-                getInfo={getCoachInfo}
-                data={data}
+                getInfo={getCoachInfo} 
                 total={total}
                 TitleComponent={<MCoachModal />}
+                deleteMulti={deleteMutiCoach}
+                changeData={changeData} data={data}
+                searchMsg={getCoachMsg}
+                info={coachInfo}
             />
 
             <Modal

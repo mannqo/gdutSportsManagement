@@ -4,7 +4,7 @@ export const useInfo = (getInfo: (page: number) => void) => {
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [visible, setVisible] = useState(false);
 
-    const addAthlete = () => {
+    const add = () => {
         setVisible(true);
     }
     /* 运动员信息表 */
@@ -30,7 +30,7 @@ export const useInfo = (getInfo: (page: number) => void) => {
     }, [])
 
     return {
-        addAthlete,
+        add,
         selectedRowKeys,
         rowSelection,
         onChange,

@@ -1,6 +1,7 @@
 import { acceptanceLevel, acceptanceType, belongCoach, examProvinces, gender, group, idCardType, inSchool, nation, sportProject } from "./picker"
+import { ModalType } from "../type/ModalType"
 
-export const athleteBaseInfo = [
+export const athleteBaseInfo: ModalType[] = [
     {
         name: 'number',
         label: '学号',

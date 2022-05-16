@@ -1,4 +1,5 @@
 export interface EventValue {
+    [key: string]: any;
     approvePerson: Array<string>,
     beforeOrAfter: string,
     birth: any,

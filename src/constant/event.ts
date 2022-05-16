@@ -1,35 +1,10 @@
 import MUpload from "../component/MSelector/MUpload";
+import { ModalType } from "../type/ModalType";
 
 export type FileName = 'resultsBook' | 'orderBook' | 'competitionPicture' | 'resultsCertificate' | 'prizesPicture'
-interface Item {
-    name: 'approvePerson' |
-    'beforeOrAfter' |
-    'birth' |
-    'coach' |
-    'competitionLevel' |
-    'competitionPlace' |
-    'competitionProject' |
-    'competitionTime' |
-    'competitionPicture' |
-    'dataType' |
-    'desgination' |
-    'id' |
-    'leader' |
-    'money' |
-    'name' |
-    'orderBook' |
-    'prizesPicture' |
-    'results' |
-    'resultsBook' |
-    'resultsCertificate' |
-    'state',
-    label: string,
-    component?: any,
-    require?: Boolean
-}
-export type EventInfo = Array<Item>
 
-export const eventInfo: EventInfo = [
+
+export const eventInfo: ModalType[] = [
     {
         name: 'desgination',
         label: '名称',

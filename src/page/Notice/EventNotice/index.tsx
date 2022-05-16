@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { eventInfo } from '../../../type/infoType'
+import { eventInfo } from '../../../type/infoNum'
 import NoticeModal from '../Component/NoticeModal'
 
 const EventNotice = memo(() => {

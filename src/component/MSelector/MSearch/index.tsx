@@ -1,45 +1,50 @@
 import { Select, Input, Modal } from 'antd'
-import React, { memo, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
-import { athleteBaseInfo } from '../../../constant/athlete';
-import { getAthleteMsg } from '../../../services/athlete';
 
 const { Option } = Select;
-// interface PropType<T,K> {
-//     changeData?: (data: any, total: number) => void
-//     searchMsg?: any
-//     info?: T
-// }
-// interface Obj {
-//     [key: string]: any;
-// }
-// const MySearch: React.FC = (props: PropType<T,K>) => {
-//     return (
-//         <></>
-//     )
-// }
-const MSearch = memo((props: {
-    changeData?: (data: any, total: number) => void
+interface PropType<T> {
+    info?: T[],
+    changeData?: (data: any, total: number) => void,
     searchMsg?: any
-    info?: any
-}) => {
-    const { changeData } = props;
+}
+interface Type {
+    name: string;
+    label: string;
+}
+interface Obj {
+    [key: string]: any;
+}
+const MySearch = <T extends Type>(props: PropType<T>) => {
+    const { changeData, info, searchMsg } = props;
     const [condition, setCondition] = useState<string>('');
-    function handleChange(value: string) {
+    async function handleChange(value: string) {
         setCondition(value);
+        if (value === 'all') {
+            const res = await searchMsg({ pn: 1 });
+            const { data, total } = res;
+            changeData && changeData(data.records, total);
+        }
     }
-    async function handleSearch(value: any) {
-        // const obj: Obj = {}
-        // obj[condition] = value
-        // const res = await getAthleteMsg(obj);
-        // const { data, total } = res;
-        // if (data) {
-        //     changeData && changeData(data.records, total);
-        // } else {
-        //     Modal.info({
-        //         title: res.message,
-        //     })
-        // }
+    async function handleSearch(value: any) { 
+        if (condition !== 'all') { 
+            const obj: Obj = {}
+            obj[condition] = value
+            const res = await searchMsg(obj);
+            const { data, total } = res;
+            if (data) {
+                changeData && changeData(data.records, total);
+            } else {
+                Modal.info({
+                    title: res.message,
+                })
+            }
+        } else { 
+            Modal.info({
+                title: '请根据不同搜索条件进行搜索',
+            })
+        }
+
     }
     return (
         <SeachContainer>
@@ -48,10 +53,11 @@ const MSearch = memo((props: {
                 // defaultValue={{ value: '学号' }}
                 placeholder='筛选条件'
                 style={{ width: 120 }}
-                onChange={handleChange}
+                onChange={handleChange} autoClearSearchValue
             >
+                <Option key='all' value='all'>全部</Option>
                 {
-                    athleteBaseInfo.map(item => (
+                    info && info.map(item => (
                         <Option key={item.name} value={item.name}>{item.label}</Option>
                     ))
                 }
@@ -59,7 +65,7 @@ const MSearch = memo((props: {
             <Input.Search onSearch={handleSearch} className='search_input' placeholder="筛选内容" />
         </SeachContainer>
     )
-})
+}
 
 const SeachContainer = styled.div`
     display: flex; 
@@ -69,5 +75,4 @@ const SeachContainer = styled.div`
         width: 200px;
     }
 `
-
-export default MSearch
+export default MySearch

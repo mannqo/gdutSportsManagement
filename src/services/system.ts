@@ -16,3 +16,29 @@ export function getSecMsg(option: any) {
         params: option
     })
 }
+
+export function postStairMsg(option: any) {
+    return request({
+        method: 'POST',
+        url: '/sports/api/oneOrganization',
+        data: option
+    })
+}
+
+export function putStairMsg(option: any) {
+    return request({
+        method: 'PUT',
+        url: '/sports/api/oneOrganization',
+        data: option
+    })
+}
+
+
+export function deleteStairMsg(option: any) {
+    return request({
+        method: 'DELETE',
+        url: '/sports/api/oneOrganization',
+        data: option
+    })
+}
+

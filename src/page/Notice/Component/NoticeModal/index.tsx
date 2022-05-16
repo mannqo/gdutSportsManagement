@@ -4,7 +4,7 @@ import { SmileOutlined } from '@ant-design/icons';
 import './index.css'
 import ReadButton from './ReadButton'; 
 import { useList } from './useList';
-import { InfoType } from '../../../../type/infoType';
+import { InfoType } from '../../../../type/infoNum';
 
 
 const NoticeModal = memo((props: { type: InfoType }) => {

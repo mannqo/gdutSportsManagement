@@ -3,7 +3,6 @@ import React, { memo } from 'react'
 import { athleteBaseInfo } from '../../../../constant/athlete';
 import MUploadImg from '../../../MSelector/MUploadImg';
 import MDatePicker from '../../../MSelector/MDatePicker';
-
 import { ImageWrapper } from '../../../../config/style';
 import { useBaseInfo } from './useBaseInfo';
 

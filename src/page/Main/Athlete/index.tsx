@@ -5,6 +5,7 @@ import MAthleteModal from '../../../component/MAthleteModal';
 import { useAthlete } from './useAthlete';
 import { getAthleteMsg } from '../../../services/athlete';
 import { athleteBaseInfo } from '../../../constant/athlete';
+import { ModalType } from '../../../type/ModalType';
 
 const AthleteInfo = memo(() => {
     const {
@@ -20,14 +21,13 @@ const AthleteInfo = memo(() => {
     } = useAthlete();
     return (
         <>
-            <MInfo
+            <MInfo<ModalType>
                 columns={athleteColumns}
-                getInfo={getAthleteInfo}
-                data={data}
+                getInfo={getAthleteInfo} 
                 total={total}
                 TitleComponent={<MAthleteModal id={0} />}
                 deleteMulti={deleteMultiAthlete}
-                changeData={changeData}
+                changeData={changeData} data={data}
                 searchMsg={getAthleteMsg}
                 info={athleteBaseInfo}
             />

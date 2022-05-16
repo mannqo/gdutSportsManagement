@@ -2,8 +2,7 @@ import request from "./axios";
 
 // 增删改查
 /* 运动员基本信息 */
-export function getAthleteMsg(option) {
-    console.log(option);
+export function getAthleteMsg(option) { 
     return request({
         method: 'GET',
         url: '/sports/api/sportsBaseMsg',

@@ -8,7 +8,7 @@ import { getEventMsg, postEventMsg, putEventMsg } from '../../services/event';
 import { initialEventValue } from '../../type/eventInfo';
 
 export const useEventModal = (id?: number) => {
-    const formData = new FormData();
+    const [formData, setFormData] = useState(new FormData())
     const [value, setValue] = useState(initialEventValue);
     const [form] = Form.useForm();
 

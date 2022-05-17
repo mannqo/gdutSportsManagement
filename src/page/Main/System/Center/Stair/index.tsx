@@ -4,9 +4,8 @@ import { useStair } from './useStair';
 import MInfo from '../../../../../component/MInfo';
 import { ModalType } from '../../../../../type/ModalType';
 import { getStairMsg } from '../../../../../services/system';
-import MyModal from './StairModal';
-
-const { SubMenu } = Menu;
+import StairModal from './StairModal';
+import { stairInfo } from '../../../../../constant/system';
 
 const Stair = memo(() => {
     const {
@@ -27,19 +26,21 @@ const Stair = memo(() => {
                 columns={stairColumn}
                 getInfo={getStairInfo}
                 total={total}
+                TitleComponent={<StairModal id={0} />}
                 deleteMulti={deleteMultiStair}
                 changeData={changeData} data={data}
                 searchMsg={getStairMsg}
+                info={stairInfo}
             />
             <Modal
-                title={<MyModal id={id} />}
+                title={<StairModal id={id} />}
                 visible={visible}
                 bodyStyle={{ display: 'none' }}
                 onOk={hideModal}
                 onCancel={hideModal}
                 width={1000}
             />
-        </> 
+        </>
     )
 })
 

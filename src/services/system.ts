@@ -1,6 +1,6 @@
 import request from "./axios";
 
-/* 查询一级组织 */
+/* 一级组织和二级组织的增删改查 */
 export function getStairMsg(option: any) {
     return request({
         method: 'GET',
@@ -8,7 +8,6 @@ export function getStairMsg(option: any) {
         params: option
     })
 }
-/* 查询二级组织 */
 export function getSecMsg(option: any) {
     return request({
         method: 'GET',
@@ -18,10 +17,26 @@ export function getSecMsg(option: any) {
 }
 
 export function postStairMsg(option: any) {
+    const formData = new FormData();
+    Object.keys(option).forEach(key => {
+        formData.append(key, option[key]);
+    })
     return request({
         method: 'POST',
         url: '/sports/api/oneOrganization',
-        data: option
+        data: formData
+    })
+}
+
+export function postSecMsg(option: any) {
+    const formData = new FormData();
+    Object.keys(option).forEach(key => {
+        formData.append(key, option[key]);
+    })
+    return request({
+        method: 'POST',
+        url: '/sports/api/secondOrganization',
+        data: formData
     })
 }
 
@@ -33,6 +48,13 @@ export function putStairMsg(option: any) {
     })
 }
 
+export function putSecMsg(option: any) {
+    return request({
+        method: 'PUT',
+        url: '/sports/api/secondOrganization',
+        data: option
+    })
+}
 
 export function deleteStairMsg(option: any) {
     return request({
@@ -42,3 +64,10 @@ export function deleteStairMsg(option: any) {
     })
 }
 
+export function deleteSecMsg(option: any) {
+    return request({
+        method: 'DELETE',
+        url: '/sports/api/secondOrganization',
+        data: option
+    })
+} 

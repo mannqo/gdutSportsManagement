@@ -1,5 +1,6 @@
 import { acceptanceLevel, acceptanceType, belongCoach, examProvinces, gender, group, idCardType, inSchool, nation, sportProject } from "./picker"
 import { ModalType } from "../type/ModalType"
+import MTimePicker from "../component/MSelector/MTimePicker"
 
 export const athleteBaseInfo: ModalType[] = [
     {
@@ -186,6 +187,7 @@ export const athletePersonalMatch = [
     },
     {
         name: 'competitionTime',
-        label: '比赛时间'
+        label: '比赛时间',
+        component: MTimePicker
     }
 ]

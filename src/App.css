@@ -34,3 +34,7 @@
 .ant-modal-footer {
   display: none;
 }
+
+#root .ant-table-cell {
+  text-align: center;
+}

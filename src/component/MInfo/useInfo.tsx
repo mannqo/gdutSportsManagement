@@ -4,10 +4,9 @@ export const useInfo = (getInfo: (page: number) => void) => {
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [visible, setVisible] = useState(false);
 
-    const add = () => {
+    const add = () => { 
         setVisible(true);
-    }
-    /* 运动员信息表 */
+    } 
     const hideModal = () => {
         setVisible(false);
     }

@@ -15,8 +15,7 @@ export default memo(function MHeader() {
                 <Menu.Item key="/athleteManage/info" onClick={() => history.push('/athleteManage/info')}>运动员管理</Menu.Item>
                 <Menu.Item key="/eventManage/info" onClick={() => history.push('/eventManage/info')}>比赛管理</Menu.Item>
                 <Menu.Item key="/coachInfo/info" onClick={() => history.push('/coachInfo/info')}>教练信息</Menu.Item>
-                {/* <Menu.Item key="/checkInfo" onClick={() => history.push('/checkInfo')}>考勤管理</Menu.Item> */}
-                <Menu.Item key="/systemManage/framework/sportEvent" onClick={() => history.push('/systemManage/framework/sportEvent')}>系统管理</Menu.Item>
+                <Menu.Item key="/systemManage/framework/stair" onClick={() => history.push('/systemManage/framework/stair')}>系统管理</Menu.Item>
                 <Menu.Item key="/approveManage/event" onClick={() => history.push('/approveManage/event')}>审核管理</Menu.Item>
                 <Menu.Item key="/notice/event" onClick={() => history.push('/notice/event')}>通知</Menu.Item>
             </Menu>

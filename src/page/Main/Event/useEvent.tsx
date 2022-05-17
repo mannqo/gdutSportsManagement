@@ -80,12 +80,12 @@ export const useEvent = () => {
     const deleteMultiEvent = (ids: Array<number>) => {
         Modal.confirm({
             title: '确定要删除这些比赛信息吗?',
-            content: `删除的运动员id分别为${ids.join(',')}`,
+            content: `删除的比赛信息序号分别为${ids.join(',')}`,
             icon: <ExclamationCircleOutlined />,
             okText: '确认',
             cancelText: '取消',
             onOk: async () => {
-                const res = await deleteEventMsg({ ids });
+                const res = await deleteEventMsg(ids);
                 Modal.info({
                     title: res.message,
                 })

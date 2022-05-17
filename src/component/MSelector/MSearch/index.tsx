@@ -15,20 +15,23 @@ interface Type {
 interface Obj {
     [key: string]: any;
 }
+type Visible = 'block' | 'none'
 const MySearch = <T extends Type>(props: PropType<T>) => {
     const { changeData, info, searchMsg } = props;
     const [condition, setCondition] = useState<string>('');
+    const [visible, setVisible] = useState<Visible>('block');
     async function handleChange(value: string) {
         setCondition(value);
         if (value === 'all') {
+            setVisible('none');
             const res = await searchMsg({ pn: 1 });
             const { data, total } = res;
             changeData && changeData(data.records, total);
-        }
+        } else { setVisible('block'); }
     }
-    async function handleSearch(value: any) { 
-        if (condition !== 'all') { 
-            const obj: Obj = {}
+    async function handleSearch(value: any) {
+        if (condition !== 'all') {
+            const obj: Obj = {};
             obj[condition] = value
             const res = await searchMsg(obj);
             const { data, total } = res;
@@ -39,7 +42,7 @@ const MySearch = <T extends Type>(props: PropType<T>) => {
                     title: res.message,
                 })
             }
-        } else { 
+        } else {
             Modal.info({
                 title: '请根据不同搜索条件进行搜索',
             })
@@ -62,7 +65,12 @@ const MySearch = <T extends Type>(props: PropType<T>) => {
                     ))
                 }
             </Select>
-            <Input.Search onSearch={handleSearch} className='search_input' placeholder="筛选内容" />
+            <Input.Search
+                onSearch={handleSearch}
+                className='search_input'
+                placeholder="筛选内容"
+                style={{ 'display': visible }}
+            />
         </SeachContainer>
     )
 }

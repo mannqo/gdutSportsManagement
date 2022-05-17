@@ -1,3 +1,6 @@
+import { DatePicker } from "antd";
+import MDatePicker from "../component/MSelector/MDatePicker";
+import MTimePicker from "../component/MSelector/MTimePicker";
 import MUpload from "../component/MSelector/MUpload";
 import { ModalType } from "../type/ModalType";
 
@@ -31,7 +34,8 @@ export const eventInfo: ModalType[] = [
     },
     {
         name: 'competitionTime',
-        label: '比赛时间'
+        label: '比赛时间',
+        component: MTimePicker
     },
     {
         name: 'competitionProject',

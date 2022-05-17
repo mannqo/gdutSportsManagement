@@ -12,6 +12,14 @@ export const useStair = () => {
 
     const stairColumn = [
         {
+            title: '序号',
+            dataIndex: 'id'
+        },
+        {
+            title: '组织编码',
+            dataIndex: 'code',
+        },
+        {
             title: '组织名称',
             dataIndex: 'name',
         },
@@ -67,12 +75,12 @@ export const useStair = () => {
     const deleteMultiStair = (ids: Array<number>) => {
         Modal.confirm({
             title: '确定要删除这些一级组织吗?',
-            content: `删除的运动员序号分别为${ids.join(',')}`,
+            content: `删除的一级组织序号分别为${ids.join(',')}`,
             icon: <ExclamationCircleOutlined />,
             okText: '确认',
             cancelText: '取消',
             onOk: async () => {
-                const res = await deleteStairMsg({ id });
+                const res = await deleteStairMsg(ids);
                 Modal.info({
                     title: res.message,
                 })

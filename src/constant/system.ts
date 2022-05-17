@@ -1,4 +1,4 @@
-export const firstOrganization = [
+export const stairInfo = [
     {
         name: 'name',
         label: '组织名称',
@@ -15,7 +15,8 @@ export const firstOrganization = [
     },
     {
         name: 'code',
-        label: '组织编码'
+        label: '组织编码',
+        require: true,
     },
     {
         name: 'changeLeader',
@@ -25,4 +26,17 @@ export const firstOrganization = [
         name: 'departmentLeader',
         label: '部门领导'
     }
+]
+
+export const secLevelInfo = [
+    {
+        name: 'name',
+        label: '二级组织名称',
+        require: true
+    },
+    {
+        name: 'oneOrg',
+        label: '所属一级组织',
+        require: true,
+    },
 ]

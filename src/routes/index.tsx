@@ -17,6 +17,7 @@ import { InfoCircleOutlined, MailOutlined, PlusOutlined, RightOutlined } from "@
 import NoticeManage from "../page/Notice/NoticeManage";
 import MNormalSider from "../component/MSider/MNormalSider";
 import Character from "../page/Main/System/Character";
+import SecDetails from "../page/Main/System/Center/SecDetails";
 
 const routes = [
     {
@@ -111,14 +112,19 @@ const routes = [
                         component: Center,
                         children: [
                             {
-                                path: "/systemManage/framework/sportEvent",
+                                path: "/systemManage/framework/stair",
                                 exact: true,
                                 component: Stair
                             },
                             {
-                                path: "/systemManage/framework/classify",
+                                path: "/systemManage/framework/secLevel",
                                 exact: true,
                                 component: SecondLevel
+                            }, 
+                            {
+                                path: "/systemManage/framework/secDetails",
+                                exact: true,
+                                component: SecDetails
                             },
                         ]
                     },

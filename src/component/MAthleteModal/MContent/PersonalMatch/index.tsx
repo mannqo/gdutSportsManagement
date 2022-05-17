@@ -24,7 +24,9 @@ const PersonalMatch = memo((props: { number: string, id: number }) => {
                                 },
                             ]}
                         >
-                            <Input placeholder={`填写${item.label}`} />
+                            {
+                                item.component ? <item.component /> : <Input placeholder={`填写${item.label}`} />
+                            }
                         </Form.Item>
                     </Col>
                 ))}

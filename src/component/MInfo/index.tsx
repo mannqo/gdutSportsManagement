@@ -26,7 +26,7 @@ const MInfo = <T extends Type>(props: PropType<T>) => {
         onChange,
         visible,
         hideModal
-    } = useInfo(getInfo);
+    } = useInfo(getInfo); 
 
     return (
         <>

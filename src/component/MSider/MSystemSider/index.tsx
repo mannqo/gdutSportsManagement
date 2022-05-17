@@ -1,27 +1,29 @@
-import React, { memo } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import { Layout, Menu } from 'antd';
-import { NavLink } from 'react-router-dom';
-import { MailOutlined } from '@ant-design/icons';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 const MSystemSider = memo(() => {
+    // const location = useLocation();
+    // const { pathname } = location;
+    // const key = pathname.split('/')[3]; 
     return (
         <Sider width={200} className="site-layout-background">
             <Menu
                 mode="inline"
                 theme='dark'
                 defaultOpenKeys={['info', 'center']}
-                defaultSelectedKeys={['info', 'stair']}
+                defaultSelectedKeys={['info', 'stair']} 
                 style={{ height: '100%', borderRight: 0 }}
             >
                 <SubMenu key='center' title="组织架构">
                     <Menu.Item key="stair">
-                        <NavLink to="/systemManage/framework/sportEvent">一级组织</NavLink>
+                        <NavLink to="/systemManage/framework/stair">一级组织</NavLink>
                     </Menu.Item>
                     <Menu.Item key="secondLevel">
-                        <NavLink to="/systemManage/framework/classify">二级组织</NavLink>
+                        <NavLink to="/systemManage/framework/secLevel">二级组织</NavLink>
                     </Menu.Item>
                 </SubMenu>
                 <Menu.Item key="character">

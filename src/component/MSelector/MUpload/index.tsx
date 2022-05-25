@@ -5,8 +5,7 @@ import { host } from '../../../config';
 import { deleteFile } from '../../../services/event';
 
 const MUpload = memo((props: { id: number, name: string, getFormData: Function, initfileList: any }) => {
-    const { id, name, getFormData, initfileList } = props;
-
+    const { id, name, getFormData, initfileList } = props; 
     let defaultFileList: Array<any> = [];
     if (initfileList) {
         defaultFileList = [];
@@ -37,7 +36,7 @@ const MUpload = memo((props: { id: number, name: string, getFormData: Function, 
             console.log(err);
         }
     }
-    const onFileChange = (e: any) => {
+    const onFileChange = (e: any) => { 
         setFileList(e.fileList);
     }
 
@@ -53,12 +52,10 @@ const MUpload = memo((props: { id: number, name: string, getFormData: Function, 
             // 调用删除文件的接口 
             console.log(file); 
             const res = await deleteFile({ id, type: 4, resource: JSON.stringify(initfileList), path: file.thumbUrl, name: file.departName })
-            console.log(res);
-
+            console.log(res); 
             return true;
         }
-    }
-
+    } 
 
     return (
         <Upload

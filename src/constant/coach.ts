@@ -1,4 +1,4 @@
-import MDatePicker from "../component/MSelector/MDatePicker";
+import { gender } from "./picker";
 
 export const coachInfo = [
     {
@@ -10,12 +10,29 @@ export const coachInfo = [
         label: '姓名',
     },
     {
-        name: 'birth',
-        label: '出生年月',
-        component: MDatePicker
+        name: 'gender',
+        label: '性别',
+        component: 'MPicker',
+        optionList: gender 
+    },
+    {
+        name: 'phone',
+        label: '手机'
+    },
+    {
+        name: 'idCardNumber',
+        label: '身份证号码',
     },
     {
         name: 'professionName',
         label: '职称',
-    }
+    },
+    {
+        name: 'project',
+        label: '运动项目',
+    },
+    {
+        name: 'groups',
+        label: '组别'
+    },
 ]

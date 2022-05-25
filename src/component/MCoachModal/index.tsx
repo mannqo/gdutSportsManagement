@@ -1,9 +1,11 @@
-import { Form, Row, Col, Input, Button } from 'antd'
+import { Form, Row, Col, Input, Button, Select } from 'antd'
 import React, { memo } from 'react'
 import { ImageWrapper } from '../../config/style';
 import { coachInfo } from '../../constant/coach';
 import MUploadImg from '../MSelector/MUploadImg';
 import { useCoachModal } from './useCoachModal';
+
+const { Option } = Select;
 
 const MCoachModal = memo((props: { id?: number }) => {
     const { id } = props;
@@ -28,10 +30,15 @@ const MCoachModal = memo((props: { id?: number }) => {
                                     name={item.name}
                                     label={item.label}
                                 >
-                                    {
-                                        item.component ?
-                                            <item.component />
-                                            : <Input placeholder={`填写${item.label}`} />
+                                    {item.component ?
+                                        <Select placeholder={`选择${item.label}`}>
+                                            {
+                                                item.optionList && item.optionList.map((item: any) => (
+                                                    <Option key={item.value} value={item.content} label={item.content}>{item.content}</Option>
+                                                ))
+                                            }
+                                        </Select>
+                                        : <Input placeholder={`填写${item.label}`} />
                                     }
                                 </Form.Item>
                             </Col>
@@ -45,10 +52,10 @@ const MCoachModal = memo((props: { id?: number }) => {
                         </Button>
                     </Form.Item>
                 </Form>
-                <div className="image">
+                {/* <div className="image">
                     <p>相片:</p>
-                    <MUploadImg initialImageUrl={imageUrl} id={id} type={3} />
-                </div>
+                    <MUploadImg />
+                </div> */}
             </ImageWrapper>
         </>
     )

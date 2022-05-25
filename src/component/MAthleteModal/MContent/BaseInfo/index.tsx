@@ -5,6 +5,7 @@ import MUploadImg from '../../../MSelector/MUploadImg';
 import MDatePicker from '../../../MSelector/MDatePicker';
 import { ImageWrapper } from '../../../../config/style';
 import { useBaseInfo } from './useBaseInfo';
+import { uploadImgUrl } from '../../../../config';
 
 const { Option } = Select;
 
@@ -14,7 +15,8 @@ const BaseInfo = memo((props: { getNumber: (number: string) => void, id: number 
         form,
         value,
         onFinish,
-        imageUrl
+        imageUrl,
+        getFormData
     } = useBaseInfo(getNumber, id);
     return (
         <>
@@ -28,7 +30,7 @@ const BaseInfo = memo((props: { getNumber: (number: string) => void, id: number 
                 >
                     <Row gutter={10}>
                         {athleteBaseInfo.map((item) => (
-                            <Col span={10} key={item.name}>
+                            <Col span={8} key={item.name}>
                                 <Form.Item
                                     name={item.name}
                                     label={item.label}
@@ -50,24 +52,23 @@ const BaseInfo = memo((props: { getNumber: (number: string) => void, id: number 
                                             </Select>
                                             :
                                             item.component === 'MDatePicker' ?
-                                                <MDatePicker /> :
-                                                <Input placeholder={`填写${item.label}`} />
+                                                <MDatePicker />
+                                                : item.component === 'MUploadImg' ?
+                                                    <MUploadImg initialImageUrl={value && value[item.name]} name={item.name} getFormData={getFormData} />
+                                                    : <Input placeholder={`填写${item.label}`} />
+
                                     }
                                 </Form.Item>
                             </Col>
                         )
                         )}
-                        <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
+                        <Form.Item style={{'transform': 'translateY(60px)'}} wrapperCol={{ span: 12, offset: 8 }}>
                             <Button type="primary" htmlType="submit" >
                                 提交基本信息
                             </Button>
                         </Form.Item>
                     </Row>
                 </Form>
-                <div className="image">
-                    <p>证件照:</p>
-                    <MUploadImg initialImageUrl={imageUrl} id={id} type={10} />
-                </div>
             </ImageWrapper>
 
         </>

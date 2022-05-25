@@ -1,11 +1,8 @@
-import { DatePicker } from "antd";
-import MDatePicker from "../component/MSelector/MDatePicker";
 import MTimePicker from "../component/MSelector/MTimePicker";
 import MUpload from "../component/MSelector/MUpload";
 import { ModalType } from "../type/ModalType";
 
-export type FileName = 'resultsBook' | 'orderBook' | 'competitionPicture' | 'resultsCertificate' | 'prizesPicture'
-
+export type FileName = 'resultsBook' | 'orderBook' | 'competitionPicture' | 'resultsCertificate' | 'prizesPicture';
 
 export const eventInfo: ModalType[] = [
     {

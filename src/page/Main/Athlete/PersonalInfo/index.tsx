@@ -2,7 +2,7 @@ import React, { memo, useState } from 'react'
 import styled from 'styled-components';
 import BaseInfo from '../../../../component/MAthleteModal/MContent/BaseInfo'
 
-const Mqtest = memo(() => {
+const PersonalInfo = memo(() => {
     const [number, setNumber] = useState('');
 
     const getNumber = (number: string) => {
@@ -26,4 +26,4 @@ const BaseInfoContainer = styled.div`
     }
 `
 
-export default Mqtest
+export default PersonalInfo

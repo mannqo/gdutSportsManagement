@@ -2,7 +2,7 @@ import request from "./axios";
 
 // 增删改查
 /* 运动员基本信息 */
-export function getAthleteMsg(option) { 
+export function getAthleteMsg(option) {
     return request({
         method: 'GET',
         url: '/sports/api/sportsBaseMsg',
@@ -10,9 +10,9 @@ export function getAthleteMsg(option) {
     })
 }
 export function postAthleteMsg(option) {
-    const formData = new FormData();
-    Object.keys(option).forEach((key) => {
-        option[key] !== undefined && formData.append(key, option[key]);
+    const { formData, values } = option;
+    Object.keys(values).forEach((key) => {
+        !formData.get(key) && values[key] && formData.append(key, values[key]);
     })
     return request({
         method: 'POST',
@@ -35,11 +35,10 @@ export function deleteMultAthleteMsg(option) {
     })
 }
 export function putAthleteMsg(option) {
-    const formData = new FormData();
-    Object.keys(option).forEach((key) => {
-        option[key] && formData.append(key, option[key]);
+    const { formData, values } = option;
+    Object.keys(values).forEach((key) => {
+        !formData.get(key) && values[key] && formData.append(key, values[key]);
     })
-    formData.get('id');
     return request({
         method: 'PUT',
         url: '/sports/api/sportsBaseMsg',

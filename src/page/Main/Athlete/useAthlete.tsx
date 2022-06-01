@@ -89,7 +89,6 @@ export const useAthlete = () => {
             }
         });
     }
-
     /* 获取运动员列表 */
     const getAthleteInfo = async (page: number) => {
         setPage(page);

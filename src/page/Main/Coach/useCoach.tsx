@@ -22,11 +22,7 @@ export const useCoach = () => {
         {
             title: '名字',
             dataIndex: 'name',
-        },
-        {
-            title: '出生日月',
-            dataIndex: 'birth',
-        },
+        }, 
         {
             title: '职称',
             dataIndex: 'professionName',

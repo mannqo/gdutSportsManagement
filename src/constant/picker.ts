@@ -86,75 +86,76 @@ export const idCardType = [
     },
 ]
 
-export const acceptanceLevel = [
-    {
-        value: '1',
-        content: '层次1',
-    },
-    {
-        value: '2',
-        content: '层次1',
-    },
-    {
-        value: '3',
-        content: '层次1',
-    },
-]
+// export const acceptanceLevel = [
+//     {
+//         value: '1',
+//         content: '层次1',
+//     },
+//     {
+//         value: '2',
+//         content: '层次1',
+//     },
+//     {
+//         value: '3',
+//         content: '层次1',
+//     },
+// ]
 
 /* 入学基本情况 */
-export const acceptanceType = [
-    {
-        value: '1',
-        content: '方式1',
-    },
-    {
-        value: '2',
-        content: '方式1',
-    },
-    {
-        value: '3',
-        content: '方式1',
-    },
-]
+// export const acceptanceType = [
+//     {
+//         value: '1',
+//         content: '方式1',
+//     },
+//     {
+//         value: '2',
+//         content: '方式1',
+//     },
+//     {
+//         value: '3',
+//         content: '方式1',
+//     },
+// ]
 
-export const belongCoach = [
-    {
-        value: '1',
-        content: '教练1',
-    },
-    {
-        value: '2',
-        content: '教练1',
-    },
-    {
-        value: '3',
-        content: '教练1',
-    },
-]
+// export const belongCoach = [
+//     {
+//         value: '1',
+//         content: '教练1',
+//     },
+//     {
+//         value: '2',
+//         content: '教练1',
+//     },
+//     {
+//         value: '3',
+//         content: '教练1',
+//     },
+// ]
 
 /* 参加高考情况 */
-export const examProvinces = [
-    {
-        value: '1',
-        content: '省份1',
-    },
-    {
-        value: '2',
-        content: '省份2',
-    },
-    {
-        value: '3',
-        content: '省份3',
-    },
-]
+// export const examProvinces = [
+//     {
+//         value: '1',
+//         content: '省份1',
+//     },
+//     {
+//         value: '2',
+//         content: '省份2',
+//     },
+//     {
+//         value: '3',
+//         content: '省份3',
+//     },
+// ]
 
-export const inSchool = [
-    {
-        value: '1',
-        content: '是',
-    },
-    {
-        value: '0',
-        content: '否',
-    },
-]
+// export const inSchool = [
+//     {
+//         value: '1',
+//         content: '是',
+//     },
+//     {
+//         value: '0',
+//         content: '否',
+//     },
+// ]
+ 

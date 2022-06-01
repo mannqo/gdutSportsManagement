@@ -1,13 +1,12 @@
 import { Redirect } from "react-router-dom";
 import Main from "../page/Main";
 import AthleteInfo from "../page/Main/Athlete";
-import Mqtest from "../page/Main/Athlete/xxx";
+import PersonalInfo from "../page/Main/Athlete/PersonalInfo";
 import Check from "../page/Main/Check";
 import CoachInfo from "../page/Main/Coach";
 import EventInfo from "../page/Main/Event";
 import System from "../page/Main/System";
 import Center from "../page/Main/System/Center";
-import Config from "../page/Main/System/Config";
 import SecondLevel from "../page/Main/System/Center/SecondLevel";
 import Stair from "../page/Main/System/Center/Stair";
 import ApproveEvent from "../page/Main/Approve";
@@ -48,10 +47,10 @@ const routes = [
                     },
                     {
                         path: '/athleteManage/test',
-                        component: Mqtest,
+                        component: PersonalInfo,
                         icon: PlusOutlined,
-                        key: 'test',
-                        content: '测试'
+                        key: 'personalInfo',
+                        content: '运动员个人信息'
                     }
                 ]
             },
@@ -106,7 +105,7 @@ const routes = [
                         path: "/systemManage",
                         exact: true,
                         render: () => <Redirect to="/systemManage/framework/Event" />
-                    }, 
+                    },
                     {
                         path: "/systemManage/framework",
                         component: Center,
@@ -120,7 +119,7 @@ const routes = [
                                 path: "/systemManage/framework/secLevel",
                                 exact: true,
                                 component: SecondLevel
-                            }, 
+                            },
                             {
                                 path: "/systemManage/framework/secDetails",
                                 exact: true,

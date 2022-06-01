@@ -2,36 +2,39 @@ import { getAthleteMsg, postAthleteMsg, putAthleteMsg } from '../../../../servic
 import moment from 'moment';
 import { Form, Modal } from 'antd';
 import { useEffect, useState } from 'react';
+import { UploadFile } from 'antd/lib/upload/interface';
+
 
 export const useBaseInfo = (getNumber: (number: string) => void, id: number) => {
     const [number, setNumber] = useState('');
     const [value, setValue] = useState();
     const [imageUrl, setImageUrl] = useState('');
     const [form] = Form.useForm();
-    const dateFormat = 'YYYY-MM-DD';
+    const [formData, setFormData] = useState(new FormData());
+    const dateFormat = 'YYYY-MM-DD'; 
 
-    const postInfo = async (values: any) => {
+    const postInfo = async (formData: FormData, values: any) => {
         Modal.confirm({
             title: '确定提交该运动员基本信息吗?',
             okText: '确认',
             cancelText: '取消',
             onOk: async () => {
                 getNumber(values.number);
-                const res = await postAthleteMsg(values);
+                const res = await postAthleteMsg({ formData, values });
                 Modal.info({
                     title: res.message,
                 })
             }
         });
     }
-    const putInfo = async (values: any) => {
+    const putInfo = async (formData: FormData, values: any) => {
         values.id = id;
         Modal.confirm({
             title: '确定修改该运动员基本信息吗?',
             okText: '确认',
             cancelText: '取消',
             onOk: async () => {
-                const res = await putAthleteMsg(values);
+                const res = await putAthleteMsg({ formData, values });
                 Modal.info({
                     title: res.message,
                 })
@@ -39,9 +42,13 @@ export const useBaseInfo = (getNumber: (number: string) => void, id: number) => 
         });
     }
     const onFinish = async (values: any) => {
-        id && putInfo(values);
-        !id && postInfo(values);
+        id && putInfo(formData, values);
+        !id && postInfo(formData, values);
     };
+    const getFormData = async (name: string, file: File) => {
+        formData.append(name, file);
+        return formData;
+    }
 
     useEffect(() => {
         const getInitialValues = async () => {
@@ -64,6 +71,7 @@ export const useBaseInfo = (getNumber: (number: string) => void, id: number) => 
         form,
         value,
         onFinish,
-        imageUrl
+        imageUrl,
+        getFormData
     }
 }

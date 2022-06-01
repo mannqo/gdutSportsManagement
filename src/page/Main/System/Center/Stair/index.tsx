@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { Menu, Modal } from 'antd';
+import { Modal } from 'antd';
 import { useStair } from './useStair';
 import MInfo from '../../../../../component/MInfo';
 import { ModalType } from '../../../../../type/ModalType';

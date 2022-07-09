@@ -1,4 +1,4 @@
-import { Form, Row, Col, Input, Select, Button, Upload } from 'antd'
+import { Form, Row, Col, Input, Select, Button, Upload, Cascader } from 'antd'
 import React, { memo } from 'react'
 import { athleteBaseInfo } from '../../../../constant/athlete';
 import MUploadImg from '../../../MSelector/MUploadImg';
@@ -15,7 +15,8 @@ const BaseInfo = memo((props: { getNumber: (number: string) => void, id: number 
         value,
         onFinish,
         imageUrl,
-        getFormData
+        getFormData,
+        sportProject
     } = useBaseInfo(getNumber, id);
     return (
         <>
@@ -29,6 +30,11 @@ const BaseInfo = memo((props: { getNumber: (number: string) => void, id: number 
                     onFinish={onFinish}
                 >
                     <Row justify='center' align='middle' gutter={[32, 16]}>
+                        <Col span={6} key='sportProject'>
+                            <Form.Item name='sportProject' label='运动项目' rules={[{ required: true },]}>
+                                <Cascader options={sportProject} placeholder="填写组别" />
+                            </Form.Item>
+                        </Col>
                         {athleteBaseInfo.map((item) => (
                             <Col span={6} key={item.name}>
                                 <Form.Item
@@ -60,7 +66,7 @@ const BaseInfo = memo((props: { getNumber: (number: string) => void, id: number 
                             </Col>
                         )
                         )}
-                        <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
+                        <Form.Item >
                             <Button type="primary" htmlType="submit" >
                                 提交基本信息
                             </Button>

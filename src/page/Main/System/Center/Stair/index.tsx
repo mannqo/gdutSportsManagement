@@ -6,7 +6,6 @@ import { ModalType } from '../../../../../type/ModalType';
 import { getStairMsg } from '../../../../../services/system';
 import StairModal from './StairModal';
 import { stairInfo } from '../../../../../constant/system';
-import { Route, RouterProps } from 'react-router-dom';
 
 const Stair = memo((props: { route: any }) => {
     const {
@@ -30,12 +29,8 @@ const Stair = memo((props: { route: any }) => {
             path: '/systemManage/framework/secLevel',
             breadcrumbName: '二级组织',
         },
-        {
-            path: '/systemManage/framework/secDetails',
-            breadcrumbName: '详情',
-        },
     ]
-    // console.log(props.route.path);
+    
     return (
         <>
             <PageHeader

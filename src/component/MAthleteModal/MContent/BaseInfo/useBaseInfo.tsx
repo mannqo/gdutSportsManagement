@@ -2,12 +2,13 @@ import { getAthleteMsg, postAthleteMsg, putAthleteMsg } from '../../../../servic
 import moment from 'moment';
 import { Form, Modal } from 'antd';
 import { useEffect, useState } from 'react';
-import { UploadFile } from 'antd/lib/upload/interface';
 import { initialPersonalInfo } from '../../../../type/personalInfo';
-
+import { allOneName } from '../../../../services/system';
+import { initSportProject } from '../../../../constant/picker';
 
 export const useBaseInfo = (getNumber: (number: string) => void, id: number) => {
     const [formData, setFormData] = useState(new FormData());
+    const [sportProject, setSportProject] = useState(initSportProject)
     const [number, setNumber] = useState('');
     const [value, setValue] = useState(initialPersonalInfo);
     const [imageUrl, setImageUrl] = useState('');
@@ -50,6 +51,11 @@ export const useBaseInfo = (getNumber: (number: string) => void, id: number) => 
         formData.append(name, file);
         return formData;
     }
+    const getOneOranization = async () => {
+        const res = await allOneName();
+        console.log(res);
+
+    }
 
     useEffect(() => {
         const getInitialValues = async () => {
@@ -61,6 +67,7 @@ export const useBaseInfo = (getNumber: (number: string) => void, id: number) => 
             setValue(msg);
         }
         id && getInitialValues();
+        getOneOranization();
     }, [id])
 
     useEffect(() => {
@@ -73,6 +80,7 @@ export const useBaseInfo = (getNumber: (number: string) => void, id: number) => 
         value,
         onFinish,
         imageUrl,
-        getFormData
+        getFormData,
+        sportProject
     }
 }

@@ -1,14 +1,17 @@
-import { DeleteOutlined, ExclamationCircleOutlined, SettingOutlined } from "@ant-design/icons";
-import { Modal } from "antd";
-import { useState } from "react";
-import { deleteAthleteMsg, deleteMultAthleteMsg, getAthleteMsg } from "../../../services/athlete";
+import { DeleteOutlined, ExclamationCircleOutlined, SettingOutlined } from '@ant-design/icons';
+import { Modal } from 'antd';
+import React, { memo, useEffect, useState } from 'react'
+import { deleteAthleteMsg, deleteMultAthleteMsg } from '../../../../../../services/athlete';
+import { getSecondById } from '../../../../../../services/system';
 
-export const useAthlete = () => {
+const useDetail = (props: { id: number }) => {
+    const { id } = props;
     const [data, setData] = useState([]);
     const [total, setTotal] = useState(0);    // 总数据数 
     const [page, setPage] = useState(1);
     const [visible, setVisible] = useState(false);
-    const [id, setId] = useState(0);
+    const [athleteId, setAthleteId] = useState(0);
+    const [searchCondition, setSearchCondition] = useState();
 
     /* 运动员信息列表 */
     const athleteColumns = [
@@ -16,10 +19,6 @@ export const useAthlete = () => {
             title: '序号',
             dataIndex: 'id',
         },
-        // {
-        //     title: '学校名称',
-        //     dataIndex: 'schoolName',
-        // },
         {
             title: '中文姓名',
             dataIndex: 'chineseName',
@@ -52,8 +51,18 @@ export const useAthlete = () => {
     ];
 
     const viewDetails = (id: number) => {
-        setId(id);
+        setAthleteId(id);
         setVisible(true);
+    }
+
+    /* 获取运动员列表 */
+    const getAthletes = async (page: number) => {
+        setPage(page);
+        const res = await getSecondById(id);
+        console.log(res);
+        const { data } = res;
+        setData(data);
+        // setTotal(data.total);
     }
 
     /* 删除运动员信息 */
@@ -68,7 +77,7 @@ export const useAthlete = () => {
                 Modal.info({
                     title: res.message,
                 })
-                getAthleteInfo(page);
+                getAthletes(page);
             }
         });
     }
@@ -85,17 +94,9 @@ export const useAthlete = () => {
                 Modal.info({
                     title: res.message,
                 })
-                getAthleteInfo(page);
+                getAthletes(page);
             }
         });
-    }
-    /* 获取运动员列表 */
-    const getAthleteInfo = async (page: number) => {
-        setPage(page);
-        const res = await getAthleteMsg({ pn: page });
-        const { data } = res;
-        setTotal(data.total);
-        setData(data.records);
     }
 
     /* 运动员信息表 */
@@ -108,15 +109,21 @@ export const useAthlete = () => {
         setData(data);
         setTotal(total)
     }
+    useEffect(() => {
+        getAthletes(page);
+    }, [])
+
     return {
         athleteColumns,
-        getAthleteInfo,
+        getAthletes,
         data,
         total,
-        id,
+        athleteId,
         visible,
         hideModal,
         deleteMultiAthlete,
         changeData
     }
 }
+
+export default useDetail

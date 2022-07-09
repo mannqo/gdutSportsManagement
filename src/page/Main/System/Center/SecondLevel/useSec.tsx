@@ -1,7 +1,7 @@
 import { DeleteOutlined, ExclamationCircleOutlined, SearchOutlined, SettingOutlined } from "@ant-design/icons";
 import { Modal } from "antd";
 import { useState } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { deleteSecMsg, getSecMsg } from "../../../../../services/system";
 
 export const useSec = () => {
@@ -12,21 +12,11 @@ export const useSec = () => {
     const [id, setId] = useState(0);
 
     const secColumn = [
+        { title: '序号', dataIndex: 'id', },
+        { title: '所属一级组织', dataIndex: 'oneOrg' },
+        { title: '组织名称', dataIndex: 'name', },
         {
-            title: '序号',
-            dataIndex: 'id',
-        },
-        {
-            title: '所属一级组织',
-            dataIndex: 'oneOrg'
-        },
-        {
-            title: '组织名称',
-            dataIndex: 'name',
-        },
-        {
-            title: '修改',
-            dataIndex: 'id',
+            title: '修改', dataIndex: 'id',
             render: (id: number) => (
                 <div onClick={() => viewDetails(id)}>
                     <SettingOutlined />
@@ -39,7 +29,7 @@ export const useSec = () => {
             render: (id: number) => (
                 <NavLink to={{
                     pathname: '/systemManage/framework/secDetails',
-                    state: id
+                    state: { id: id }
                 }}>
                     <SearchOutlined />
                 </NavLink>

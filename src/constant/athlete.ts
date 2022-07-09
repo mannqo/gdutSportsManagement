@@ -1,4 +1,4 @@
-import { gender, group, idCardType, nation, sportProject } from "./picker"
+import { gender, idCardType, isSchool, nation } from "./picker"
 import { ModalType } from "../type/ModalType"
 import MTimePicker from "../component/MSelector/MTimePicker"
 
@@ -11,30 +11,29 @@ export const athleteBaseInfo: ModalType[] = [
         require: true,
     },
     {
-        name: 'sportProject',
-        label: '运动项目',
-        require: true,
-        component: 'MPicker',
-        optionList: sportProject
-    },
-    {
-        name: 'high',
-        label: '身高',
-        require: true,
-    },
-    {
         name: 'gender',
         label: '性别',
         component: 'MPicker',
         optionList: gender,
         require: true,
     },
+    // {
+    //     name: 'sportProject',
+    //     label: '运动项目',
+    //     require: true,
+    //     component: 'Cascader',
+    // },
+    // {
+    //     name: 'inGroup',
+    //     label: '组别',
+    //     require: true,
+    //     component: 'MPicker',
+    //     optionList: group
+    // },
     {
-        name: 'inGroup',
-        label: '组别',
+        name: 'high',
+        label: '身高',
         require: true,
-        component: 'MPicker',
-        optionList: group
     },
     {
         name: 'weight',
@@ -86,6 +85,8 @@ export const athleteBaseInfo: ModalType[] = [
     {
         name: 'isSchool',
         label: '是否在校',
+        component: 'MPicker',
+        optionList: isSchool
     },
     {
         name: 'idCardFront',

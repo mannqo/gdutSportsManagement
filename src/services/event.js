@@ -59,3 +59,13 @@ export function deleteFile(option) {
         data: option
     })
 }
+/* 
+ * 获取个人比赛记录
+ */
+export function getPersonalEventMsg(option) {
+    return request({
+        method: 'GET',
+        url: '/sports/api/sportCompetition',
+        params: option,
+    })
+}

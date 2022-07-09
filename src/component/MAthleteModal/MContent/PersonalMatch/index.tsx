@@ -10,12 +10,11 @@ const PersonalMatch = memo((props: { number: string, id: number }) => {
         <Form
             form={form}
             name="personalMatch"
-            layout={'vertical'}
             onFinish={onFinish}
         >
             <Row gutter={[32, 16]}>
                 {athletePersonalMatch.map((item) => (
-                    <Col span={8} key={item.name}>
+                    <Col span={10} key={item.name}>
                         <Form.Item
                             name={item.name}
                             label={item.label}
@@ -29,7 +28,6 @@ const PersonalMatch = memo((props: { number: string, id: number }) => {
                         </Form.Item>
                     </Col>
                 ))}
-
             </Row>
             <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
                 <Button type="primary" htmlType="submit">

@@ -36,8 +36,9 @@ export function deleteMultAthleteMsg(option) {
 }
 export function putAthleteMsg(option) {
     const { formData, values } = option;
+    const fileName = ['idCardFront', 'idCardAfter', 'picture', 'studentReport'];
     Object.keys(values).forEach((key) => {
-        !formData.get(key) && values[key] && formData.append(key, values[key]);
+        !formData.get(key) && values[key] && !fileName.includes(key) && formData.append(key, values[key]);
     })
     return request({
         method: 'PUT',

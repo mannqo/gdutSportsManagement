@@ -22,9 +22,10 @@ const MEventModal = memo((props: { id?: number, type?: string }) => {
                 preserve={false}
                 initialValues={value}
                 name="eventInfo"
+                layout='vertical'
                 onFinish={onFinish}
             >
-                <Row gutter={10}>
+                <Row gutter={[32, 16]}>
                     {eventInfo.map((item) => (
                         <Col span={8} key={item.name}>
                             <Form.Item

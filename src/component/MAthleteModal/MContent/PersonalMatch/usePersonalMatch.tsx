@@ -2,11 +2,12 @@ import { Form, Modal } from 'antd';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { getSportCompetition, postSportCompetition, putSportCompetition } from '../../../../services/athlete';
+import { getPersonalEventMsg } from '../../../../services/event';
 
 export const usePersonalMatch = (number: string, id: number) => {
     const [value, setValue] = useState(null);
     const [form] = Form.useForm();
-    const dateFormat = 'YYYY-MM-DD'; 
+    const dateFormat = 'YYYY-MM-DD';
 
     const postInfo = (values: any) => {
         values.number = number;;
@@ -41,6 +42,12 @@ export const usePersonalMatch = (number: string, id: number) => {
         (!value || !id) && postInfo(values);
         (value && id) && putInfo(values);
     };
+
+    const getPersonalEvent = async () => {
+        const res = await getPersonalEventMsg(number);
+        console.log(res);
+
+    }
     useEffect(() => {
         const getInitialValues = async () => {
             const res = await getSportCompetition({ number });

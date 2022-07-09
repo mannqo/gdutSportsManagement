@@ -27,12 +27,12 @@ export const coachInfo = [
         name: 'professionName',
         label: '职称',
     },
-    {
-        name: 'project',
-        label: '运动项目',
-    },
-    {
-        name: 'groups',
-        label: '组别'
-    },
+    // {
+    //     name: 'project',
+    //     label: '运动项目',
+    // },
+    // {
+    //     name: 'groups',
+    //     label: '组别'
+    // },
 ]

@@ -2,10 +2,12 @@
 import { Form, Modal } from 'antd';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
+import { initSportProject } from '../../constant/picker';
 import { getCoachMsg, postCoachMsg, putCoachMsg } from '../../services/coach';
 
 export const useCoachModal = (id?: number) => {
     const [value, setValue] = useState();
+    const [sportProject, setSportProject] = useState(initSportProject)
     const [imageUrl, setImageUrl] = useState('');
     const [form] = Form.useForm();
 
@@ -61,6 +63,7 @@ export const useCoachModal = (id?: number) => {
     return {
         form,
         onFinish,
-        imageUrl
+        imageUrl,
+        sportProject
     }
 }

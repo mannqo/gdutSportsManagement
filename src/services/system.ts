@@ -70,4 +70,22 @@ export function deleteSecMsg(option: any) {
         url: '/sports/api/secondOrganization',
         data: option
     })
-} 
+}
+
+/* 获取所有一级组织 */
+export function allOneName() {
+    return request({
+        method: 'GET',
+        url: '/sports/api/oneOrganization/getAllOneName'
+    })
+}
+
+/* 根据id获取该二级组织的学生 */
+export function getSecondById(id: number) {
+    console.log(id);
+    return request({
+        method: 'GET',
+        url: '/sports/api/secondOrganization/getStuById',
+        params: { id }
+    })
+}

@@ -1,7 +1,8 @@
-import { Form, Row, Col, Input, Button, Select } from 'antd'
+import { Form, Row, Col, Input, Button, Select, Cascader } from 'antd'
 import React, { memo } from 'react'
 import { ImageWrapper } from '../../config/style';
 import { coachInfo } from '../../constant/coach';
+import { initSportProject } from '../../constant/picker';
 import MUploadImg from '../MSelector/MUploadImg';
 import { useCoachModal } from './useCoachModal';
 
@@ -12,7 +13,8 @@ const MCoachModal = memo((props: { id?: number }) => {
     const {
         form,
         onFinish,
-        imageUrl
+        imageUrl,
+        sportProject
     } = useCoachModal(id);
     return (
         <>
@@ -30,6 +32,11 @@ const MCoachModal = memo((props: { id?: number }) => {
                                     name={item.name}
                                     label={item.label}
                                 >
+                                    <Col span={6} key='sportProject'>
+                                        <Form.Item label='运动项目' rules={[{ required: true },]}>
+                                            <Cascader options={sportProject} placeholder="填写组别" />
+                                        </Form.Item>
+                                    </Col>
                                     {item.component ?
                                         <Select placeholder={`选择${item.label}`}>
                                             {

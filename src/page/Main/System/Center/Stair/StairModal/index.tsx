@@ -1,4 +1,4 @@
-import { Button, Col, Form, Input, Row } from 'antd';
+import { Button, Col, Form, Input, Row, PageHeader } from 'antd';
 import React, { memo } from 'react'
 import { ImageWrapper } from '../../../../../../config/style';
 import { stairInfo } from '../../../../../../constant/system';
@@ -11,8 +11,8 @@ const Modal = memo((props: { id?: number }) => {
         form
     } = useModal(id);
     return (
-        <>
-            <h2 style={{ textAlign: 'center', lineHeight: '40px' }}>一级组织</h2>
+        <> 
+            <h2 style={{ textAlign: 'center', lineHeight: '40px' }}>一级组织信息</h2>
             <ImageWrapper>
                 <Form
                     form={form}

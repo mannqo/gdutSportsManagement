@@ -1,11 +1,10 @@
-import { Form, Row, Col, Input, Select, Button } from 'antd'
+import { Form, Row, Col, Input, Select, Button, Upload } from 'antd'
 import React, { memo } from 'react'
 import { athleteBaseInfo } from '../../../../constant/athlete';
 import MUploadImg from '../../../MSelector/MUploadImg';
 import MDatePicker from '../../../MSelector/MDatePicker';
 import { ImageWrapper } from '../../../../config/style';
 import { useBaseInfo } from './useBaseInfo';
-import { uploadImgUrl } from '../../../../config';
 
 const { Option } = Select;
 
@@ -25,12 +24,13 @@ const BaseInfo = memo((props: { getNumber: (number: string) => void, id: number 
                     form={form}
                     preserve={false}
                     initialValues={value}
+                    layout={'vertical'}
                     name="baseInfo"
                     onFinish={onFinish}
                 >
-                    <Row gutter={10}>
+                    <Row justify='center' align='middle' gutter={[32, 16]}>
                         {athleteBaseInfo.map((item) => (
-                            <Col span={8} key={item.name}>
+                            <Col span={6} key={item.name}>
                                 <Form.Item
                                     name={item.name}
                                     label={item.label}
@@ -50,19 +50,17 @@ const BaseInfo = memo((props: { getNumber: (number: string) => void, id: number 
                                                     ))
                                                 }
                                             </Select>
-                                            :
-                                            item.component === 'MDatePicker' ?
+                                            : item.component === 'MDatePicker' ?
                                                 <MDatePicker />
                                                 : item.component === 'MUploadImg' ?
                                                     <MUploadImg initialImageUrl={value && value[item.name]} name={item.name} getFormData={getFormData} />
                                                     : <Input placeholder={`填写${item.label}`} />
-
                                     }
                                 </Form.Item>
                             </Col>
                         )
                         )}
-                        <Form.Item style={{'transform': 'translateY(60px)'}} wrapperCol={{ span: 12, offset: 8 }}>
+                        <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
                             <Button type="primary" htmlType="submit" >
                                 提交基本信息
                             </Button>

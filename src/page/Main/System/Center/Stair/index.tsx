@@ -1,13 +1,14 @@
 import React, { memo } from 'react'
-import { Modal } from 'antd';
+import { Modal, PageHeader } from 'antd';
 import { useStair } from './useStair';
 import MInfo from '../../../../../component/MInfo';
 import { ModalType } from '../../../../../type/ModalType';
 import { getStairMsg } from '../../../../../services/system';
 import StairModal from './StairModal';
 import { stairInfo } from '../../../../../constant/system';
+import { Route, RouterProps } from 'react-router-dom';
 
-const Stair = memo(() => {
+const Stair = memo((props: { route: any }) => {
     const {
         stairColumn,
         getStairInfo,
@@ -20,8 +21,27 @@ const Stair = memo(() => {
         changeData
     } = useStair();
 
+    const routes = [
+        {
+            path: '/systemManage/framework/stair',
+            breadcrumbName: '一级组织',
+        },
+        {
+            path: '/systemManage/framework/secLevel',
+            breadcrumbName: '二级组织',
+        },
+        {
+            path: '/systemManage/framework/secDetails',
+            breadcrumbName: '详情',
+        },
+    ]
+    // console.log(props.route.path);
     return (
         <>
+            <PageHeader
+                className="site-page-header"
+                breadcrumb={{ routes }}
+            />
             <MInfo<ModalType>
                 columns={stairColumn}
                 getInfo={getStairInfo}

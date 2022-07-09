@@ -3,15 +3,16 @@ import moment from 'moment';
 import { Form, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import { UploadFile } from 'antd/lib/upload/interface';
+import { initialPersonalInfo } from '../../../../type/personalInfo';
 
 
 export const useBaseInfo = (getNumber: (number: string) => void, id: number) => {
+    const [formData, setFormData] = useState(new FormData());
     const [number, setNumber] = useState('');
-    const [value, setValue] = useState();
+    const [value, setValue] = useState(initialPersonalInfo);
     const [imageUrl, setImageUrl] = useState('');
     const [form] = Form.useForm();
-    const [formData, setFormData] = useState(new FormData());
-    const dateFormat = 'YYYY-MM-DD'; 
+    const dateFormat = 'YYYY-MM-DD';
 
     const postInfo = async (formData: FormData, values: any) => {
         Modal.confirm({

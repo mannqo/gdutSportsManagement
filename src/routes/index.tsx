@@ -16,7 +16,7 @@ import { InfoCircleOutlined, MailOutlined, PlusOutlined, RightOutlined } from "@
 import NoticeManage from "../page/Notice/NoticeManage";
 import MNormalSider from "../component/MSider/MNormalSider";
 import Character from "../page/Main/System/Character";
-import SecDetails from "../page/Main/System/Center/SecDetails";
+import SecDetails from "../page/Main/System/Center/SecondLevel/SecDetails";
 
 const routes = [
     {
@@ -171,13 +171,13 @@ const routes = [
                         key: 'event',
                         content: '比赛通知'
                     },
-                    {
-                        path: "/notice/approve",
-                        component: ApproveNotice,
-                        icon: InfoCircleOutlined,
-                        key: 'approve',
-                        content: '审核通知'
-                    },
+                    // {
+                    //     path: "/notice/approve",
+                    //     component: ApproveNotice,
+                    //     icon: InfoCircleOutlined,
+                    //     key: 'approve',
+                    //     content: '审核通知'
+                    // },
                     {
                         path: '/notice/manage',
                         component: NoticeManage,

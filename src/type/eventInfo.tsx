@@ -1,4 +1,4 @@
-export interface EventValue {
+export interface EventInfo {
     [key: string]: any;
     approvePerson: Array<string>,
     beforeOrAfter: string,
@@ -22,7 +22,7 @@ export interface EventValue {
     resultsCertificate: Array<string>
     state: string,
 }
-export const initialEventValue: EventValue = {
+export const initialEventValue: EventInfo = {
     approvePerson: [],
     beforeOrAfter: '',
     birth: '',

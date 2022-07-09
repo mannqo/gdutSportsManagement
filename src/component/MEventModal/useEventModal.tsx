@@ -3,7 +3,7 @@ import { Form, Modal } from 'antd';
 import moment from 'moment';
 import { useEffect, useState } from 'react'
 import { FileName } from '../../constant/event';
-import { agreeApply, ApproveRes } from '../../services/approve';
+import { agreeApply } from '../../services/approve';
 import { getEventMsg, postEventMsg, putEventMsg } from '../../services/event';
 import { initialEventValue } from '../../type/eventInfo';
 

@@ -26,7 +26,8 @@ export const athleteBaseInfo: ModalType[] = [
         name: 'gender',
         label: '性别',
         component: 'MPicker',
-        optionList: gender
+        optionList: gender,
+        require: true,
     },
     {
         name: 'inGroup',
@@ -81,6 +82,10 @@ export const athleteBaseInfo: ModalType[] = [
     {
         name: 'phone',
         label: '手机号码',
+    },
+    {
+        name: 'isSchool',
+        label: '是否在校',
     },
     {
         name: 'idCardFront',

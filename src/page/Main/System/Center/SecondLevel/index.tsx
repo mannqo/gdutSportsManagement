@@ -8,16 +8,6 @@ import SecModal from './SecModal';
 import { useSec } from './useSec';
 
 const SecondLevel = memo(() => {
-    const routes = [
-        {
-            path: '/systemManage/framework/stair',
-            breadcrumbName: '一级组织',
-        },
-        {
-            path: '/systemManage/framework/secLevel',
-            breadcrumbName: '二级组织',
-        }, 
-    ]
     const {
         secColumn,
         getSecInfo,
@@ -31,10 +21,10 @@ const SecondLevel = memo(() => {
     } = useSec();
     return (
         <>
-            <PageHeader
+            {/* <PageHeader
                 className="site-page-header" 
                 breadcrumb={{ routes }} 
-            />
+            /> */}
             <MInfo<ModalType>
                 columns={secColumn}
                 getInfo={getSecInfo}

@@ -1,8 +1,7 @@
-import { Form, Row, Col, Input, Select, Button, Upload, Cascader } from 'antd'
+import { Form, Row, Col, Input, Select, Button, Upload, Cascader, DatePicker } from 'antd'
 import React, { memo } from 'react'
 import { athleteBaseInfo } from '../../../../constant/athlete';
 import MUploadImg from '../../../MSelector/MUploadImg';
-import MDatePicker from '../../../MSelector/MDatePicker';
 import { ImageWrapper } from '../../../../config/style';
 import { useBaseInfo } from './useBaseInfo';
 
@@ -18,21 +17,25 @@ const BaseInfo = memo((props: { getNumber: (number: string) => void, id: number 
         getFormData,
         sportProject
     } = useBaseInfo(getNumber, id);
+    const dateFormat = 'YYYY-MM-DD';
+
     return (
         <>
             <ImageWrapper>
                 <Form
                     form={form}
-                    preserve={false}
-                    initialValues={value}
                     layout={'vertical'}
                     name="baseInfo"
                     onFinish={onFinish}
                 >
                     <Row justify='center' align='middle' gutter={[32, 16]}>
-                        <Col span={6} key='sportProject'>
-                            <Form.Item name='sportProject' label='运动项目' rules={[{ required: true },]}>
-                                <Cascader options={sportProject} placeholder="填写组别" />
+                        <Col span={6} key='prjectGroup'>
+                            <Form.Item name='projectGroup' label='运动项目' rules={[{ required: true }]}>
+                                <Cascader
+                                    key='projectGroup'
+                                    options={sportProject}
+                                    placeholder="填写组别"
+                                />
                             </Form.Item>
                         </Col>
                         {athleteBaseInfo.map((item) => (
@@ -57,7 +60,7 @@ const BaseInfo = memo((props: { getNumber: (number: string) => void, id: number 
                                                 }
                                             </Select>
                                             : item.component === 'MDatePicker' ?
-                                                <MDatePicker />
+                                                <DatePicker placeholder='选择日期' format={dateFormat} />
                                                 : item.component === 'MUploadImg' ?
                                                     <MUploadImg initialImageUrl={value && value[item.name]} name={item.name} getFormData={getFormData} />
                                                     : <Input placeholder={`填写${item.label}`} />

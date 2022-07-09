@@ -4,9 +4,10 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { initSportProject } from '../../constant/picker';
 import { getCoachMsg, postCoachMsg, putCoachMsg } from '../../services/coach';
+import { initialCoachInfo } from '../../type/coach';
 
 export const useCoachModal = (id?: number) => {
-    const [value, setValue] = useState();
+    const [value, setValue] = useState(initialCoachInfo);
     const [sportProject, setSportProject] = useState(initSportProject)
     const [imageUrl, setImageUrl] = useState('');
     const [form] = Form.useForm();
@@ -41,6 +42,7 @@ export const useCoachModal = (id?: number) => {
     }
 
     const onFinish = (values: any) => {
+        console.log(values); 
         id && putInfo(values);
         !id && postInfo(values);
     };
@@ -62,6 +64,7 @@ export const useCoachModal = (id?: number) => {
 
     return {
         form,
+        value,
         onFinish,
         imageUrl,
         sportProject

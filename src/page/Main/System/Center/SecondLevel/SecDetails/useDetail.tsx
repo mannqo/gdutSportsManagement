@@ -25,11 +25,7 @@ const useDetail = (props: { id: number }) => {
         },
         {
             title: '运动项目',
-            dataIndex: 'sportProject',
-        },
-        {
-            title: '组别',
-            dataIndex: 'inGroup',
+            dataIndex: 'projectGroup',
         },
         {
             title: '详情',
@@ -59,10 +55,9 @@ const useDetail = (props: { id: number }) => {
     const getAthletes = async (page: number) => {
         setPage(page);
         const res = await getSecondById(id);
-        console.log(res);
         const { data } = res;
-        setData(data);
-        // setTotal(data.total);
+        setData(data.records);
+        setTotal(data.total);
     }
 
     /* 删除运动员信息 */

@@ -22,10 +22,10 @@ export const useCoach = () => {
         {
             title: '名字',
             dataIndex: 'name',
-        }, 
+        },
         {
-            title: '职称',
-            dataIndex: 'professionName',
+            title: '负责项目',
+            dataIndex: 'projectGroup',
         },
         {
             title: '详情',

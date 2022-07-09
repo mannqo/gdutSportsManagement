@@ -60,7 +60,7 @@ export const athleteBaseInfo: ModalType[] = [
         label: '录取专业'
     },
     {
-        name: 'aClass',
+        name: 'aclass',
         label: '班级',
     },
     {

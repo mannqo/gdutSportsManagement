@@ -1,7 +1,7 @@
 export interface PersonalInfo {
     [key: string]: any,
     chineseName: string,
-    sportProject: string,
+    projectGroup: Array<string>,
     high: string,
     gender: string,
     inGroup: string,
@@ -23,7 +23,7 @@ export interface PersonalInfo {
 }
 export const initialPersonalInfo: PersonalInfo = {
     chineseName: '',
-    sportProject: '',
+    projectGroup: [],
     high: '',
     gender: '',
     inGroup: '',

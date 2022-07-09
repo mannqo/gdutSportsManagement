@@ -26,11 +26,7 @@ export const useAthlete = () => {
         },
         {
             title: '运动项目',
-            dataIndex: 'sportProject',
-        },
-        {
-            title: '组别',
-            dataIndex: 'inGroup',
+            dataIndex: 'projectGroup',
         },
         {
             title: '详情',

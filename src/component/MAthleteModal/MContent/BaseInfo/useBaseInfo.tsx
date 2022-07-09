@@ -62,16 +62,18 @@ export const useBaseInfo = (getNumber: (number: string) => void, id: number) => 
             const res = await getAthleteMsg({ id });
             const msg = res.data.records[0];
             msg.birth = moment(msg.birth, dateFormat);
+            msg.projectGroup = msg.projectGroup.split(',');
             setImageUrl(msg.picture);
             setNumber(msg.number);
             setValue(msg);
+            console.log(msg);
         }
         id && getInitialValues();
         getOneOranization();
     }, [id])
 
     useEffect(() => {
-        form.resetFields();
+        form.setFieldsValue(value);
         number && getNumber(number);
     }, [value, number, getNumber, form])
 

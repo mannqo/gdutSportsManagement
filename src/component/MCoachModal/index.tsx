@@ -2,11 +2,54 @@ import { Form, Row, Col, Input, Button, Select, Cascader } from 'antd'
 import React, { memo } from 'react'
 import { ImageWrapper } from '../../config/style';
 import { coachInfo } from '../../constant/coach';
-import { initSportProject } from '../../constant/picker';
-import MUploadImg from '../MSelector/MUploadImg';
 import { useCoachModal } from './useCoachModal';
 
 const { Option } = Select;
+
+
+
+interface Option {
+    value: string | number;
+    label: string;
+    children?: Option[];
+}
+const options: Option[] = [
+    {
+        label: '篮球',
+        value: '篮球',
+        // children: new Array(20)
+        //     .fill(null)
+        //     .map((_, index) => ({ label: `Number ${index}`, value: index })),
+        children: [
+            {
+                label: '甲组',
+                value: '甲组',
+            },
+            {
+                label: '乙组',
+                value: '乙组',
+            },
+            {
+                label: '丙组',
+                value: '丙组',
+            },
+        ]
+    },
+    {
+        label: '足球',
+        value: '足球',
+        children: [
+            {
+                label: '甲组',
+                value: '甲组',
+            },
+            {
+                label: '乙组',
+                value: '乙组',
+            },
+        ]
+    },
+];
 
 const MCoachModal = memo((props: { id?: number }) => {
     const { id } = props;
@@ -14,8 +57,11 @@ const MCoachModal = memo((props: { id?: number }) => {
         form,
         onFinish,
         imageUrl,
-        sportProject
+        sportProject,
+        value
     } = useCoachModal(id);
+    console.log(value.projectGroup);
+
     return (
         <>
             <h2 style={{ textAlign: 'center', lineHeight: '40px' }}>教练信息表</h2>
@@ -25,18 +71,25 @@ const MCoachModal = memo((props: { id?: number }) => {
                     name="coachInfo"
                     onFinish={onFinish}
                 >
-                    <Row gutter={10}>
+                    <Row gutter={[32, 16]}>
+                        <Col span={10} key='projectGroup'>
+                            <Form.Item name='projectGroup' label='运动项目' rules={[{ required: true },]}>
+                                <Cascader 
+                                    style={{ width: '100%' }}
+                                    options={options}
+                                    // onChange={onChange}
+                                    multiple
+                                    maxTagCount="responsive"
+                                />
+                            </Form.Item>
+                        </Col>
                         {coachInfo.map((item) => (
                             <Col span={10} key={item.name}>
                                 <Form.Item
                                     name={item.name}
                                     label={item.label}
                                 >
-                                    <Col span={6} key='sportProject'>
-                                        <Form.Item label='运动项目' rules={[{ required: true },]}>
-                                            <Cascader options={sportProject} placeholder="填写组别" />
-                                        </Form.Item>
-                                    </Col>
+
                                     {item.component ?
                                         <Select placeholder={`选择${item.label}`}>
                                             {

@@ -82,7 +82,6 @@ export function allOneName() {
 
 /* 根据id获取该二级组织的学生 */
 export function getSecondById(id: number) {
-    console.log(id);
     return request({
         method: 'GET',
         url: '/sports/api/secondOrganization/getStuById',

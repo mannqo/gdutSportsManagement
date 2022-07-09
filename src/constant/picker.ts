@@ -1,7 +1,7 @@
 /* 基本信息 */
 
 /* 运动项目+组别联动 */
-interface Option {
+export interface Option {
     value: string | number;
     label: string;
     children?: Option[];

@@ -93,6 +93,10 @@ export const useAthlete = () => {
     const getAthleteInfo = async (page: number) => {
         setPage(page);
         const res = await getAthleteMsg({ pn: page });
+        console.log(page);
+
+        console.log('res', res);
+
         const { data } = res;
         setTotal(data.total);
         setData(data.records);

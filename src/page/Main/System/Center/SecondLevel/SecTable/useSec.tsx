@@ -18,8 +18,8 @@ export const useSec = (oneOrg?: string) => {
         { title: '所属一级组织', dataIndex: 'oneOrg' },
         { title: '组织名称', dataIndex: 'name' },
         {
-            title: '教练', dataIndex: 'coach', render: (coach: string) => (
-                <span>{coach}</span>
+            title: '教练', dataIndex: 'coach', render: (coach: Array<string>) => (
+                <span>{coach.join(',')}</span>
             )
         },
         {
@@ -92,7 +92,7 @@ export const useSec = (oneOrg?: string) => {
     const getSecInfo = async (page: number) => {
         setPage(page);
         const res = await getSecMsg({ pn: page, oneOrg });
-        console.log(res);
+        // console.log(res);
 
         const { data } = res;
         setTotal(data.total);

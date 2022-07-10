@@ -23,15 +23,15 @@ export const useEvent = () => {
         {
             title: '运动员姓名',
             dataIndex: 'name',
-            render: (athlete: any) => (
-                <span>{athlete}</span>
+            render: (athlete: Array<string>) => (
+                <span>{athlete.join(',')}</span>
             )
         },
         {
             title: '教练',
             dataIndex: 'coach',
-            render: (coach: string) => (
-                <span>{coach}</span>
+            render: (coach: Array<string>) => (
+                <span>{coach.join(',')}</span>
             )
         },
         {

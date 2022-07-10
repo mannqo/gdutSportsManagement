@@ -5,7 +5,6 @@ import routes from '../../routes'
 
 const Admin = memo((props: any) => {
     const { id } = props;
-    console.log(routes);
     return (
         <HashRouter>
             {renderRoutes(routes)}

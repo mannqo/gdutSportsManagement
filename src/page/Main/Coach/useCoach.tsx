@@ -26,6 +26,9 @@ export const useCoach = () => {
         {
             title: '负责项目',
             dataIndex: 'projectGroup',
+            render: (coach: Array<string>) => (
+                <span>{coach.join(' ; ')}</span>
+            )
         },
         {
             title: '详情',

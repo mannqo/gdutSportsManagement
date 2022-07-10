@@ -9,7 +9,7 @@ import { ModalType } from '../../../../../../type/ModalType';
 import useDetail from './useDetail';
 
 const SecDetails = memo((props: any) => {
-    console.log(props);
+    // console.log(props);
 
     const { state } = props.location;
 

@@ -55,7 +55,7 @@ export const useBaseInfo = (getNumber: (number: string) => void, id: number) => 
     }
     const getOneOranization = async () => {
         const res = await allOneName();
-        console.log(res);
+        // console.log(res);
     }
 
     /* 获取运动项目 */

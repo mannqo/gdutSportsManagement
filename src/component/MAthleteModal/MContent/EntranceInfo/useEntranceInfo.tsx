@@ -21,7 +21,7 @@ export const useEntranceInfo = (number: string) => {
                     title: res.message,
                 })
                 if (res.data) {
-                    console.log(res.data);
+                    // console.log(res.data);
                     setId(res.data.id);
                 }
             }

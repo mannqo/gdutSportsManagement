@@ -11,7 +11,6 @@ const useDetail = (props: { id: number }) => {
     const [page, setPage] = useState(1);
     const [visible, setVisible] = useState(false);
     const [athleteId, setAthleteId] = useState(0);
-    const [searchCondition, setSearchCondition] = useState();
 
     /* 运动员信息列表 */
     const athleteColumns = [
@@ -55,6 +54,8 @@ const useDetail = (props: { id: number }) => {
     const getAthletes = async (page: number) => {
         setPage(page);
         const res = await getSecondById(id);
+        console.log(res);
+
         const { data } = res;
         setData(data.records);
         setTotal(data.total);

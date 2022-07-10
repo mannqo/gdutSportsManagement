@@ -11,12 +11,15 @@ import SecondLevel from "../page/Main/System/Center/SecondLevel";
 import Stair from "../page/Main/System/Center/Stair";
 import ApproveEvent from "../page/Main/Approve";
 import EventNotice from "../page/Notice/EventNotice";
-import ApproveNotice from "../page/Notice/ApproveNotice";
+// import ApproveNotice from "../page/Notice/ApproveNotice";
 import { InfoCircleOutlined, MailOutlined, PlusOutlined, RightOutlined } from "@ant-design/icons";
 import NoticeManage from "../page/Notice/NoticeManage";
 import MNormalSider from "../component/MSider/MNormalSider";
 import Character from "../page/Main/System/Character";
 import SecDetails from "../page/Main/System/Center/SecondLevel/SecDetails";
+import StairTable from "../page/Main/System/Center/Stair/StairTable";
+import FitSec from "../page/Main/System/Center/Stair/FitSec";
+import SecTable from "../page/Main/System/Center/SecondLevel/SecTable";
 
 const routes = [
     {
@@ -112,19 +115,42 @@ const routes = [
                         children: [
                             {
                                 path: "/systemManage/framework/stair",
-                                exact: true,
-                                component: Stair
+                                component: Stair,
+                                children: [
+                                    {
+                                        path: "/systemManage/framework/stair",
+                                        exact: true,
+                                        component: StairTable,
+                                    },
+                                    {
+                                        path: "/systemManage/framework/stair/secLevel",
+                                        exact: true,
+                                        component: FitSec,
+                                    },
+                                    {
+                                        path: "/systemManage/framework/stair/secLevel/detail",
+                                        exact: true,
+                                        component: SecDetails,
+                                    },
+                                ]
                             },
                             {
                                 path: "/systemManage/framework/secLevel",
-                                exact: true,
-                                component: SecondLevel
+                                component: SecondLevel,
+                                children: [
+                                    {
+                                        path: "/systemManage/framework/secLevel",
+                                        exact: true,
+                                        component: SecTable,
+                                    },
+                                    {
+                                        path: "/systemManage/framework/secLevel/detail",
+                                        exact: true,
+                                        component: SecDetails
+                                    },
+                                ]
                             },
-                            {
-                                path: "/systemManage/framework/secDetails",
-                                exact: true,
-                                component: SecDetails
-                            },
+
                         ]
                     },
 

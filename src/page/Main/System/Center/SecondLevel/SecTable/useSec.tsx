@@ -2,19 +2,26 @@ import { DeleteOutlined, ExclamationCircleOutlined, SearchOutlined, SettingOutli
 import { Modal } from "antd";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { deleteSecMsg, getSecMsg } from "../../../../../services/system";
+import { deleteSecMsg, getSecMsg } from "../../../../../../services/system";
 
-export const useSec = () => {
+export const useSec = (oneOrg?: string) => {
     const [data, setData] = useState([]);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
     const [visible, setVisible] = useState(false);
     const [id, setId] = useState(0);
+    const pathname = oneOrg ? '/systemManage/framework/stair/secLevel/detail'
+        : '/systemManage/framework/secLevel/detail';
 
     const secColumn = [
         { title: '序号', dataIndex: 'id', },
         { title: '所属一级组织', dataIndex: 'oneOrg' },
-        { title: '组织名称', dataIndex: 'name', },
+        { title: '组织名称', dataIndex: 'name' },
+        {
+            title: '教练', dataIndex: 'coach', render: (coach: string) => (
+                <span>{coach}</span>
+            )
+        },
         {
             title: '修改', dataIndex: 'id',
             render: (id: number) => (
@@ -28,7 +35,7 @@ export const useSec = () => {
             dataIndex: 'id',
             render: (id: number) => (
                 <NavLink to={{
-                    pathname: '/systemManage/framework/secDetails',
+                    pathname,
                     state: { id: id }
                 }}>
                     <SearchOutlined />
@@ -84,7 +91,9 @@ export const useSec = () => {
     }
     const getSecInfo = async (page: number) => {
         setPage(page);
-        const res = await getSecMsg({ pn: page });
+        const res = await getSecMsg({ pn: page, oneOrg });
+        console.log(res);
+
         const { data } = res;
         setTotal(data.total);
         setData(data.records);

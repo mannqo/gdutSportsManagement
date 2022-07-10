@@ -9,6 +9,8 @@ import { ModalType } from '../../../../../../type/ModalType';
 import useDetail from './useDetail';
 
 const SecDetails = memo((props: any) => {
+    console.log(props);
+
     const { state } = props.location;
 
     const {
@@ -23,14 +25,8 @@ const SecDetails = memo((props: any) => {
         changeData
     } = useDetail(state);
 
-
-
     return (
         <>
-            {/* <PageHeader
-                className="site-page-header"
-                breadcrumb={{ routes }}
-            /> */}
             <MInfo<ModalType>
                 columns={athleteColumns}
                 getInfo={getAthletes}

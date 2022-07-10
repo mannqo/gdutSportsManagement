@@ -13,7 +13,7 @@ export default memo(function System(props: any) {
     return (
         <Layout>
             <MSystemSider />
-            <Layout style={{ padding: '0 24px' }}>
+            <Layout style={{ padding: '20px 24px' }}>
                 <Content >
                     {route && renderRoutes(route.children)}
                 </Content>

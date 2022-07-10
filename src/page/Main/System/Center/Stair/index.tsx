@@ -1,28 +1,48 @@
-import React, { memo } from 'react'
-import { PageHeader } from 'antd';
-import StairTable from './StairTable';
-import { organizationRoutes } from '../../../../../routes/system';
+import React, { memo, useEffect, useState } from 'react'
+import { Breadcrumb, PageHeader } from 'antd';
+import { oneOrganizationRoutes } from '../../../../../routes/system';
+import { renderRoutes } from 'react-router-config';
+import { Link } from 'react-router-dom';
 
-const Stair = memo((props: { route: { path: string } }) => {
-    const { route: { path } } = props;
-    const targetPath = path.split('/')[path.split('/').length - 1];
+interface Route {
+    path: string;
+    breadcrumbName: string;
+    children?: Omit<Route, 'children'>[];
+}
+
+const Stair = memo((props: { route: { children: Route[] }, location: { pathname: string } }) => {
+    const [breadcrumbs, setBreadcrumbs] = useState<Array<Route>>([]);
+    const { location: { pathname } } = props;
+    const { route } = props;
+    const { children } = route;
+
+    useEffect(() => {
+        const breadcrumbs = formatBreadcrumbRoutes(pathname);
+        setBreadcrumbs(breadcrumbs);
+    }, [pathname]);
+
+    function formatBreadcrumbRoutes(pathname: string) {
+        let result: Array<Route> = [];
+        oneOrganizationRoutes.forEach(item => {
+            pathname.includes(item.path) && result.push(item);
+        })
+        return result;
+    }
 
     return (
         <>
-            <PageHeader
-                className="site-page-header"
-                breadcrumb={{
-                    routes: organizationRoutes, itemRender(route, params, routes, paths) {
-                        const index = routes.findIndex(item => item.path === targetPath);
-                        routes = routes.slice(0, index + 1);
-                        const last = routes.indexOf(route) === routes.length - 1;
-                        return last && (
-                            <span>{route.breadcrumbName}</span>
+            <Breadcrumb>
+                {
+                    breadcrumbs.map((item, index) => {
+                        return (
+                            <Breadcrumb.Item key={index}>
+                                <Link to={item.path}>{item.breadcrumbName}</Link>
+                            </Breadcrumb.Item>
                         )
-                    },
-                }}
-            />
-            <StairTable></StairTable>
+                    })
+                }
+            </Breadcrumb>
+            {route && renderRoutes(children)}
         </>
     )
 })

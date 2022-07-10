@@ -4,8 +4,6 @@ import styled from 'styled-components';
 
 const Center = memo((props: any) => {
     const { route } = props;
-    console.log('center', route);
-
     return (
         <CenterWrapper>
             {route && renderRoutes(route.children)}

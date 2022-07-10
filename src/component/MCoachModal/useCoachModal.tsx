@@ -30,6 +30,9 @@ export const useCoachModal = (id?: number) => {
         });
     }
     const putInfo = async (values: any) => {
+        values.id = id;
+        console.log(values);
+
         Modal.confirm({
             title: '确定修改该教练的信息吗?',
             okText: '确认',

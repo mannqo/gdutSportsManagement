@@ -30,7 +30,7 @@ export const useEvent = () => {
         {
             title: '教练',
             dataIndex: 'coach',
-            render: (coach: any) => (
+            render: (coach: string) => (
                 <span>{coach}</span>
             )
         },

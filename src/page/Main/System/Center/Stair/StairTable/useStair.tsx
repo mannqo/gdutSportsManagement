@@ -1,6 +1,7 @@
-import { DeleteOutlined, ExclamationCircleOutlined, SettingOutlined } from "@ant-design/icons";
+import { DeleteOutlined, ExclamationCircleOutlined, SearchOutlined, SettingOutlined } from "@ant-design/icons";
 import { Modal } from "antd";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { deleteStairMsg, getStairMsg } from "../../../../../../services/system";
 
 export const useStair = () => {
@@ -31,6 +32,18 @@ export const useStair = () => {
                     <SettingOutlined />
                     <span>查看/修改</span>
                 </div>
+            )
+        },
+        {
+            title: '查看详情',
+            dataIndex: 'name',
+            render: (name: string) => (
+                <NavLink to={{
+                    pathname: '/systemManage/framework/stair/secLevel',
+                    state: { oneOrg: name }
+                }}>
+                    <SearchOutlined />
+                </NavLink>
             )
         },
         {

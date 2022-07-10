@@ -3,8 +3,10 @@ import { Form, Modal } from 'antd';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { initSportProject } from '../../constant/picker';
+import { getProjectGroup } from '../../services/athlete';
 import { getCoachMsg, postCoachMsg, putCoachMsg } from '../../services/coach';
 import { initialCoachInfo } from '../../type/coach';
+import { formatCascader } from '../../utils/format';
 
 export const useCoachModal = (id?: number) => {
     const [value, setValue] = useState(initialCoachInfo);
@@ -42,10 +44,17 @@ export const useCoachModal = (id?: number) => {
     }
 
     const onFinish = (values: any) => {
-        console.log(values); 
+        console.log(values);
         id && putInfo(values);
         !id && postInfo(values);
     };
+
+    /* 获取运动项目 */
+    const getSportProject = async () => {
+        const res = await getProjectGroup();
+        const formatProject = formatCascader(res.data);
+        setSportProject(formatProject);
+    }
 
     useEffect(() => {
         const getInitialValues = async () => {
@@ -60,6 +69,7 @@ export const useCoachModal = (id?: number) => {
 
     useEffect(() => {
         form.setFieldsValue(value);
+        getSportProject();
     }, [value, form])
 
     return {

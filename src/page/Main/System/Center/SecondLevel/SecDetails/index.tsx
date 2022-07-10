@@ -8,36 +8,7 @@ import { getAthleteMsg } from '../../../../../../services/athlete';
 import { ModalType } from '../../../../../../type/ModalType';
 import useDetail from './useDetail';
 
-interface DataType {
-    key: React.Key;
-    name: string;
-    description: string;
-}
-const columns: ColumnsType<DataType> = [
-    { title: '序号', dataIndex: 'id' },
-    { title: '运动员姓名', dataIndex: 'chineseName' },
-    {
-        title: '操作',
-        dataIndex: '',
-        render: () => <a>Delete</a>,
-    },
-];
-
 const SecDetails = memo((props: any) => {
-    // const routes = [
-    //     {
-    //         path: '/systemManage/framework/stair',
-    //         breadcrumbName: '一级组织',
-    //     },
-    //     {
-    //         path: '/systemManage/framework/secDetails',
-    //         breadcrumbName: '二级组织',
-    //     },
-    //     {
-    //         path: '/systemManage/framework/secDetails',
-    //         breadcrumbName: '详情',
-    //     },
-    // ]  
     const { state } = props.location;
 
     const {

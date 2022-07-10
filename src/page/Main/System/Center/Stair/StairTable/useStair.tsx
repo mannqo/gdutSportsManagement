@@ -1,7 +1,7 @@
 import { DeleteOutlined, ExclamationCircleOutlined, SettingOutlined } from "@ant-design/icons";
 import { Modal } from "antd";
 import { useState } from "react";
-import { deleteStairMsg, getStairMsg } from "../../../../../services/system";
+import { deleteStairMsg, getStairMsg } from "../../../../../../services/system";
 
 export const useStair = () => {
     const [data, setData] = useState([]);
@@ -22,14 +22,6 @@ export const useStair = () => {
         {
             title: '组织名称',
             dataIndex: 'name',
-        },
-        {
-            title: '分管领导',
-            dataIndex: 'chargeLeader',
-        },
-        {
-            title: '部门领导',
-            dataIndex: 'departmentLeader',
         },
         {
             title: '详情',

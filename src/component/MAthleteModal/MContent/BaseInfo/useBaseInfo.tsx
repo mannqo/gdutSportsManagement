@@ -1,14 +1,16 @@
-import { getAthleteMsg, postAthleteMsg, putAthleteMsg } from '../../../../services/athlete';
+import { getAthleteMsg, getProjectGroup, postAthleteMsg, putAthleteMsg } from '../../../../services/athlete';
 import moment from 'moment';
 import { Form, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import { initialPersonalInfo } from '../../../../type/personalInfo';
 import { allOneName } from '../../../../services/system';
 import { initSportProject } from '../../../../constant/picker';
+import { formatCascader } from '../../../../utils/format';
+
 
 export const useBaseInfo = (getNumber: (number: string) => void, id: number) => {
     const [formData, setFormData] = useState(new FormData());
-    const [sportProject, setSportProject] = useState(initSportProject)
+    const [sportProject, setSportProject] = useState(initSportProject);
     const [number, setNumber] = useState('');
     const [value, setValue] = useState(initialPersonalInfo);
     const [imageUrl, setImageUrl] = useState('');
@@ -54,7 +56,13 @@ export const useBaseInfo = (getNumber: (number: string) => void, id: number) => 
     const getOneOranization = async () => {
         const res = await allOneName();
         console.log(res);
+    }
 
+    /* 获取运动项目 */
+    const getSportProject = async () => {
+        const res = await getProjectGroup();
+        const formatProject = formatCascader(res.data);
+        setSportProject(formatProject);
     }
 
     useEffect(() => {
@@ -66,10 +74,10 @@ export const useBaseInfo = (getNumber: (number: string) => void, id: number) => 
             setImageUrl(msg.picture);
             setNumber(msg.number);
             setValue(msg);
-            console.log(msg);
         }
         id && getInitialValues();
         getOneOranization();
+        getSportProject();
     }, [id])
 
     useEffect(() => {

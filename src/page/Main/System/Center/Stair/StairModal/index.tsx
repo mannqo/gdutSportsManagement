@@ -4,14 +4,14 @@ import { ImageWrapper } from '../../../../../../config/style';
 import { stairInfo } from '../../../../../../constant/system';
 import { useModal } from './useModal';
 
-const Modal = memo((props: { id?: number }) => {
+const StairModal = memo((props: { id?: number }) => {
     const { id } = props;
     const {
         onFinish,
         form
     } = useModal(id);
     return (
-        <> 
+        <>
             <h2 style={{ textAlign: 'center', lineHeight: '40px' }}>一级组织信息</h2>
             <ImageWrapper>
                 <Form
@@ -46,4 +46,4 @@ const Modal = memo((props: { id?: number }) => {
     )
 })
 
-export default Modal
+export default StairModal

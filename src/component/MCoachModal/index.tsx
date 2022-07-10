@@ -6,51 +6,6 @@ import { useCoachModal } from './useCoachModal';
 
 const { Option } = Select;
 
-
-
-interface Option {
-    value: string | number;
-    label: string;
-    children?: Option[];
-}
-const options: Option[] = [
-    {
-        label: '篮球',
-        value: '篮球',
-        // children: new Array(20)
-        //     .fill(null)
-        //     .map((_, index) => ({ label: `Number ${index}`, value: index })),
-        children: [
-            {
-                label: '甲组',
-                value: '甲组',
-            },
-            {
-                label: '乙组',
-                value: '乙组',
-            },
-            {
-                label: '丙组',
-                value: '丙组',
-            },
-        ]
-    },
-    {
-        label: '足球',
-        value: '足球',
-        children: [
-            {
-                label: '甲组',
-                value: '甲组',
-            },
-            {
-                label: '乙组',
-                value: '乙组',
-            },
-        ]
-    },
-];
-
 const MCoachModal = memo((props: { id?: number }) => {
     const { id } = props;
     const {
@@ -74,9 +29,9 @@ const MCoachModal = memo((props: { id?: number }) => {
                     <Row gutter={[32, 16]}>
                         <Col span={10} key='projectGroup'>
                             <Form.Item name='projectGroup' label='运动项目' rules={[{ required: true },]}>
-                                <Cascader 
+                                <Cascader
                                     style={{ width: '100%' }}
-                                    options={options}
+                                    options={sportProject}
                                     // onChange={onChange}
                                     multiple
                                     maxTagCount="responsive"

@@ -160,3 +160,12 @@ export function putSportCompetition(option) {
         data: formData
     })
 }
+
+
+/* 获取一二级组织 */
+export function getProjectGroup() {
+    return request({
+        method: 'GET',
+        url: '/sports/api/oneOrganization/getAllOT',
+    })
+}

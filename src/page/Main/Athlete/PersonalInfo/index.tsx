@@ -11,7 +11,7 @@ const PersonalInfo = memo(() => {
     return (
         <BaseInfoContainer>
             <p className='title'>运动员个人信息</p>
-            <BaseInfo getNumber={getNumber} id={44} />
+            <BaseInfo getNumber={getNumber} id={62} />
             <p className="title">运动员比赛信息</p>
         </BaseInfoContainer>
     )

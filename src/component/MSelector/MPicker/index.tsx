@@ -9,9 +9,7 @@ interface Item {
 }
 const { Option } = Select;
 
-const MPicker = memo((props: { item: Item }) => {
-    console.log(props);
-
+const MPicker = memo((props: { item: Item }) => { 
     const { item } = props;
     return (
         <Select placeholder={`选择${item.label}`}>

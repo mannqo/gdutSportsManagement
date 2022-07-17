@@ -1,3 +1,5 @@
+import { Input, Select } from "antd"
+
 export const stairInfo = [
     {
         name: 'name',
@@ -28,15 +30,37 @@ export const stairInfo = [
     }
 ]
 
+const oneLevel = [
+    {
+        value: '篮球',
+        content: '篮球',
+    },
+    {
+        value: '羽毛球',
+        content: '羽毛球',
+    },
+    {
+        value: 'ccc',
+        content: 'ccc',
+    },
+    {
+        value: '足球',
+        content: '足球',
+    }
+]
+
 export const secLevelInfo = [
     {
         name: 'name',
         label: '二级组织名称',
-        require: true
+        require: true,
     },
     {
         name: 'oneOrg',
         label: '所属一级组织',
         require: true,
+        component: Select,
+        optionList: oneLevel,
     },
 ]
+

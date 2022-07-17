@@ -4,13 +4,15 @@ import { renderRoutes } from 'react-router-config';
 import MHeader from '../../component/MHeader';
 
 
-export default memo(function Main(props: any) {
+const Main = memo((props: any) => {
   const { route } = props;
 
   return (
     <Layout>
       <MHeader />
-      {route && renderRoutes(route.routes)}
+      {route && renderRoutes(route.children)}
     </Layout>
   )
-});
+})
+
+export default Main;

@@ -68,9 +68,10 @@ export const athleteBaseInfo: ModalType[] = [
         label: '出生日期',
         component: 'MDatePicker',
     },
+
     {
-        name: 'idCardNumber',
-        label: '身份证件号码'
+        name: 'phone',
+        label: '手机号码',
     },
     {
         name: 'idCardType',
@@ -79,8 +80,8 @@ export const athleteBaseInfo: ModalType[] = [
         optionList: idCardType
     },
     {
-        name: 'phone',
-        label: '手机号码',
+        name: 'idCardNumber',
+        label: '身份证件号码'
     },
     {
         name: 'isSchool',

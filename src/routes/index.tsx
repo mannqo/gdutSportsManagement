@@ -20,47 +20,60 @@ import SecDetails from "../page/Main/System/Center/SecondLevel/SecDetails";
 import StairTable from "../page/Main/System/Center/Stair/StairTable";
 import FitSec from "../page/Main/System/Center/Stair/FitSec";
 import SecTable from "../page/Main/System/Center/SecondLevel/SecTable";
+import React from "react";
 
-const routes = [
+interface Route {
+    path: string,
+    component?: React.MemoExoticComponent<(props: any) => JSX.Element>,
+    children?: Array<Route>
+    exact?: boolean,
+    auth?: Array<string>,
+    icon?: any,
+    render?: () => JSX.Element,
+    content?: string
+}
+
+const routes: Array<Route> = [
     {
         path: "/",
         component: Main,
-        routes: [
+        children: [
             {
                 path: "/",
+                auth: ['root'],
                 exact: true,
                 render: () => <Redirect to="/athleteManage/info" />
             },
             {
                 path: "/athleteManage",
                 component: MNormalSider,
-                auth: 'root',
                 children: [
                     {
                         path: "/athleteManage",
+                        auth: ['root'],
                         exact: true,
                         render: () => <Redirect to="/athleteManage/info" />
                     },
                     {
                         path: '/athleteManage/info',
+                        auth: ['root'],
                         component: AthleteInfo,
                         icon: MailOutlined,
-                        key: 'info',
                         content: '运动员信息表'
                     },
                     {
-                        path: '/athleteManage/test',
+                        path: '/athleteManage/personalInfo',
+                        auth: ['athlete'],
                         component: PersonalInfo,
                         icon: PlusOutlined,
-                        key: 'personalInfo',
                         content: '运动员个人信息'
                     }
                 ]
             },
             {
                 path: "/eventManage",
+                auth: ['root'],
                 component: MNormalSider,
-                auth: 'root',
                 children: [
                     {
                         path: "/eventManage",
@@ -71,13 +84,13 @@ const routes = [
                         path: "/eventManage/info",
                         component: EventInfo,
                         icon: MailOutlined,
-                        key: 'info',
                         content: '比赛信息'
                     }
                 ]
             },
             {
                 path: "/coachInfo",
+                auth: ['root'],
                 component: MNormalSider,
                 children: [
                     {
@@ -89,19 +102,18 @@ const routes = [
                         path: "/coachInfo/info",
                         component: CoachInfo,
                         icon: MailOutlined,
-                        key: 'info',
                         content: '教练信息表'
                     }
                 ]
             },
             {
                 path: "/checkInfo",
-                auth: 'root',
+                auth: ['root'],
                 component: Check,
             },
             {
                 path: "/systemManage",
-                auth: 'root',
+                auth: ['root'],
                 component: System,
                 children: [
                     {
@@ -162,7 +174,7 @@ const routes = [
             },
             {
                 path: "/approveManage",
-                auth: 'root',
+                auth: ['root'],
                 component: MNormalSider,
                 children: [
                     {
@@ -175,40 +187,32 @@ const routes = [
                         exact: true,
                         component: ApproveEvent,
                         icon: MailOutlined,
-                        key: 'event',
                         content: '比赛审核'
                     }
                 ]
             },
             {
                 path: "/notice",
-                auth: 'root',
                 component: MNormalSider,
                 children: [
                     {
                         path: "/notice",
+                        auth: ['root'],
                         exact: true,
                         render: () => <Redirect to="/notice/event" />
                     },
                     {
                         path: "/notice/event",
+                        auth: ['root', 'athlete'],
                         component: EventNotice,
                         icon: InfoCircleOutlined,
-                        key: 'event',
                         content: '比赛通知'
                     },
-                    // {
-                    //     path: "/notice/approve",
-                    //     component: ApproveNotice,
-                    //     icon: InfoCircleOutlined,
-                    //     key: 'approve',
-                    //     content: '审核通知'
-                    // },
                     {
                         path: '/notice/manage',
+                        auth: ['root'],
                         component: NoticeManage,
                         icon: RightOutlined,
-                        key: 'mannage',
                         content: '通知管理'
                     }
                 ]

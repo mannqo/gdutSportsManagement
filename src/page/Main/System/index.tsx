@@ -6,8 +6,7 @@ import MSystemSider from '../../../component/MSider/MSystemSider';
 
 
 const { Content } = Layout;
-
-export default memo(function System(props: any) {
+const System = memo((props: any) => {
     const { route } = props;
 
     return (
@@ -22,3 +21,5 @@ export default memo(function System(props: any) {
 
     );
 });
+
+export default System;

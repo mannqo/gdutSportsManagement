@@ -1,9 +1,10 @@
-import { Button, Form, Input, Row } from 'antd'
+import { Button, Form, Input, Row, Select } from 'antd'
 import React, { memo } from 'react'
 import { ImageWrapper } from '../../../../../../config/style'
 import { secLevelInfo } from '../../../../../../constant/system'
 import { useModal } from './useModal'
 
+const { Option } = Select;
 const SecModal = memo((props: { id: number }) => {
     const { id } = props;
     const {
@@ -28,7 +29,15 @@ const SecModal = memo((props: { id: number }) => {
                                 required={item.require}
                             >
                                 {
-                                    <Input placeholder={`填写${item.label}`} />
+                                    item.optionList ?
+                                        <Select placeholder={`选择${item.label}`}>
+                                            {
+                                                item.optionList && item.optionList.map((item: any) => (
+                                                    <Option key={item.value} value={item.content} label={item.content}>{item.content}</Option>
+                                                ))
+                                            }
+                                        </Select>
+                                        : <Input placeholder={`填写${item.label}`} />
                                 }
                             </Form.Item>
                         )

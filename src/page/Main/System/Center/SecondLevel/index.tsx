@@ -1,33 +1,18 @@
-import { Breadcrumb, Modal, PageHeader } from 'antd';
-import React, { memo, useEffect, useState } from 'react'
+import { Breadcrumb } from 'antd';
+import { memo } from 'react';
 import { renderRoutes } from 'react-router-config';
 import { Link } from 'react-router-dom';
-import { secOrganizationRoutes } from '../../../../../routes/system';
+import { useSecLevel } from './useSecLevel';
 
-interface Route {
-    path: string;
-    breadcrumbName: string;
-    children?: Omit<Route, 'children'>[];
-}
 
-const SecondLevel = (props: { route: { children: Route[] }, location: { pathname: string } }) => {
-    const [breadcrumbs, setBreadcrumbs] = useState<Array<Route>>([]);
+
+const SecondLevel = memo((props: { children: { children: any }, location: { pathname: string } }) => {
     const { location: { pathname } } = props;
-    const { route } = props;
-    const { children } = route;
+    const { children } = props;
+    const {
+        breadcrumbs
+    } = useSecLevel(children.children, pathname);
 
-    useEffect(() => {
-        const breadcrumbs = formatBreadcrumbRoutes(pathname);
-        setBreadcrumbs(breadcrumbs);
-    }, [pathname]);
-
-    function formatBreadcrumbRoutes(pathname: string) {
-        let result: Array<Route> = [];
-        secOrganizationRoutes.forEach(item => {
-            pathname.includes(item.path) && result.push(item);
-        }) 
-        return result;
-    }
     return (
         <>
             <Breadcrumb>
@@ -41,9 +26,9 @@ const SecondLevel = (props: { route: { children: Route[] }, location: { pathname
                     })
                 }
             </Breadcrumb>
-            {route && renderRoutes(children)}
+            {children && renderRoutes(children.children)}
         </>
     )
-}
+})
 
 export default SecondLevel

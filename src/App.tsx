@@ -4,7 +4,7 @@ import Admin from './page/Admin';
 
 function App() {
   return (
-    <Admin id='1' />
+    <Admin id={1} />
   );
 }
 

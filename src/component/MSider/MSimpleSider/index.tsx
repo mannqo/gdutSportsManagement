@@ -10,7 +10,6 @@ interface ItemValue {
     render?: Function,
     component?: Component,
     icon: any,
-    key?: string,
     content?: string
 }
 
@@ -22,8 +21,7 @@ const MSimpleSider = memo((props: any) => {
         <Sider width={200} className="site-layout-background">
             <Menu
                 mode="inline"
-                theme='dark'
-                // defaultOpenKeys={[children[1].key]}
+                theme='dark' 
                 defaultSelectedKeys={[pathname]}
                 style={{ height: '100%', borderRight: 0 }}
             >

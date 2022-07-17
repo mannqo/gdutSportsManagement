@@ -9,7 +9,7 @@ const Main = memo((props: any) => {
 
   return (
     <Layout>
-      <MHeader />
+      <MHeader route={route} />
       {route && renderRoutes(route.children)}
     </Layout>
   )

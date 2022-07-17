@@ -22,7 +22,8 @@ import FitSec from "../page/Main/System/Center/Stair/FitSec";
 import SecTable from "../page/Main/System/Center/SecondLevel/SecTable";
 import React from "react";
 
-interface Route {
+export interface Route {
+    [key: string]: any,
     path: string,
     component?: React.MemoExoticComponent<(props: any) => JSX.Element>,
     children?: Array<Route>
@@ -45,7 +46,14 @@ const routes: Array<Route> = [
                 render: () => <Redirect to="/athleteManage/info" />
             },
             {
+                path: "/",
+                auth: ['athlete'],
+                exact: true,
+                render: () => <Redirect to="/athleteManage/personalInfo" />
+            },
+            {
                 path: "/athleteManage",
+                content: '运动员管理',
                 component: MNormalSider,
                 children: [
                     {
@@ -53,6 +61,12 @@ const routes: Array<Route> = [
                         auth: ['root'],
                         exact: true,
                         render: () => <Redirect to="/athleteManage/info" />
+                    },
+                    {
+                        path: "/athleteManage",
+                        auth: ['athlete'],
+                        exact: true,
+                        render: () => <Redirect to="/athleteManage/personalInfo" />
                     },
                     {
                         path: '/athleteManage/info',
@@ -72,6 +86,7 @@ const routes: Array<Route> = [
             },
             {
                 path: "/eventManage",
+                content: '比赛管理',
                 auth: ['root'],
                 component: MNormalSider,
                 children: [
@@ -90,6 +105,7 @@ const routes: Array<Route> = [
             },
             {
                 path: "/coachInfo",
+                content: '教练信息',
                 auth: ['root'],
                 component: MNormalSider,
                 children: [
@@ -106,20 +122,22 @@ const routes: Array<Route> = [
                     }
                 ]
             },
-            {
-                path: "/checkInfo",
-                auth: ['root'],
-                component: Check,
-            },
+            // {
+            //     path: "/checkInfo",
+            //     content: '',
+            //     auth: ['root'],
+            //     component: Check,
+            // },
             {
                 path: "/systemManage",
+                content: '系统管理',
                 auth: ['root'],
                 component: System,
                 children: [
                     {
                         path: "/systemManage",
                         exact: true,
-                        render: () => <Redirect to="/systemManage/framework/Event" />
+                        render: () => <Redirect to="/systemManage/framework/stair" />
                     },
                     {
                         path: "/systemManage/framework",
@@ -174,6 +192,7 @@ const routes: Array<Route> = [
             },
             {
                 path: "/approveManage",
+                content: '审核管理',
                 auth: ['root'],
                 component: MNormalSider,
                 children: [
@@ -193,11 +212,12 @@ const routes: Array<Route> = [
             },
             {
                 path: "/notice",
+                content: '通知',
                 component: MNormalSider,
                 children: [
                     {
                         path: "/notice",
-                        auth: ['root'],
+                        auth: ['root', 'athlete'],
                         exact: true,
                         render: () => <Redirect to="/notice/event" />
                     },

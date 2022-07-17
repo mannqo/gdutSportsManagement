@@ -1,18 +1,29 @@
 import React, { memo } from 'react'
 import { renderRoutes } from 'react-router-config'
 import { HashRouter } from 'react-router-dom'
-import routes from '../../routes'
+import routes, { Route } from '../../routes'
 
 const Admin = memo((props: any) => {
     const { id } = props;
-    const auth = 'root';
-    console.log(id);
-    console.log(routes[0]);
-    const newRoute = routes[0];
-    // routes.forEach((value, index, arr) => {
-    //     console.log(value, index, arr);
-    // })
-    // newRoute.forEach(() => { })
+    const auth = 'athlete';
+
+    function judgeAuthority(routesArr: Route[]) {
+        const arr: Route[] = []
+        routesArr.forEach((item) => {
+            if (!item.auth && item.children) {
+                item.children = judgeAuthority(item.children);
+                arr.push(item);
+            }
+            if (item.auth?.includes(auth)) {
+                arr.push(item);
+            }
+        })
+        console.log(arr);
+        return arr;
+    }
+
+    judgeAuthority(routes);
+    console.log(routes);
 
 
     return (

@@ -1,32 +1,19 @@
-import { Breadcrumb } from 'antd';
 import { memo } from 'react';
-import { renderRoutes } from 'react-router-config';
-import { Link } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config'; 
+import MBreadcrumb from '../../../../../component/MBreadcrumb';
 import { useSecLevel } from './useSecLevel';
 
 
-
-const SecondLevel = memo((props: { children: { children: any }, location: { pathname: string } }) => {
-    const { location: { pathname } } = props;
-    const { children } = props;
+const SecondLevel = memo((props: { route: { children: any }, location: { pathname: string } }) => {
+    const { location: { pathname }, route } = props;
     const {
         breadcrumbs
-    } = useSecLevel(children.children, pathname);
+    } = useSecLevel(pathname);
 
     return (
         <>
-            <Breadcrumb>
-                {
-                    breadcrumbs.map((item, index) => {
-                        return (
-                            <Breadcrumb.Item key={index}>
-                                <Link to={item.path}>{item.breadcrumbName}</Link>
-                            </Breadcrumb.Item>
-                        )
-                    })
-                }
-            </Breadcrumb>
-            {children && renderRoutes(children.children)}
+            <MBreadcrumb breadcrumbs={breadcrumbs} route={route} />
+            {route && renderRoutes(route.children)}
         </>
     )
 })

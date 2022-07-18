@@ -1,7 +1,7 @@
 import { DeleteOutlined, ExclamationCircleOutlined, SettingOutlined } from "@ant-design/icons";
 import { Modal } from "antd";
 import { useState } from "react";
-import { deleteAthleteMsg, deleteMultAthleteMsg, getAthleteMsg } from "../../../services/athlete";
+import { deleteAthleteMsg, deleteMultAthleteMsg, getAthleteMsg } from "../../../../../services/athlete";
 
 export const useAthlete = () => {
     const [data, setData] = useState([]);

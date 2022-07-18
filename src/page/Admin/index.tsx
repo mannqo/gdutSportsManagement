@@ -1,11 +1,12 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { renderRoutes } from 'react-router-config'
 import { HashRouter } from 'react-router-dom'
 import routes, { Route } from '../../routes'
+import { getAuthority } from '../../services/admin'
 
 const Admin = memo((props: any) => {
     const { id } = props;
-    const auth = 'athlete';
+    const [auth, setAuth] = useState('root');
 
     function judgeAuthority(routesArr: Route[]) {
         const arr: Route[] = []
@@ -14,17 +15,20 @@ const Admin = memo((props: any) => {
                 item.children = judgeAuthority(item.children);
                 arr.push(item);
             }
-            if (item.auth?.includes(auth)) {
-                arr.push(item);
-            }
+            item.auth?.includes(auth) && arr.push(item);
         })
-        console.log(arr);
         return arr;
     }
 
     judgeAuthority(routes);
-    console.log(routes);
 
+    const asyncFn = async (number: string) => {
+        const res = await getAuthority(number);
+        console.log(res);
+    }
+    useEffect(() => {
+        asyncFn('666666')
+    }, [])
 
     return (
         <HashRouter>

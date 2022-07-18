@@ -8,3 +8,7 @@ type 类型（暂时下面四个）
 id:内容的id，根据id修改图片
 ### 接口文档
 https://sportmanager.w.eolink.com/share/index?shareCode=pCLF1h
+### 类型
++ 4 比赛
++ 3 教练
++ 10 运动员

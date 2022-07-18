@@ -1,6 +1,6 @@
 import { Redirect } from "react-router-dom";
 import Main from "../page/Main";
-import AthleteInfo from "../page/Main/Athlete";
+import AthleteInfo from "../page/Main/Athlete/AthleteManage/AthleteInfo";
 import PersonalInfo from "../page/Main/Athlete/PersonalInfo";
 import Check from "../page/Main/Check";
 import CoachInfo from "../page/Main/Coach";
@@ -21,6 +21,8 @@ import StairTable from "../page/Main/System/Center/Stair/StairTable";
 import FitSec from "../page/Main/System/Center/Stair/FitSec";
 import SecTable from "../page/Main/System/Center/SecondLevel/SecTable";
 import React from "react";
+import AthleteManage from "../page/Main/Athlete/AthleteManage";
+import UploadExcel from "../page/Main/Athlete/AthleteManage/UploadExcel";
 
 export interface Route {
     [key: string]: any,
@@ -71,9 +73,21 @@ const routes: Array<Route> = [
                     {
                         path: '/athleteManage/info',
                         auth: ['root'],
-                        component: AthleteInfo,
+                        component: AthleteManage,
                         icon: MailOutlined,
-                        content: '运动员信息表'
+                        content: '运动员信息表',
+                        children: [
+                            {
+                                path: '/athleteManage/info',
+                                exact: true,
+                                component: AthleteInfo,
+                            },
+                            {
+                                path: '/athleteManage/info/uploadExcel',
+                                exact: true,
+                                component: UploadExcel,
+                            }
+                        ]
                     },
                     {
                         path: '/athleteManage/personalInfo',

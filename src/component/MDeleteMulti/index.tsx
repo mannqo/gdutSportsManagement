@@ -17,7 +17,7 @@ const MDeleteMulti = memo((props: any) => {
 
     return (
         <div className="noticeChange" style={{ float: 'right', margin: 16 }}>
-            <Button type='primary' onClick={add}> 新增 </Button>
+            <Button type='primary' onClick={add}> 新增单个 </Button>
             <Button onClick={deleteAll} disabled={!hasSelected} loading={deleteLoading}>
                 批量删除
             </Button>

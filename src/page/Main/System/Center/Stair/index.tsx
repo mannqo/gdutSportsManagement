@@ -1,48 +1,20 @@
-import React, { memo, useEffect, useState } from 'react'
-import { Breadcrumb, PageHeader } from 'antd';
-import { oneOrganizationRoutes } from '../../../../../routes/system';
+import React, { memo } from 'react'
 import { renderRoutes } from 'react-router-config';
-import { Link } from 'react-router-dom';
+import { Route } from '../../../../../utils/format';
+import { useStair } from './useStair';
+import MBreadcrumb from '../../../../../component/MBreadcrumb';
 
-interface Route {
-    path: string;
-    breadcrumbName: string;
-    children?: Omit<Route, 'children'>[];
-}
 
 const Stair = memo((props: { route: { children: Route[] }, location: { pathname: string } }) => {
-    const [breadcrumbs, setBreadcrumbs] = useState<Array<Route>>([]);
-    const { location: { pathname } } = props;
-    const { route } = props;
-    const { children } = route;
-
-    useEffect(() => {
-        const breadcrumbs = formatBreadcrumbRoutes(pathname);
-        setBreadcrumbs(breadcrumbs);
-    }, [pathname]);
-
-    function formatBreadcrumbRoutes(pathname: string) {
-        let result: Array<Route> = [];
-        oneOrganizationRoutes.forEach(item => {
-            pathname.includes(item.path) && result.push(item);
-        })
-        return result;
-    }
+    const { location: { pathname }, route } = props;
+    const {
+        breadcrumbs
+    } = useStair(pathname);
 
     return (
         <>
-            <Breadcrumb>
-                {
-                    breadcrumbs.map((item, index) => {
-                        return (
-                            <Breadcrumb.Item key={index}>
-                                <Link to={item.path}>{item.breadcrumbName}</Link>
-                            </Breadcrumb.Item>
-                        )
-                    })
-                }
-            </Breadcrumb>
-            {route && renderRoutes(children)}
+            <MBreadcrumb breadcrumbs={breadcrumbs} route={route} />
+            {route && renderRoutes(route.children)}
         </>
     )
 })

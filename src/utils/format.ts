@@ -1,3 +1,4 @@
+/*  级联选择器数据格式化 */
 interface SourceCascader {
     value: string,
     label: Array<string>
@@ -30,5 +31,20 @@ export function formatCascader(sourceCascader: SourceCascader[]) {
     console.log(afterCascader);
 
     return afterCascader;
+}
+
+
+/*  面包屑数据格式化 */
+export interface Route {
+    path: string;
+    breadcrumbName: string;
+    children?: Omit<Route, 'children'>[];
+}
+export function formatBreadcrumbRoutes(routes: Route[], pathname: string) {
+    let result: Array<Route> = [];
+    routes.forEach(item => {
+        pathname.includes(item.path) && result.push(item);
+    })
+    return result;
 }
 export { };

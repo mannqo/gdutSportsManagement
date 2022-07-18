@@ -10,6 +10,7 @@ export default function request(option) {
             timeout: 10000,
             headers: {
                 "Access-Control-Allow-Origin": "*",
+                "Access-Control-Expose-Headers": "fileName"
             }
         })
         instance.defaults.withCredentials = true;  // 携带cookie

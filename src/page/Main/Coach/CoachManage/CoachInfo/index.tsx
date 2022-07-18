@@ -1,11 +1,11 @@
 import React, { memo, useState } from 'react'
-import MInfo from '../../../component/MInfo'
+import MInfo from '../../../../../component/MInfo'
 import { Modal } from 'antd';
-import MCoachModal from '../../../component/MCoachModal';
+import MCoachModal from '../../../../../component/MCoachModal';
 import { useCoach } from './useCoach';
-import { ModalType } from '../../../type/ModalType';
-import { coachInfo } from '../../../constant/coach';
-import { getCoachMsg } from '../../../services/coach';
+import { ModalType } from '../../../../../type/ModalType';
+import { coachInfo } from '../../../../../constant/coach';
+import { getCoachMsg } from '../../../../../services/coach';
 
 const CoachInfo = memo(() => {
     const {
@@ -30,6 +30,7 @@ const CoachInfo = memo(() => {
                 changeData={changeData} data={data}
                 searchMsg={getCoachMsg}
                 info={coachInfo}
+                type='3'
             />
 
             <Modal

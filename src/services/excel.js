@@ -1,3 +1,4 @@
+import { baseURL } from "../config";
 import request from "./axios";
 
 /* 上传excel文件 */
@@ -35,11 +36,7 @@ export function exportExcel(option) {
  * @param {int}  type 4比赛 3教练 10运动  员
  * @returns 
  */
-export function importTemplate(option) {
-    return request({
-        method: 'GET',
-        url: '/sports/api/file/exportByType',
-        params: option,
-        responseType: 'blob'
-    })
+export function importTemplate(type) {
+    const url = baseURL + '/sports/api/file/exportByType?type=' + type
+    return url;
 }

@@ -2,7 +2,7 @@ import { Table, Modal, Button } from 'antd';
 import React, { memo } from 'react'
 import MDeleteMulti from '../MDeleteMulti';
 import MSearch from '../MSelector/MSearch';
-import MUploadExcel from '../MUploadExcel';
+import MUploadExcel from '../MUploadExcel/MUploadBtn';
 import { useInfo } from './useInfo';
 
 interface PropType<T> {

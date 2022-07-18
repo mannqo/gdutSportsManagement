@@ -1,42 +1,17 @@
-import { UploadOutlined } from '@ant-design/icons';
-import { Button, Upload } from 'antd'
-import React, { memo, useEffect } from 'react'
-import { useHistory } from 'react-router-dom';
-import { importTemplate, uploadExcel } from '../../services/excel';
+import { Button } from 'antd'
+import React, { memo } from 'react'
+import { importTemplate } from '../../services/excel'
+import MExcel from './MExcel'
 
-const MUploadExcel = memo((props: { type: string | undefined }) => {
-    const { type } = props;
-    const display = type ? 'block' : 'none';
-    const history = useHistory();
-
-    const uploadExcelRes = async (option: any) => {
-        try {
-            const { file } = option;
-            console.log(file);
-            const res = await uploadExcel({ excelFile: file, type });
-            console.log(res);
-
-        } catch (err) {
-            console.log(err);
-        }
-    }
-    const transferToUpload = () => {
-        history.push('/athleteManage/info/uploadExcel')
-    }
+const MUploadExcel = memo((props: { route: { type: string } }) => {
+    const { route: { type } } = props;
     return (
-        <Button
-            type='primary'
-            icon={<UploadOutlined />}
-            onClick={transferToUpload}
-            style={{
-                display,
-                float: 'right',
-                margin: 16
-            }}>
-            导入excel
-        </Button >
-
-
+        <>
+            <Button type='primary' style={{ 'marginTop': '16px' }} >
+                <a href={type && importTemplate(type)}>下载导入模板</a>
+            </Button>
+            <MExcel />
+        </>
     )
 })
 

@@ -1,11 +1,11 @@
 import React, { memo } from 'react'
-import MInfo from '../../../component/MInfo'
+import MInfo from '../../../../../component/MInfo'
 import { Modal } from 'antd';
-import MEventModal from '../../../component/MEventModal';
+import MEventModal from '../../../../../component/MEventModal';
 import { useEvent } from './useEvent';
-import { ModalType } from '../../../type/ModalType';
-import { eventInfo } from '../../../constant/event';
-import { getEventMsg } from '../../../services/event';
+import { ModalType } from '../../../../../type/ModalType';
+import { eventInfo } from '../../../../../constant/event';
+import { getEventMsg } from '../../../../../services/event';
 
 const EventInfo = memo(() => {
     const {
@@ -31,6 +31,7 @@ const EventInfo = memo(() => {
                 changeData={changeData} data={data}
                 searchMsg={getEventMsg}
                 info={eventInfo}
+                type='10'
             />
             <Modal
                 title={<MEventModal type='eventInfo' id={id} />}

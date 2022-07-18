@@ -3,8 +3,8 @@ import Main from "../page/Main";
 import AthleteInfo from "../page/Main/Athlete/AthleteManage/AthleteInfo";
 import PersonalInfo from "../page/Main/Athlete/PersonalInfo";
 import Check from "../page/Main/Check";
-import CoachInfo from "../page/Main/Coach";
-import EventInfo from "../page/Main/Event";
+import CoachInfo from "../page/Main/Coach/CoachManage/CoachInfo";
+import EventInfo from "../page/Main/Event/EventManage/EventInfo";
 import System from "../page/Main/System";
 import Center from "../page/Main/System/Center";
 import SecondLevel from "../page/Main/System/Center/SecondLevel";
@@ -22,7 +22,9 @@ import FitSec from "../page/Main/System/Center/Stair/FitSec";
 import SecTable from "../page/Main/System/Center/SecondLevel/SecTable";
 import React from "react";
 import AthleteManage from "../page/Main/Athlete/AthleteManage";
-import UploadExcel from "../page/Main/Athlete/AthleteManage/UploadExcel";
+import MUploadExcel from "../component/MUploadExcel";
+import EventManage from "../page/Main/Event/EventManage";
+import CoachManage from "../page/Main/Coach/CoachManage";
 
 export interface Route {
     [key: string]: any,
@@ -33,7 +35,8 @@ export interface Route {
     auth?: Array<string>,
     icon?: any,
     render?: () => JSX.Element,
-    content?: string
+    content?: string,
+    type?: string
 }
 
 const routes: Array<Route> = [
@@ -85,7 +88,8 @@ const routes: Array<Route> = [
                             {
                                 path: '/athleteManage/info/uploadExcel',
                                 exact: true,
-                                component: UploadExcel,
+                                component: MUploadExcel,
+                                type: '4',
                             }
                         ]
                     },
@@ -111,9 +115,22 @@ const routes: Array<Route> = [
                     },
                     {
                         path: "/eventManage/info",
-                        component: EventInfo,
+                        component: EventManage,
                         icon: MailOutlined,
-                        content: '比赛信息'
+                        content: '比赛信息',
+                        children: [
+                            {
+                                path: "/eventManage/info",
+                                exact: true,
+                                component: EventInfo,
+                            },
+                            {
+                                path: '/eventManage/info/uploadExcel',
+                                exact: true,
+                                component: MUploadExcel,
+                                type: '3'
+                            }
+                        ]
                     }
                 ]
             },
@@ -130,9 +147,22 @@ const routes: Array<Route> = [
                     },
                     {
                         path: "/coachInfo/info",
-                        component: CoachInfo,
+                        component: CoachManage,
                         icon: MailOutlined,
-                        content: '教练信息表'
+                        content: '教练信息表',
+                        children: [
+                            {
+                                path: '/coachInfo/info',
+                                exact: true,
+                                component: CoachInfo,
+                            },
+                            {
+                                path: '/coachInfo/info/uploadExcel',
+                                exact: true,
+                                component: MUploadExcel,
+                                type: '10',
+                            }
+                        ]
                     }
                 ]
             },

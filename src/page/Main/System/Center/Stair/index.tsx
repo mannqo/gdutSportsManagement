@@ -1,19 +1,15 @@
 import React, { memo } from 'react'
-import { renderRoutes } from 'react-router-config';
 import { Route } from '../../../../../utils/format';
-import { useStair } from './useStair';
 import MBreadcrumb from '../../../../../component/MBreadcrumb';
+import { oneOrganizationRoutes } from '../../../../../routes/breadcrumb';
 
 
 const Stair = memo((props: { route: { children: Route[] }, location: { pathname: string } }) => {
     const { location: { pathname }, route } = props;
-    const {
-        breadcrumbs
-    } = useStair(pathname);
 
     return (
         <>
-            <MBreadcrumb breadcrumbs={breadcrumbs} route={route} />
+            <MBreadcrumb pathname={pathname} route={route} breadcrumbRoutes={oneOrganizationRoutes} />
         </>
     )
 })

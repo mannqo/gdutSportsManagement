@@ -2,10 +2,13 @@ import { Breadcrumb } from 'antd'
 import React, { memo } from 'react'
 import { renderRoutes } from 'react-router-config';
 import { Link } from 'react-router-dom';
+import { breadcrumbRoute } from '../../routes/breadcrumb';
 import { Route } from '../../utils/format';
+import useBreadcrumb from './useBreadcrumb';
 
-const MBreadcrumb = memo((props: { breadcrumbs: Route[], route: { children: any } }) => {
-    const { breadcrumbs, route } = props;
+const MBreadcrumb = memo((props: { pathname: string, route: { children: any }, breadcrumbRoutes: breadcrumbRoute[] }) => {
+    const { pathname, route, breadcrumbRoutes } = props;
+    const { breadcrumbs } = useBreadcrumb(pathname, breadcrumbRoutes);
     return (
         <>
             <Breadcrumb>

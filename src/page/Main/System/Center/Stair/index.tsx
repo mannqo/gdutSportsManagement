@@ -14,7 +14,6 @@ const Stair = memo((props: { route: { children: Route[] }, location: { pathname:
     return (
         <>
             <MBreadcrumb breadcrumbs={breadcrumbs} route={route} />
-            {route && renderRoutes(route.children)}
         </>
     )
 })

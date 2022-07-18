@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { renderRoutes } from 'react-router-config'; 
+import { renderRoutes } from 'react-router-config';
 import MBreadcrumb from '../../../../../component/MBreadcrumb';
 import { useSecLevel } from './useSecLevel';
 
@@ -13,7 +13,6 @@ const SecondLevel = memo((props: { route: { children: any }, location: { pathnam
     return (
         <>
             <MBreadcrumb breadcrumbs={breadcrumbs} route={route} />
-            {route && renderRoutes(route.children)}
         </>
     )
 })

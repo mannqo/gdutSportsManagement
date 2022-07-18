@@ -1,11 +1,13 @@
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, Upload } from 'antd'
 import React, { memo, useEffect } from 'react'
+import { useHistory } from 'react-router-dom';
 import { importTemplate, uploadExcel } from '../../services/excel';
 
 const MUploadExcel = memo((props: { type: string | undefined }) => {
     const { type } = props;
     const display = type ? 'block' : 'none';
+    const history = useHistory();
 
     const uploadExcelRes = async (option: any) => {
         try {
@@ -19,7 +21,7 @@ const MUploadExcel = memo((props: { type: string | undefined }) => {
         }
     }
     const transferToUpload = () => {
-
+        history.push('/athleteManage/info/uploadExcel')
     }
     return (
         <Button

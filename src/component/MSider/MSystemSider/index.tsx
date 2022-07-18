@@ -5,10 +5,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
-const MSystemSider = memo(() => {
-    // const location = useLocation();
-    // const { pathname } = location;
-    // const key = pathname.split('/')[3]; 
+const MSystemSider = memo(() => {  
     return (
         <Sider width={200} className="site-layout-background">
             <Menu

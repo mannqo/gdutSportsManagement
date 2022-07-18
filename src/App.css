@@ -8,6 +8,7 @@
   flex: 1 0 auto;
   min-height: 90vh;
   height: auto;
+  background-color: #fff;
 }
 
 .ant-layout-header {
@@ -29,10 +30,6 @@
 
 .site-layout-background {
   background: #fff;
-}
-
-.ant-layout {
-  background-color: #fff;
 }
 
 .ant-modal-footer {

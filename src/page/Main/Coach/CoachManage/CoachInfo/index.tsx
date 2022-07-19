@@ -6,6 +6,7 @@ import { useCoach } from './useCoach';
 import { ModalType } from '../../../../../type/ModalType';
 import { coachInfo } from '../../../../../constant/coach';
 import { getCoachMsg } from '../../../../../services/coach';
+import { coachInfoType } from '../../../../../type/infoNum';
 
 const CoachInfo = memo(() => {
     const {
@@ -23,14 +24,14 @@ const CoachInfo = memo(() => {
         <>
             <MInfo<ModalType>
                 columns={coachColumn}
-                getInfo={getCoachInfo} 
+                getInfo={getCoachInfo}
                 total={total}
                 TitleComponent={<MCoachModal />}
                 deleteMulti={deleteMutiCoach}
                 changeData={changeData} data={data}
                 searchMsg={getCoachMsg}
                 info={coachInfo}
-                type='3'
+                type={coachInfoType}
             />
 
             <Modal

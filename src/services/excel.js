@@ -8,12 +8,10 @@ import request from "./axios";
  * @param {int}  type 4比赛 3教练 10运动员  
  * @returns 
  */
-export function uploadExcel(option) {
-    return request({
-        method: 'POST',
-        url: '/sports/api/file/excelFileUpload',
-        data: option
-    })
+export const uploadExcel = {
+    name: 'excelFile',
+    url: baseURL + '/sports/api/file/excelFileUpload',
+    token: localStorage.getItem('token') || ''
 }
 /* 导出excel文件 */
 /**
@@ -37,6 +35,6 @@ export function exportExcel(option) {
  * @returns 
  */
 export function importTemplate(type) {
-    const url = baseURL + '/sports/api/file/exportByType?type=' + type
+    const url = baseURL + '/sports/api/file/download?type=' + type
     return url;
 }

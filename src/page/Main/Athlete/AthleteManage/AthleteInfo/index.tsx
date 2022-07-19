@@ -6,6 +6,7 @@ import { useAthlete } from './useAthlete';
 import { getAthleteMsg } from '../../../../../services/athlete';
 import { athleteBaseInfo } from '../../../../../constant/athlete';
 import { ModalType } from '../../../../../type/ModalType';
+import { athleteInfo } from '../../../../../type/infoNum';
 
 const AthleteInfo = memo(() => {
     const {
@@ -31,7 +32,7 @@ const AthleteInfo = memo(() => {
                 changeData={changeData} data={data}
                 searchMsg={getAthleteMsg}
                 info={athleteBaseInfo}
-                type='10'
+                type={athleteInfo}
             />
             <Modal
                 title={<MAthleteModal id={id} />}

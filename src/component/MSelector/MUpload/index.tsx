@@ -49,8 +49,7 @@ const MUpload = memo((props: { id: number, name: string, getFormData: Function, 
             })
             return false;
         } else {
-            // 调用删除文件的接口 
-            console.log(file); 
+            // 调用删除文件的接口  
             const res = await deleteFile({ id, type: 4, resource: JSON.stringify(initfileList), path: file.thumbUrl, name: file.departName })
             console.log(res); 
             return true;

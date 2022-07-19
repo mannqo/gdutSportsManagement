@@ -1,8 +1,9 @@
 import { Table, Modal, Button } from 'antd';
 import React, { memo } from 'react'
+import { InfoType } from '../../type/infoNum';
 import MDeleteMulti from '../MDeleteMulti';
 import MSearch from '../MSelector/MSearch';
-import MUploadExcel from '../MUploadExcel/MUploadBtn';
+import MUploadBtn from '../MUploadExcel/MUploadBtn';
 import { useInfo } from './useInfo';
 
 interface PropType<T> {
@@ -13,7 +14,7 @@ interface PropType<T> {
     deleteMulti?: (ids: Array<number>) => void,
     changeData?: (data: any, total: number) => void,
     searchMsg?: any,
-    type?: string,
+    type?: InfoType,
 }
 interface Type {
     name: string;
@@ -22,6 +23,7 @@ interface Type {
 const MInfo = <T extends Type>(props: PropType<T>) => {
     const { columns, getInfo, data, total, TitleComponent, deleteMulti, changeData, searchMsg, info } = props;
     const { type } = props;
+
     const {
         add,
         selectedRowKeys,
@@ -35,7 +37,7 @@ const MInfo = <T extends Type>(props: PropType<T>) => {
         <>
             <MSearch changeData={changeData} searchMsg={searchMsg} info={info} />
             <MDeleteMulti add={add} deleteMulti={deleteMulti} selectedRowKeys={selectedRowKeys} />
-            <MUploadExcel type={type} />
+            <MUploadBtn type={type} />
             <Table
                 rowSelection={rowSelection}
                 columns={columns}

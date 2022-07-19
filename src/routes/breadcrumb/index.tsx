@@ -54,11 +54,11 @@ export const eventRoutes: breadcrumbRoute[] = [
 
 export const coachRoutes: breadcrumbRoute[] = [
     {
-        path: '/eventManage/info',
+        path: '/coachInfo/info',
         breadcrumbName: '教练信息主页'
     },
     {
-        path: '/eventManage/info/uploadExcel',
+        path: '/coachInfo/info/uploadExcel',
         breadcrumbName: '导入教练信息'
     }
 ]

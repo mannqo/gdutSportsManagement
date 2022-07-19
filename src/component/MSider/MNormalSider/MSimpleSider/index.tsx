@@ -21,8 +21,9 @@ const MSimpleSider = memo((props: any) => {
         <Sider width={200} className="site-layout-background">
             <Menu
                 mode="inline"
-                theme='dark' 
+                theme='dark'
                 defaultSelectedKeys={[pathname]}
+                selectedKeys={[pathname]}
                 style={{ height: '100%', borderRight: 0 }}
             >
                 {

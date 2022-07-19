@@ -13,11 +13,18 @@ export default function request(option) {
                 "Access-Control-Expose-Headers": "fileName"
             }
         })
+        // instance.headers.post['token'] = localStorage.getItem('token');
         instance.defaults.withCredentials = true;  // 携带cookie
         instance.defaults.headers.post['Content-Type'] = 'application/json'
 
         // 拦截器
         instance.interceptors.request.use(config => {
+            if (localStorage.getItem('token')) {
+                const token = localStorage.getItem('token');
+                config.headers['token'] = `${token}`
+            } else {
+                delete config.headers[`token`];
+            }
             return config;
         }, err => {
             console.log(err, '请求拦截');

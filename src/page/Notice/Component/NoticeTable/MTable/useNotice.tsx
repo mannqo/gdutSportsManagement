@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getNoticeMsg } from '../../../../../services/notice';
 
 export const useNotice = ((type: string) => {
@@ -21,6 +21,7 @@ export const useNotice = ((type: string) => {
     useEffect(() => {
         getNotice(1, type);
     }, [type])
+
     return {
         dataSource,
         total,

@@ -36,7 +36,7 @@ export interface Route {
     icon?: any,
     render?: () => JSX.Element,
     content?: string,
-    type?: string
+    type?: string, // 4比赛 3教练 10运动员
 }
 
 const routes: Array<Route> = [
@@ -89,7 +89,7 @@ const routes: Array<Route> = [
                                 path: '/athleteManage/info/uploadExcel',
                                 exact: true,
                                 component: MUploadExcel,
-                                type: '4',
+                                type: '10',
                             }
                         ]
                     },
@@ -128,7 +128,7 @@ const routes: Array<Route> = [
                                 path: '/eventManage/info/uploadExcel',
                                 exact: true,
                                 component: MUploadExcel,
-                                type: '3'
+                                type: '4'
                             }
                         ]
                     }
@@ -160,7 +160,7 @@ const routes: Array<Route> = [
                                 path: '/coachInfo/info/uploadExcel',
                                 exact: true,
                                 component: MUploadExcel,
-                                type: '10',
+                                type: '3',
                             }
                         ]
                     }

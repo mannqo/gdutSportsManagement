@@ -19,8 +19,7 @@ const NoticeTable = memo((props: { type: string, onSelectChange: any }) => {
             columns={noticeColumns}
             dataSource={dataSource}
             pagination={{ total, onChange }}
-        />
-
+        /> 
     )
 })
 

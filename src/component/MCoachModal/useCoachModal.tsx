@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { initSportProject } from '../../constant/picker';
 import { getProjectGroup } from '../../services/athlete';
 import { getCoachMsg, postCoachMsg, putCoachMsg } from '../../services/coach';
-import { initialCoachInfo } from '../../type/coach';
+import { initialCoachInfo } from '../../type/coachInfo';
 import { formatCascader } from '../../utils/format';
 
 export const useCoachModal = (id?: number) => {

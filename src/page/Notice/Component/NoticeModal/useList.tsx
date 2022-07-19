@@ -1,45 +1,62 @@
 import { Button } from "antd";
 import { useEffect, useState } from "react";
 import { getNoticeMsg } from "../../../../services/notice";
+import { eventInfo } from "../../../../type/infoNum";
+import { NoticeInfo } from "../../../../type/noticeInfo";
+import ReadButton from "./ReadButton";
 
 export const useList = (type: string) => {
-    const [loading, setLoading] = useState(true);
-    const [list, setList] = useState([]);
-    const [ifMore, setIfMore] = useState(true);  // 是否还有更多信息
-    
-    const getNotice = async (pn: number) => {
+    const [data, setData] = useState([]);
+    const [total, setTotal] = useState(0)
+    const [page, setPage] = useState(0);
+
+    const noticeColumns = [
+        {
+            title: '编号',
+            dataIndex: 'id',
+        },
+        {
+            title: '通知',
+            dataIndex: 'message',
+        },
+        {
+            title: '通知对象',
+            dataIndex: 'toPerson'
+        },
+        {
+            title: '操作',
+            dataIndex: 'id',
+            render: (id: number, item: NoticeInfo) => {
+                return (
+                    <ReadButton id={item.id} isRead={item.isRead} type={eventInfo} />
+                )
+            }
+        }
+    ]
+
+    const getNotice = async (page: number) => {
         try {
-            const res = await getNoticeMsg({ pn, type });
-            const { data: { records } } = res;
-            records.length < 10 && setIfMore(false);
-            setLoading(false);
-            res && res.data && setList(list.concat(records));
+            setPage(page)
+            const res = await getNoticeMsg({ pn: page, type });
+            const { data: { records, total } } = res;
+            setTotal(total);
+            setData(records);
         } catch (err) {
-            setIfMore(false);
-            setLoading(false);
+            console.log(err);
         }
     }
-    const onLoadMore = () => {
-        const pn = Math.floor(list.length / 10) + 1;
-        getNotice(pn);
+    const onChange = async (page: number) => {
+        getNotice(page);
     }
-    const loadMore =
-        !loading && ifMore ? (
-            <div
-                style={{ textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px' }}
-            >
-                <Button type='primary' onClick={onLoadMore}>点击加载更多</Button>
-            </div>
-        ) : <></>;
 
     useEffect(() => {
-        setList([]);
         getNotice(1);
     }, [])
     return {
-        loading,
-        loadMore,
-        list
+        data,
+        total,
+        onChange,
+        noticeColumns
     }
 }
 

@@ -31,7 +31,7 @@ const EventInfo = memo(() => {
                 changeData={changeData} data={data}
                 searchMsg={getEventMsg}
                 info={eventInfo}
-                type='10'
+                type='4'
             />
             <Modal
                 title={<MEventModal type='eventInfo' id={id} />}

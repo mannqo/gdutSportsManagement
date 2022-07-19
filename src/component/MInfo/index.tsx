@@ -41,7 +41,7 @@ const MInfo = <T extends Type>(props: PropType<T>) => {
                 columns={columns}
                 dataSource={data}
                 rowKey='id'
-                pagination={{ total, onChange }}
+                pagination={{ total, onChange, pageSizeOptions: ['10'] }}
             />
             <Modal
                 title={TitleComponent}

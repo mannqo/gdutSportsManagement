@@ -31,7 +31,7 @@ const AthleteInfo = memo(() => {
                 changeData={changeData} data={data}
                 searchMsg={getAthleteMsg}
                 info={athleteBaseInfo}
-                type='4'
+                type='10'
             />
             <Modal
                 title={<MAthleteModal id={id} />}

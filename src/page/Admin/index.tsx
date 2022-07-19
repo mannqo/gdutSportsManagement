@@ -24,7 +24,8 @@ const Admin = memo((props: any) => {
 
     const asyncFn = async (number: string) => {
         const res = await getAuthority(number);
-        console.log(res);
+        const { other } = res;
+        localStorage.setItem('token', other);
     }
     useEffect(() => {
         asyncFn('666666')

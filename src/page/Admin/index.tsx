@@ -6,7 +6,7 @@ import { getAuthority } from '../../services/admin'
 
 const Admin = memo((props: any) => {
     const { id } = props;
-    const [auth, setAuth] = useState('root');
+    const [auth, setAuth] = useState('athlete');
 
     function judgeAuthority(routesArr: Route[]) {
         const arr: Route[] = []
@@ -25,10 +25,11 @@ const Admin = memo((props: any) => {
     const asyncFn = async (number: string) => {
         const res = await getAuthority(number);
         const { other } = res;
+        localStorage.setItem('number', number);
         localStorage.setItem('token', other);
     }
     useEffect(() => {
-        asyncFn('666666')
+        asyncFn('777777')
     }, [])
 
     return (

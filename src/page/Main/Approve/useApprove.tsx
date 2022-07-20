@@ -59,20 +59,6 @@ export const useApprove = () => {
             dataIndex: 'number',
         },
         {
-            title: '审核意见',
-            dataIndex: 'message',
-            render: (message: string) => (
-                <>{message ? message : 'null'}</>
-            )
-        },
-        {
-            title: '审核时间',
-            dataIndex: 'approveTime',
-            render: (approveTime: string) => (
-                <>{approveTime ? approveTime : 'null'}</>
-            )
-        },
-        {
             title: '申请内容',
             dataIndex: 'contentId',
             render: (id: number) => (

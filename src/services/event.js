@@ -47,12 +47,6 @@ export function putEventMsg(option) {
  * @param {*} option id type path resource name
  */
 export function deleteFile(option) {
-    console.log(option);
-    // const formData = new FormData();
-    // Object.keys(option).forEach((key) => {
-    //     formData.append(key, option[key])
-    // })
-    // console.log(formData);
     return request({
         method: 'DELETE',
         url: '/sports/api/img/delete',

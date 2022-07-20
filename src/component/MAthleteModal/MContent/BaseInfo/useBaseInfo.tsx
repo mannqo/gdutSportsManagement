@@ -8,12 +8,11 @@ import { initSportProject } from '../../../../constant/picker';
 import { formatCascader } from '../../../../utils/format';
 
 
-export const useBaseInfo = (getNumber: (number: string) => void, id: number) => {
+export const useBaseInfo = (id: number, getNumber?: (number: string) => void) => {
     const [formData, setFormData] = useState(new FormData());
     const [sportProject, setSportProject] = useState(initSportProject);
     const [number, setNumber] = useState('');
     const [value, setValue] = useState(initialPersonalInfo);
-    const [imageUrl, setImageUrl] = useState('');
     const [form] = Form.useForm();
     const dateFormat = 'YYYY-MM-DD';
 
@@ -23,7 +22,7 @@ export const useBaseInfo = (getNumber: (number: string) => void, id: number) => 
             okText: '确认',
             cancelText: '取消',
             onOk: async () => {
-                getNumber(values.number);
+                getNumber && getNumber(values.number);
                 const res = await postAthleteMsg({ formData, values });
                 Modal.info({
                     title: res.message,
@@ -71,7 +70,6 @@ export const useBaseInfo = (getNumber: (number: string) => void, id: number) => 
             const msg = res.data.records[0];
             msg.birth = moment(msg.birth, dateFormat);
             msg.projectGroup = msg.projectGroup.split(',');
-            setImageUrl(msg.picture);
             setNumber(msg.number);
             setValue(msg);
         }
@@ -82,14 +80,13 @@ export const useBaseInfo = (getNumber: (number: string) => void, id: number) => 
 
     useEffect(() => {
         form.setFieldsValue(value);
-        number && getNumber(number);
+        number && getNumber && getNumber(number);
     }, [value, number, getNumber, form])
 
     return {
         form,
         value,
         onFinish,
-        imageUrl,
         getFormData,
         sportProject
     }

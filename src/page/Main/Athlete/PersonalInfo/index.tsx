@@ -1,18 +1,29 @@
+import { Table } from 'antd';
 import React, { memo, useState } from 'react'
 import styled from 'styled-components';
 import BaseInfo from '../../../../component/MAthleteModal/MContent/BaseInfo'
+import usePersonalInfo from './usePersonalInfo';
 
 const PersonalInfo = memo(() => {
-    const [number, setNumber] = useState('');
 
-    const getNumber = (number: string) => {
-        setNumber(number);
-    }
+    const {
+        personalEventColumns,
+        data,
+        total,
+        onChange
+    } = usePersonalInfo()
+
     return (
         <BaseInfoContainer>
             <p className='title'>运动员个人信息</p>
-            <BaseInfo getNumber={getNumber} id={62} />
+            <BaseInfo id={62} />
             <p className="title">运动员比赛信息</p>
+            <Table
+                columns={personalEventColumns}
+                dataSource={data}
+                rowKey='id'
+                pagination={{ total, onChange, pageSizeOptions: ['10'] }}
+            />
         </BaseInfoContainer>
     )
 })

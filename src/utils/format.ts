@@ -27,9 +27,8 @@ export function formatCascader(sourceCascader: SourceCascader[]) {
         obj.label = item.value;
         obj.children = formatArr(item.label);
         afterCascader[index] = obj;
-    })
-    console.log(afterCascader);
-
+    }) 
+    
     return afterCascader;
 }
 

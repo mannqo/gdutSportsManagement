@@ -28,7 +28,7 @@ const MContent = memo((props: { id: number }) => {
     return (
         <Tabs defaultActiveKey="1">
             <TabPane tab="基本信息" key="baseInfo">
-                <BaseInfo getNumber={getNumber} id={id} />
+                <BaseInfo id={id} getNumber={getNumber} />
             </TabPane>
             {/* <TabPane tab="入学基本情况" key="entrance">
                 <Entrance number={number} />

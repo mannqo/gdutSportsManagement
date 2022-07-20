@@ -11,8 +11,7 @@ const NoticeManage = memo(() => {
         <Card
             style={{ width: '100% ' }}
             tabList={tabList}
-            activeTabKey={activeTabKey}
-            // tabBarExtraContent={<a href="#" > More</a>}
+            activeTabKey={activeTabKey} 
             onTabChange={(key: tabType) => {
                 onTabChange(key);
             }}

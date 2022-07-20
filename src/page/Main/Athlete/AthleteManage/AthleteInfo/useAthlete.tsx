@@ -30,7 +30,7 @@ export const useAthlete = () => {
         },
         {
             title: '详情',
-            dataIndex: 'id',
+            dataIndex: 'number',
             render: (id: number) => (
                 <div onClick={() => viewDetails(id)}>
                     <SettingOutlined />

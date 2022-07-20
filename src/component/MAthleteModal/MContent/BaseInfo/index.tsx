@@ -7,16 +7,15 @@ import { useBaseInfo } from './useBaseInfo';
 
 const { Option } = Select;
 
-const BaseInfo = memo((props: { getNumber: (number: string) => void, id: number }) => {
+const BaseInfo = memo((props: { id: number, getNumber?: (number: string) => void }) => {
     const { getNumber, id } = props;
     const {
         form,
         value,
         onFinish,
-        imageUrl,
         getFormData,
         sportProject
-    } = useBaseInfo(getNumber, id);
+    } = useBaseInfo(id, getNumber);
     const dateFormat = 'YYYY-MM-DD';
 
     return (

@@ -25,6 +25,8 @@ import AthleteManage from "../page/Main/Athlete/AthleteManage";
 import MUploadExcel from "../component/MUploadExcel";
 import EventManage from "../page/Main/Event/EventManage";
 import CoachManage from "../page/Main/Coach/CoachManage";
+import Login from "../page/Login";
+import NotFind from "../page/NotFind";
 
 export interface Route {
     [key: string]: any,
@@ -41,20 +43,23 @@ export interface Route {
 
 const routes: Array<Route> = [
     {
+        path: '/login',
+        exact: true,
+        component: Login
+    },
+    {
+        path: '/404',
+        exact: true,
+        component: NotFind
+    },
+    {
         path: "/",
         component: Main,
         children: [
             {
                 path: "/",
-                auth: ['root'],
                 exact: true,
-                render: () => <Redirect to="/athleteManage/info" />
-            },
-            {
-                path: "/",
-                auth: ['athlete'],
-                exact: true,
-                render: () => <Redirect to="/athleteManage/personalInfo" />
+                render: () => <Redirect to="/athleteManage" />
             },
             {
                 path: "/athleteManage",
@@ -63,19 +68,19 @@ const routes: Array<Route> = [
                 children: [
                     {
                         path: "/athleteManage",
-                        auth: ['root'],
+                        auth: ['管理员'],
                         exact: true,
                         render: () => <Redirect to="/athleteManage/info" />
                     },
                     {
                         path: "/athleteManage",
-                        auth: ['athlete'],
+                        auth: ['在校运动员'],
                         exact: true,
                         render: () => <Redirect to="/athleteManage/personalInfo" />
                     },
                     {
                         path: '/athleteManage/info',
-                        auth: ['root'],
+                        auth: ['管理员'],
                         component: AthleteManage,
                         icon: MailOutlined,
                         content: '运动员信息表',
@@ -95,7 +100,7 @@ const routes: Array<Route> = [
                     },
                     {
                         path: '/athleteManage/personalInfo',
-                        auth: ['athlete'],
+                        auth: ['在校运动员'],
                         component: PersonalInfo,
                         icon: PlusOutlined,
                         content: '运动员个人信息'
@@ -105,7 +110,7 @@ const routes: Array<Route> = [
             {
                 path: "/eventManage",
                 content: '比赛管理',
-                auth: ['root'],
+                auth: ['管理员'],
                 component: MNormalSider,
                 children: [
                     {
@@ -137,7 +142,7 @@ const routes: Array<Route> = [
             {
                 path: "/coachInfo",
                 content: '教练信息',
-                auth: ['root'],
+                auth: ['管理员'],
                 component: MNormalSider,
                 children: [
                     {
@@ -169,13 +174,13 @@ const routes: Array<Route> = [
             // {
             //     path: "/checkInfo",
             //     content: '',
-            //     auth: ['root'],
+            //     auth: ['管理员'],
             //     component: Check,
             // },
             {
                 path: "/systemManage",
                 content: '系统管理',
-                auth: ['root'],
+                auth: ['管理员'],
                 component: System,
                 children: [
                     {
@@ -237,7 +242,7 @@ const routes: Array<Route> = [
             {
                 path: "/approveManage",
                 content: '审核管理',
-                auth: ['root'],
+                auth: ['管理员'],
                 component: MNormalSider,
                 children: [
                     {
@@ -261,20 +266,20 @@ const routes: Array<Route> = [
                 children: [
                     {
                         path: "/notice",
-                        auth: ['root', 'athlete'],
+                        auth: ['管理员', '在校运动员'],
                         exact: true,
                         render: () => <Redirect to="/notice/event" />
                     },
                     {
                         path: "/notice/event",
-                        auth: ['root', 'athlete'],
+                        auth: ['管理员', '在校运动员'],
                         component: EventNotice,
                         icon: InfoCircleOutlined,
                         content: '比赛通知'
                     },
                     {
                         path: '/notice/manage',
-                        auth: ['root'],
+                        auth: ['管理员'],
                         component: NoticeManage,
                         icon: RightOutlined,
                         content: '通知管理'
@@ -282,7 +287,7 @@ const routes: Array<Route> = [
                 ]
             }
         ]
-    },
+    }
 ]
 
 export default routes;

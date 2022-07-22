@@ -27,8 +27,7 @@ const usePersonalInfo = () => {
         }
     ]
     const getPersonalInfo = async (page: number) => {
-        const res = await getPersonalEventMsg({ pn: page, number });
-        console.log(res);
+        const res = await getPersonalEventMsg({ pn: page, number }); 
         const { data: { records, total } } = res;
         setData(records);
         setTotal(total);

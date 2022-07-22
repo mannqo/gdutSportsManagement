@@ -5,7 +5,7 @@ import MHeader from '../../component/MHeader';
 
 
 const Main = memo((props: any) => {
-  const { route } = props;
+  const { route } = props; 
 
   return (
     <Layout>

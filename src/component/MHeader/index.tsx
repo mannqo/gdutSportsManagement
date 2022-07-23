@@ -17,7 +17,7 @@ export default memo(function MHeader(props: { route: { children: Route[] } }) {
             <Menu
                 theme="dark"
                 mode="horizontal"
-                defaultSelectedKeys={[`/${prefix[1]}`]} >
+                defaultSelectedKeys={[`/${prefix[1]}/${prefix[2]}`]} >
                 {
                     children.map(item => {
                         if (item.path !== '/') return (

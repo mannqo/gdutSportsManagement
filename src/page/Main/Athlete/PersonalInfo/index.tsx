@@ -5,7 +5,7 @@ import BaseInfo from '../../../../component/MAthleteModal/MContent/BaseInfo'
 import usePersonalInfo from './usePersonalInfo';
 
 const PersonalInfo = memo(() => {
-    const id = Number(localStorage.getItem('athleteId'));
+    const id = Number(sessionStorage.getItem('athleteId'));
     console.log(id);
 
     const {

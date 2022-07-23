@@ -9,7 +9,7 @@ export const useList = (type: string) => {
     const [data, setData] = useState([]);
     const [total, setTotal] = useState(0)
     const [page, setPage] = useState(0);
-    const number = localStorage.getItem('number');
+    const number = sessionStorage.getItem('number');
 
     const noticeColumns = [
         {
@@ -38,7 +38,7 @@ export const useList = (type: string) => {
     const getNotice = async (page: number) => {
         try {
             setPage(page)
-            const res = await getNoticeMsg({ pn: page, type, number });
+            const res = await getNoticeMsg({ pn: page, type, toPerson: number });
             const { data: { records, total } } = res;
             setTotal(total);
             setData(records);

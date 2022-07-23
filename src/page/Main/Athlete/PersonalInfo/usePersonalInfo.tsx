@@ -5,7 +5,7 @@ import { getPersonalEventMsg } from '../../../../services/event';
 const usePersonalInfo = () => {
     const [data, setData] = useState([]);
     const [total, setTotal] = useState(0);
-    const number = localStorage.getItem('number');
+    const number = sessionStorage.getItem('number');
 
     const personalEventColumns = [
         {
@@ -27,7 +27,7 @@ const usePersonalInfo = () => {
         }
     ]
     const getPersonalInfo = async (page: number) => {
-        const res = await getPersonalEventMsg({ pn: page, number }); 
+        const res = await getPersonalEventMsg({ pn: page, number });
         const { data: { records, total } } = res;
         setData(records);
         setTotal(total);

@@ -11,7 +11,7 @@ import request from "./axios";
 export const uploadExcel = {
     name: 'excelFile',
     url: baseURL + '/sports/api/file/excelFileUpload',
-    token: localStorage.getItem('token') || ''
+    token: sessionStorage.getItem('token') || ''
 }
 /* 导出excel文件 */
 /**

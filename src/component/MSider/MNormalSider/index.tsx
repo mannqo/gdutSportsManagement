@@ -8,6 +8,7 @@ const { Content } = Layout;
 const MNormalSider = memo((props: any) => {
     const { route } = props;
     const { children } = route;
+
     return (
         <Layout>
             <MSimpleSider children={children} />

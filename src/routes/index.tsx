@@ -28,11 +28,11 @@ import CoachManage from "../page/Main/Coach/CoachManage";
 import Login from "../page/Login";
 import NotFind from "../page/NotFind";
 
-export interface Route {
+export interface RouteType {
     [key: string]: any,
     path: string,
     component?: React.MemoExoticComponent<(props: any) => JSX.Element>,
-    children?: Array<Route>
+    children?: Array<RouteType>
     exact?: boolean,
     auth?: Array<string>,
     icon?: any,
@@ -41,7 +41,7 @@ export interface Route {
     type?: string, // 4比赛 3教练 10运动员
 }
 
-const routes: Array<Route> = [
+const routes: Array<RouteType> = [
     {
         path: "/",
         exact: true,

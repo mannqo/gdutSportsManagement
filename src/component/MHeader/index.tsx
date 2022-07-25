@@ -1,11 +1,11 @@
 import React, { memo, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
-import { Route } from '../../routes';
+import { RouteType } from '../../routes';
 
 const { Header } = Layout;
 
-export default memo(function MHeader(props: { route: { children: Route[] } }) {
+export default memo(function MHeader(props: { route: { children: RouteType[] } }) {
     const { route: { children } } = props;
     const history = useHistory();
     const { pathname } = useLocation();
